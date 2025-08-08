@@ -1,6 +1,15 @@
 {
   "HomePage": {
-    "title": "اهلا بالعالم!",
-    "about": "اذهب إلى صفحة حول"
+    "brand": "حكايتي الذكية",
+    "nav": {
+      "features": "المميزات",
+      "howItWorks": "كيف يعمل",
+      "stories": "القصص",
+      "testimonials": "التقييمات"
+    },
+    "header": {
+      "signIn": "تسجيل دخول",
+      "tryFree": "جرب مجاناً"
+    }
   }
 }
