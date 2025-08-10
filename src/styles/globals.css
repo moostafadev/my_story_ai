@@ -48,6 +48,56 @@
   @apply mx-auto px-4 xl:w-6xl 2xl:w-7xl;
 }
 
+@layer keyframes {
+  leftPageOpen {
+    from {
+      transform: rotateY(90deg);
+    }
+    to {
+      transform: rotateY(0deg);
+    }
+  }
+  rightPageOpen {
+    from {
+      transform: rotateY(-90deg);
+    }
+    to {
+      transform: rotateY(0deg);
+    }
+  }
+  leftPageClose {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(90deg);
+    }
+  }
+  rightPageClose {
+    from {
+      transform: rotateY(0deg);
+    }
+    to {
+      transform: rotateY(-90deg);
+    }
+  }
+}
+
+@layer utilities {
+  .animate-leftPageOpen {
+    animation: leftPageOpen 0.6s forwards ease-in-out;
+  }
+  .animate-rightPageOpen {
+    animation: rightPageOpen 0.6s forwards ease-in-out;
+  }
+  .animate-leftPageClose {
+    animation: leftPageClose 0.6s forwards ease-in-out;
+  }
+  .animate-rightPageClose {
+    animation: rightPageClose 0.6s forwards ease-in-out;
+  }
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(0.95 0.04 90.58);
