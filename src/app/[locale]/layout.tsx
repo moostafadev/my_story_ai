@@ -6,6 +6,10 @@ import { Roboto, Noto_Sans_Arabic } from "next/font/google";
 import { cn } from "@/lib/utils";
 
 import "@/styles/globals.css";
+import "@/styles/animations.css";
+import "@/styles/shadows.css";
+
+import MainLayout from "@/components/layouts/MainLayout";
 
 const roboto = Roboto({
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
@@ -42,12 +46,17 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
+      <head>
+        <meta name="apple-mobile-web-app-title" content="My Story AI" />
+      </head>
       <body
         className={cn(
           locale === "ar" ? noto_sans_arabic.className : roboto.className
         )}
       >
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          <MainLayout>{children}</MainLayout>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

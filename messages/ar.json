@@ -1,6 +1,21 @@
 {
   "HomePage": {
-    "title": "اهلا بالعالم!",
-    "about": "اذهب إلى صفحة حول"
+    "nav": {
+      "features": "المميزات",
+      "howItWorks": "كيف يعمل",
+      "stories": "القصص",
+      "testimonials": "التقييمات"
+    },
+    "header": {
+      "signIn": "تسجيل دخول",
+      "tryFree": "جرب مجاناً"
+    },
+    "Hero": {
+      "title": "بطل القصة",
+      "subTitle": "طفلك",
+      "description": "اجعل كل مغامرة تدور حول بطلك الصغير.",
+      "ctaPrimary": "جرّب مجانًا",
+      "ctaSecondary": "اكتشف المزيد"
+    }
   }
 }

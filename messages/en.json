@@ -1,6 +1,21 @@
 {
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+    "nav": {
+      "features": "Features",
+      "howItWorks": "How It Works",
+      "stories": "Stories",
+      "testimonials": "Reviews"
+    },
+    "header": {
+      "signIn": "Sign In",
+      "tryFree": "Try Free"
+    },
+    "Hero": {
+      "title": "is the Hero",
+      "subTitle": "Your Child",
+      "description": "Make every adventure about your little hero.",
+      "ctaPrimary": "Try Free",
+      "ctaSecondary": "Discover More"
+    }
   }
 }
