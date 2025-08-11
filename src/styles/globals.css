@@ -45,7 +45,7 @@
 }
 
 @utility container {
-  @apply mx-auto px-4 xl:w-6xl 2xl:w-7xl;
+  @apply mx-auto px-4 sm:max-w-full lg:w-4xl xl:w-6xl 2xl:w-7xl;
 }
 
 @layer keyframes {

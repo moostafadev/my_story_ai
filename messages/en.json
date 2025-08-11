@@ -1,6 +1,5 @@
 {
   "HomePage": {
-    "brand": "My Story AI",
     "nav": {
       "features": "Features",
       "howItWorks": "How It Works",
@@ -10,6 +9,13 @@
     "header": {
       "signIn": "Sign In",
       "tryFree": "Try Free"
+    },
+    "Hero": {
+      "title": "is the Hero",
+      "subTitle": "Your Child",
+      "description": "Make every adventure about your little hero.",
+      "ctaPrimary": "Try Free",
+      "ctaSecondary": "Discover More"
     }
   }
 }

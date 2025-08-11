@@ -6,6 +6,9 @@ import { Roboto, Noto_Sans_Arabic } from "next/font/google";
 import { cn } from "@/lib/utils";
 
 import "@/styles/globals.css";
+import "@/styles/animations.css";
+import "@/styles/shadows.css";
+
 import MainLayout from "@/components/layouts/MainLayout";
 
 const roboto = Roboto({

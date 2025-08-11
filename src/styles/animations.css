@@ -1,0 +1,39 @@
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.star {
+  animation: scale 4s ease-in-out infinite;
+}
+
+.cloud {
+  animation: drift 6s ease-in-out infinite;
+}
+
+.heart {
+  animation: scale 5s ease-in-out infinite;
+}
+
+.moon {
+  animation: scale 5s ease-in-out infinite;
+}

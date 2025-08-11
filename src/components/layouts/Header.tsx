@@ -65,6 +65,7 @@ const Header = () => {
             width={120}
             height={120}
             className={cn("duration-300", scrollY > 0 ? "w-14" : "w-16")}
+            priority
           />
         </Link>
 
@@ -131,7 +132,7 @@ const Header = () => {
 
       <div
         className={cn(
-          "lg:hidden absolute top-full left-0 w-full bg-background shadow-md z-40 duration-300 overflow-hidden",
+          "lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-background to-background/95 backdrop-blur-md shadow-md z-40 duration-300 overflow-hidden",
           mobileMenuOpen
             ? scrollY > 0
               ? "h-[calc(100vh-4rem)]"
