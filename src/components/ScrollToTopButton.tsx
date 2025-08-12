@@ -8,14 +8,14 @@ const ScrollToTopButton: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      const scrolled = (scrollTop / docHeight) * 100;
+      const scrollTop = window.scrollY || window.pageYOffset;
+      const windowHeight = window.innerHeight;
+      const fullHeight = document.body.scrollHeight;
+
+      const scrolled = ((scrollTop + windowHeight) / fullHeight) * 100;
 
       setVisible(scrollTop > 200);
-      setProgress(scrolled);
+      setProgress(Math.min(scrolled, 100));
     };
 
     window.addEventListener("scroll", handleScroll);
