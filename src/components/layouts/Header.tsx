@@ -34,8 +34,8 @@ const Header = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 z-50 w-full border-b backdrop-blur-md duration-300",
-        scrollY > 0 ? "bg-white/80 shadow-sm" : "bg-background"
+        "fixed top-0 z-50 w-full duration-300",
+        scrollY > 0 ? "bg-white/90 shadow-sm" : "bg-primary"
       )}
     >
       <div
@@ -43,7 +43,7 @@ const Header = () => {
         style={{
           background: `linear-gradient(to ${
             isRTL ? "left" : "right"
-          }, var(--background) ${scrollProgress}%, transparent ${scrollProgress}%)`,
+          }, var(--primary) ${scrollProgress}%, transparent ${scrollProgress}%)`,
           zIndex: 0,
         }}
       />
@@ -90,8 +90,9 @@ const Header = () => {
           <LanguageSwitcher />
           <Button
             size={scrollY > 0 ? "sm" : "default"}
-            className="hidden lg:block"
+            className="hidden lg:flex"
             title={t("header.signIn")}
+            variant={"outlineSub"}
           >
             {t("header.signIn")}
           </Button>
@@ -110,19 +111,19 @@ const Header = () => {
           >
             <span
               className={cn(
-                "absolute top-[9px] left-[6px] w-6 h-[3px] bg-primary-foreground rounded-xl duration-300",
+                "absolute top-[9px] left-[6px] w-6 h-[3px] bg-primary rounded-xl duration-300",
                 mobileMenuOpen ? "translate-y-2 rotate-45 left-1 w-7" : ""
               )}
             />
             <span
               className={cn(
-                "absolute top-[17px] left-[6px] w-6 h-[3px] bg-primary-foreground rounded-xl duration-300",
+                "absolute top-[17px] left-[6px] w-6 h-[3px] bg-primary rounded-xl duration-300",
                 mobileMenuOpen ? "opacity-0 scale-0" : "opacity-100 scale-100"
               )}
             />
             <span
               className={cn(
-                "absolute top-[25px] left-[6px] w-6 h-[3px] bg-primary-foreground rounded-xl duration-300",
+                "absolute top-[25px] left-[6px] w-6 h-[3px] bg-primary rounded-xl duration-300",
                 mobileMenuOpen ? "-translate-y-2 -rotate-45 left-1 w-7" : ""
               )}
             />
@@ -132,7 +133,7 @@ const Header = () => {
 
       <div
         className={cn(
-          "lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-background to-background/95 backdrop-blur-md shadow-md z-40 duration-300 overflow-hidden",
+          "lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-primary to-primary/60 z-40 duration-300 overflow-hidden backdrop-blur-md",
           mobileMenuOpen
             ? scrollY > 0
               ? "h-[calc(100vh-4rem)]"
@@ -140,7 +141,7 @@ const Header = () => {
             : "h-0"
         )}
       >
-        <div className="flex flex-col items-start p-4 space-y-4">
+        <div className="flex flex-col items-start p-4 gap-4">
           {navData.map(({ title, href }, idx) => (
             <Link
               href={`/${href}`}
@@ -153,8 +154,8 @@ const Header = () => {
             </Link>
           ))}
           <Button
-            className="w-full"
-            onClick={() => setMobileMenuOpen(false)}
+            className="self-end"
+            variant={"secondary"}
             title={t("header.signIn")}
           >
             {t("header.signIn")}
