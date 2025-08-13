@@ -6,6 +6,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-background-sub: var(--background-sub);
+  --color-background-accent: var(--background-accent);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -34,7 +35,6 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
-  --color-primary-sub: var(--primary-sub);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -102,8 +102,9 @@
 :root {
   --radius: 0.625rem;
   --background: oklch(0.94 0.03 185.19);
-  --background-sub: oklch(1 0.04 90.58);
-  --foreground: oklch(0.3 0.03 327.88);
+  --background-sub: oklch(0.8 0.08 185.09);
+  --background-accent: oklch(0.7 0.08 185.09);
+  --foreground: oklch(0.2 0.08 185.09);
   --card: oklch(1 0.04 90.58);
   --card-foreground: oklch(0.35 0.03 327.88);
   --popover: oklch(1 0.04 90.58);
@@ -172,6 +173,9 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-background text-foreground;

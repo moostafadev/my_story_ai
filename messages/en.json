@@ -16,6 +16,57 @@
       "description": "Make every adventure about your little hero.",
       "ctaPrimary": "Try Free",
       "ctaSecondary": "Discover More"
+    },
+    "Features": {
+      "title": "Magical Features",
+      "subtitle": "For Unforgettable Stories",
+      "description": "Discover how AI can transform your ideas into amazing stories that capture children's hearts",
+      "feature1": {
+        "title": "Personalized Stories",
+        "description": "Unique stories that make your child the real hero of the adventure"
+      },
+      "feature2": {
+        "title": "Advanced AI",
+        "description": "Modern technology ensures safe and child-appropriate content"
+      },
+      "feature3": {
+        "title": "Beautiful Illustrations",
+        "description": "Colorful images that bring the story to life and make it more exciting"
+      },
+      "feature4": {
+        "title": "Easy to Use",
+        "description": "Simple interface makes creating stories a fun experience"
+      },
+      "feature5": {
+        "title": "Educational Content",
+        "description": "Stories that carry educational values and useful lessons"
+      },
+      "feature6": {
+        "title": "Easy Sharing",
+        "description": "Share your child's stories with friends and family easily"
+      }
+    },
+    "HowItWorks": {
+      "title": "How It Works",
+      "subtitle": "Simple Steps to Fun",
+      "description": "In three easy steps, get a personalized story for your child filled with adventures and educational values",
+      "step1": {
+        "title": "Upload Your Child's Photo",
+        "description": "Start by uploading a clear photo of your child to make them the real hero of the story",
+        "stepNumber": "Step One"
+      },
+      "step2": {
+        "title": "Choose Educational Value",
+        "description": "Select the value or lesson you want the story to carry for your child",
+        "stepNumber": "Step Two"
+      },
+      "step3": {
+        "title": "Get Your Story",
+        "description": "Enjoy a unique story personalized for your child with beautiful illustrations",
+        "stepNumber": "Step Three"
+      },
+      "cta": "Start Now for Free",
+      "processTime": "In less than 2 minutes"
     }
   }
 }
