@@ -54,13 +54,13 @@ export default function HomePage() {
             </defs>
 
             {/* static subtle gradient background */}
-            <rect width="100%" height="100%" fill="#90dfd5" />
+            <rect width="100%" height="100%" fill="#ffffff" />
 
             {/* wave group 1 - nearest (stronger, faster) */}
             <g className="wave wave--1" style={{ filter: "url(#soft)" }}>
               <path
                 d="M0 500 C 220 420 360 580 720 520 C 1020 470 1120 560 1440 500 L1440 800 L0 800 Z"
-                fill="#ffffff"
+                fill="#ff6800"
                 opacity="0.2"
               />
             </g>
@@ -69,7 +69,7 @@ export default function HomePage() {
             <g className="wave wave--2">
               <path
                 d="M0 520 C 240 460 420 600 720 540 C 980 480 1180 610 1440 540 L1440 800 L0 800 Z"
-                fill="#ffffff"
+                fill="#ff6800"
                 opacity="0.17"
               />
             </g>
@@ -78,7 +78,7 @@ export default function HomePage() {
             <g className="wave wave--3">
               <path
                 d="M0 540 C 260 500 480 650 760 580 C 980 520 1240 660 1440 580 L1440 800 L0 800 Z"
-                fill="#ffffff"
+                fill="#ff6800"
                 opacity="0.15"
               />
             </g>
@@ -87,7 +87,7 @@ export default function HomePage() {
             <g className="wave wave--shine">
               <path
                 d="M0 560 C 280 520 520 680 820 600 C 1060 540 1280 700 1440 620 L1440 800 L0 800 Z"
-                fill="#ffffff"
+                fill="#ff6800"
                 opacity="0.12"
               />
             </g>
@@ -143,7 +143,7 @@ export default function HomePage() {
 
       {/* Features Section */}
       <section
-        className="relative py-16 min-h-[calc(100vh-4rem)] bg-gradient-to-b from-background to-background-sub"
+        className="relative py-16 min-h-[calc(100vh-4rem)] bg-background-sub"
         id="features"
       >
         <div className="container mx-auto flex flex-col gap-14 md:gap-16">
@@ -166,7 +166,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mx-auto">
             {[1, 2, 3, 4, 5, 6].map((feat) => (
               <div
-                className="group bg-card/80 backdrop-blur-sm border border-border/50 rounded-md p-8 hover:bg-card/90 hover:shadow-xl hover:scale-105 transition-all duration-300 hover:border-accent/30"
+                className="group bg-background backdrop-blur-sm border border-border/50 rounded-md p-8 hover:bg-background/90 hover:shadow-xl hover:scale-105 transition-all duration-300 hover:border-accent/30"
                 key={feat}
               >
                 <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-primary to-primary-foreground rounded-full mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
@@ -192,7 +192,7 @@ export default function HomePage() {
 
       {/* How It Works Section */}
       <section
-        className="relative overflow-hidden py-16 min-h-[calc(100vh-4rem)] bg-gradient-to-b from-background-sub to-background-accent"
+        className="relative overflow-hidden py-16 min-h-[calc(100vh-4rem)] bg-background"
         id="how-it-works"
       >
         {/* <div className="container mx-auto relative z-10">

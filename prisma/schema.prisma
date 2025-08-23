@@ -6,3 +6,119 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
 }
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum StoryState {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum OrderState {
+  PENDING
+  PAID
+  SHIPPED
+  COMPLETED
+  CANCELLED
+}
+
+model User {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  uuid        String    @unique @default(uuid())
+  fName       String
+  lName       String
+  username    String    @unique
+  email       String    @unique
+  password    String
+  phoneNumber String?   @unique
+  isFree      Boolean   @default(true)
+  role        UserRole  @default(USER)
+
+  // Relations
+  stories     Story[]
+  addresses   Address[]
+  orders      Order[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Story {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  uuid        String     @unique @default(uuid())
+  title       String
+  desc        String
+  miniDesc    String?
+  price       Float      @default(0)
+  state       StoryState @default(DRAFT)
+
+  // Media
+  imageId     String?    @db.ObjectId
+  image       Image?     @relation(fields: [imageId], references: [id])
+  pdfId       String?    @db.ObjectId
+  pdf         Pdf?       @relation(fields: [pdfId], references: [id])
+
+  // Relations
+  userId      String     @db.ObjectId
+  user        User       @relation(fields: [userId], references: [id])
+
+  orderId     String?    @db.ObjectId
+  order       Order?     @relation(fields: [orderId], references: [id])
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Address {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  uuid        String    @unique @default(uuid())
+  city        String
+  street      String
+  houseNumber String
+
+  // Relation
+  userId      String    @db.ObjectId
+  user        User      @relation(fields: [userId], references: [id])
+}
+
+model Order {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  uuid          String     @unique @default(uuid())
+  storiesPrice  Float      @default(0) // total price of stories
+  deliveryPrice Float      @default(0) // delivery fee
+  fPrice        Float      @default(0) // final price (storiesPrice + deliveryPrice)
+  cNote         String?    // Customer note
+  ANote         String?    // Admin note
+  state         OrderState @default(PENDING)
+
+  // Relations
+  userId        String     @db.ObjectId
+  user          User       @relation(fields: [userId], references: [id])
+  stories       Story[]
+
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model Image {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  uuid        String    @unique @default(uuid())
+  url         String
+  alt         String?
+  createdAt   DateTime  @default(now())
+
+  story       Story[]
+}
+
+model Pdf {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  uuid        String    @unique @default(uuid())
+  url         String
+  createdAt   DateTime  @default(now())
+
+  story       Story[]
+}

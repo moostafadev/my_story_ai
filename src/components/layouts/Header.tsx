@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LanguageSwitcher from "../LanguageSwitcher";
 import { Button } from "../ui/button";
 import Image from "next/image";
@@ -17,6 +17,9 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isRTL = locale === "ar";
 
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
@@ -31,11 +34,40 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        mobileMenuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(e.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(e.target as Node)
+      ) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [mobileMenuOpen]);
+
   return (
     <header
       className={cn(
         "fixed top-0 z-50 w-full duration-300",
-        scrollY > 0 ? "bg-white/90 shadow-sm" : "bg-primary"
+        scrollY > 0 ? "bg-background/90 shadow-sm" : "bg-background"
       )}
     >
       <div
@@ -43,7 +75,7 @@ const Header = () => {
         style={{
           background: `linear-gradient(to ${
             isRTL ? "left" : "right"
-          }, var(--primary) ${scrollProgress}%, transparent ${scrollProgress}%)`,
+          }, var(--background-accent) ${scrollProgress}%, transparent ${scrollProgress}%)`,
           zIndex: 0,
         }}
       />
@@ -97,7 +129,7 @@ const Header = () => {
             {t("header.signIn")}
           </Button>
           <Button
-            className="bg-gradient-to-r from-accent to-accent-foreground text-white transition hover:from-accent-foreground hover:to-accent"
+            className="bg-gradient-to-r from-primary to-primary-foreground text-white transition hover:from-primary-foreground hover:to-primary"
             size={scrollY > 0 ? "sm" : "default"}
             title={t("header.tryFree")}
           >
@@ -105,25 +137,26 @@ const Header = () => {
           </Button>
 
           <Button
+            ref={buttonRef}
             className="lg:hidden relative"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             size={"icon"}
           >
             <span
               className={cn(
-                "absolute top-[9px] left-[6px] w-6 h-[3px] bg-primary rounded-xl duration-300",
+                "absolute top-[9px] left-[6px] w-6 h-[3px] bg-background rounded-xl duration-300",
                 mobileMenuOpen ? "translate-y-2 rotate-45 left-1 w-7" : ""
               )}
             />
             <span
               className={cn(
-                "absolute top-[17px] left-[6px] w-6 h-[3px] bg-primary rounded-xl duration-300",
+                "absolute top-[17px] left-[6px] w-6 h-[3px] bg-background rounded-xl duration-300",
                 mobileMenuOpen ? "opacity-0 scale-0" : "opacity-100 scale-100"
               )}
             />
             <span
               className={cn(
-                "absolute top-[25px] left-[6px] w-6 h-[3px] bg-primary rounded-xl duration-300",
+                "absolute top-[25px] left-[6px] w-6 h-[3px] bg-background rounded-xl duration-300",
                 mobileMenuOpen ? "-translate-y-2 -rotate-45 left-1 w-7" : ""
               )}
             />
@@ -132,8 +165,9 @@ const Header = () => {
       </div>
 
       <div
+        ref={menuRef}
         className={cn(
-          "lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-primary to-primary/60 z-40 duration-300 overflow-hidden backdrop-blur-md",
+          "lg:hidden absolute top-full left-0 w-full bg-gradient-to-b from-background to-background/60 z-40 duration-300 overflow-hidden backdrop-blur-md",
           mobileMenuOpen
             ? scrollY > 0
               ? "h-[calc(100vh-4rem)]"
