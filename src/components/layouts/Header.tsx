@@ -35,7 +35,7 @@ const Header = () => {
     <header
       className={cn(
         "fixed top-0 z-50 w-full duration-300",
-        scrollY > 0 ? "bg-white/90 shadow-sm" : "bg-primary"
+        scrollY > 0 ? "bg-background/90 shadow-sm" : "bg-background"
       )}
     >
       <div
@@ -43,7 +43,7 @@ const Header = () => {
         style={{
           background: `linear-gradient(to ${
             isRTL ? "left" : "right"
-          }, var(--primary) ${scrollProgress}%, transparent ${scrollProgress}%)`,
+          }, var(--background-accent) ${scrollProgress}%, transparent ${scrollProgress}%)`,
           zIndex: 0,
         }}
       />
@@ -97,7 +97,7 @@ const Header = () => {
             {t("header.signIn")}
           </Button>
           <Button
-            className="bg-gradient-to-r from-accent to-accent-foreground text-white transition hover:from-accent-foreground hover:to-accent"
+            className="bg-gradient-to-r from-primary to-primary-foreground text-white transition hover:from-primary-foreground hover:to-primary"
             size={scrollY > 0 ? "sm" : "default"}
             title={t("header.tryFree")}
           >
