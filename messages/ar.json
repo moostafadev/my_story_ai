@@ -68,5 +68,26 @@
       "cta": "ابدأ الآن مجاناً",
       "processTime": "في أقل من دقيقتين"
     }
+  },
+  "Register": {
+    "title": "إنشاء حساب",
+    "description": "ابدأ رحلتك معانا اليوم",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "emailOrPhone": "البريد الإلكتروني أو رقم الهاتف",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "alreadyHaveAccount": "هل لديك حساب؟",
+    "signIn": "تسجيل دخول",
+    "register": "إنشاء حساب",
+    "errors": {
+      "required": "هذا الحقل مطلوب",
+      "firstNameMin": "يجب أن يكون الاسم الأول على الأقل {min} أحرف",
+      "lastNameMin": "يجب أن يكون اسم العائلة على الأقل {min} أحرف",
+      "invalidEmail": "البريد الإلكتروني غير صالح",
+      "invalidPhone": "رقم الهاتف غير صالح",
+      "passwordMin": "يجب أن تكون كلمة المرور على الأقل {min} أحرف",
+      "passwordMatch": "كلمات المرور غير متطابقة"
+    }
   }
 }

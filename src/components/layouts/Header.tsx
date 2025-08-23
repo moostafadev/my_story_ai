@@ -16,6 +16,7 @@ const Header = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isRTL = locale === "ar";
+  const registerLink = "/register";
 
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -120,14 +121,15 @@ const Header = () => {
 
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
-          <Button
-            size={scrollY > 0 ? "sm" : "default"}
-            className="hidden lg:flex"
-            title={t("header.signIn")}
-            variant={"outlineSub"}
-          >
-            {t("header.signIn")}
-          </Button>
+          <Link href={registerLink} className="hidden lg:flex">
+            <Button
+              size={scrollY > 0 ? "sm" : "default"}
+              title={t("header.signIn")}
+              variant={"outlineSub"}
+            >
+              {t("header.signIn")}
+            </Button>
+          </Link>
           <Button
             className="bg-gradient-to-r from-primary to-primary-foreground text-white transition hover:from-primary-foreground hover:to-primary"
             size={scrollY > 0 ? "sm" : "default"}
@@ -187,13 +189,15 @@ const Header = () => {
               {t(title)}
             </Link>
           ))}
-          <Button
-            className="self-end"
-            variant={"secondary"}
-            title={t("header.signIn")}
-          >
-            {t("header.signIn")}
-          </Button>
+          <Link href={registerLink}>
+            <Button
+              className="self-end"
+              variant={"secondary"}
+              title={t("header.signIn")}
+            >
+              {t("header.signIn")}
+            </Button>
+          </Link>
         </div>
       </div>
     </header>

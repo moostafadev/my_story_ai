@@ -60,6 +60,10 @@ const ScrollToTopButton: React.FC = () => {
   const radius = 30;
   const circumference = 2 * Math.PI * radius;
 
+  const dashOffset = Number.isFinite(progress)
+    ? circumference - (progress / 100) * circumference
+    : circumference;
+
   return (
     <button
       onClick={scrollToTop}
@@ -114,7 +118,7 @@ const ScrollToTopButton: React.FC = () => {
           stroke="currentColor"
           strokeWidth="3"
           strokeDasharray={circumference}
-          strokeDashoffset={circumference - (progress / 100) * circumference}
+          strokeDashoffset={dashOffset}
           strokeLinecap="round"
           className="transition-all duration-150 ease-out"
           fill="none"
