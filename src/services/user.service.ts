@@ -1,10 +1,17 @@
-// src/services/user.service.ts
 import { prisma } from "@/lib/prisma";
 import { CreateUserInput, UpdateUserInput } from "@/services/types";
+import bcrypt from "bcrypt";
 
 export class UserService {
   static async createUser(data: CreateUserInput) {
-    return prisma.user.create({ data });
+    const hashedPassword = await bcrypt.hash(data.password, 12);
+
+    return prisma.user.create({
+      data: {
+        ...data,
+        password: hashedPassword,
+      },
+    });
   }
 
   static async getUserById(id: string) {

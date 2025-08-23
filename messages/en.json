@@ -68,5 +68,26 @@
       "cta": "Start Now for Free",
       "processTime": "In less than 2 minutes"
     }
+  },
+  "Register": {
+    "title": "Create Account",
+    "description": "Start your journey with My Story AI today!",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "emailOrPhone": "Email or Phone Number",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "register": "Register",
+    "errors": {
+      "required": "This field is required",
+      "firstNameMin": "First name must be at least {min} characters",
+      "lastNameMin": "Last name must be at least {min} characters",
+      "invalidEmail": "Invalid email address",
+      "invalidPhone": "Invalid phone number",
+      "passwordMin": "Password must be at least {min} characters",
+      "passwordMatch": "Passwords do not match"
+    }
   }
 }
