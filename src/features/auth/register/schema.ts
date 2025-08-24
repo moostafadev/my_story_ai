@@ -1,5 +1,6 @@
 import { ClientTranslationFunction } from "@/types/intl";
 import { z } from "zod";
+import { checkUserExists } from "./create_user.action";
 
 export const registerSchema = (t: ClientTranslationFunction) => {
   return z
@@ -17,16 +18,16 @@ export const registerSchema = (t: ClientTranslationFunction) => {
       emailOrPhone: z
         .string()
         .nonempty({ message: t("errors.required") })
-        .superRefine((value, ctx) => {
+        .superRefine(async (value, ctx) => {
           const emailRegex = /^\S+@\S+\.\S+$/;
           const phoneRegex = /^\+?[0-9]{7,15}$/;
-
           if (/^[0-9+]/.test(value)) {
             if (!phoneRegex.test(value)) {
               ctx.addIssue({
                 code: z.ZodIssueCode.custom,
                 message: t("errors.invalidPhone"),
               });
+              return;
             }
           } else {
             if (!emailRegex.test(value)) {
@@ -34,7 +35,19 @@ export const registerSchema = (t: ClientTranslationFunction) => {
                 code: z.ZodIssueCode.custom,
                 message: t("errors.invalidEmail"),
               });
+              return;
             }
+          }
+
+          const exists = await checkUserExists(value);
+          if (exists) {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message:
+                exists === "email"
+                  ? t("errors.emailExists")
+                  : t("errors.phoneExists"),
+            });
           }
         }),
 

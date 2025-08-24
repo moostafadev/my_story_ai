@@ -4,8 +4,8 @@ import { UserRole, StoryState, OrderState } from "@prisma/client";
 export interface CreateUserInput {
   fName: string;
   lName: string;
-  username: string;
-  email: string;
+  username?: string;
+  email?: string;
   password: string;
   phoneNumber?: string;
   role?: UserRole;

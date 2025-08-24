@@ -80,6 +80,10 @@
     "alreadyHaveAccount": "Already have an account?",
     "signIn": "Sign In",
     "register": "Register",
+    "successTitle": "🎉 Success!",
+    "successMessage": "Your account has been created. You can now log in.",
+    "errorTitle": "⚠️ Error",
+    "errorMessage": "Account creation failed. Please check your info and try again.",
     "errors": {
       "required": "This field is required",
       "firstNameMin": "First name must be at least {min} characters",

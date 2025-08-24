@@ -1,15 +1,42 @@
 import { prisma } from "@/lib/prisma";
 import { CreateUserInput, UpdateUserInput } from "@/services/types";
-import bcrypt from "bcrypt";
 
 export class UserService {
+  private static async generateUniqueUsername(fName: string, lName: string) {
+    const baseUsername =
+      `${fName.toLowerCase()}.${lName.toLowerCase()}`.replace(/\s+/g, "");
+    let username = baseUsername;
+    let counter = 1;
+
+    while (await prisma.user.findUnique({ where: { username } })) {
+      username = `${baseUsername}${counter}`;
+      counter++;
+    }
+
+    return username;
+  }
+
   static async createUser(data: CreateUserInput) {
-    const hashedPassword = await bcrypt.hash(data.password, 12);
+    if (data.email || data.phoneNumber) {
+      const exists = await prisma.user.findFirst({
+        where: {
+          OR: [
+            ...(data.email ? [{ email: data.email }] : []),
+            ...(data.phoneNumber ? [{ phoneNumber: data.phoneNumber }] : []),
+          ],
+        },
+      });
+
+      if (exists) {
+        throw new Error("Email or phone number already exists");
+      }
+    }
+    const username = await this.generateUniqueUsername(data.fName, data.lName);
 
     return prisma.user.create({
       data: {
         ...data,
-        password: hashedPassword,
+        username,
       },
     });
   }
@@ -22,7 +49,7 @@ export class UserService {
   }
 
   static async getUserByEmail(email: string) {
-    return prisma.user.findUnique({ where: { email } });
+    return prisma.user.findFirst({ where: { email } });
   }
 
   static async getAllUsers() {
