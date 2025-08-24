@@ -40,7 +40,8 @@ const RegisterFrom = () => {
               name="firstName"
               label="Register.firstName"
               placeholder="Register.firstName"
-              className="w-full "
+              className="w-full"
+              schema={registerSchema(t)}
             />
             <CustomInput
               control={form.control}
@@ -48,6 +49,7 @@ const RegisterFrom = () => {
               label="Register.lastName"
               placeholder="Register.lastName"
               className="w-full"
+              schema={registerSchema(t)}
             />
           </div>
           <CustomInput
@@ -56,6 +58,7 @@ const RegisterFrom = () => {
             label="Register.emailOrPhone"
             placeholder="Register.emailOrPhone"
             className="w-full"
+            schema={registerSchema(t)}
           />
           <div className="flex flex-col md:flex-row gap-4">
             <CustomInput
@@ -64,6 +67,7 @@ const RegisterFrom = () => {
               label="Register.password"
               placeholder="Register.password"
               className="w-full"
+              schema={registerSchema(t)}
             />
             <CustomInput
               control={form.control}
@@ -71,6 +75,7 @@ const RegisterFrom = () => {
               label="Register.confirmPassword"
               placeholder="Register.confirmPassword"
               className="w-full"
+              schema={registerSchema(t)}
             />
           </div>
         </div>

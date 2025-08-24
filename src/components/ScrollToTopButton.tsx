@@ -84,7 +84,7 @@ const ScrollToTopButton: React.FC = () => {
         shadow-lg hover:shadow-xl
         touch-manipulation
         select-none
-        focus:outline-none focus:ring-4 focus:ring-primary/50
+        focus:outline-none focus:ring-2 focus:ring-primary/50
         cursor-pointer
       `}
       aria-label="العودة للأعلى"

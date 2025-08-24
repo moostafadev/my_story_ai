@@ -70,8 +70,8 @@
     }
   },
   "Register": {
-    "title": "Create Account",
-    "description": "Start your journey with My Story AI today!",
+    "title": "Create Your Account Now",
+    "description": "Join us today and enjoy a unique experience full of opportunities tailored just for you",
     "firstName": "First Name",
     "lastName": "Last Name",
     "emailOrPhone": "Email or Phone Number",
@@ -86,6 +86,8 @@
       "lastNameMin": "Last name must be at least {min} characters",
       "invalidEmail": "Invalid email address",
       "invalidPhone": "Invalid phone number",
+      "emailExists": "Email is already registered",
+      "phoneExists": "Phone number is already registered",
       "passwordMin": "Password must be at least {min} characters",
       "passwordMatch": "Passwords do not match"
     }

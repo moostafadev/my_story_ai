@@ -15,9 +15,33 @@ import { useLocale, useTranslations } from "next-intl";
 import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ZodTypeAny, ZodObject } from "zod";
+
+function isFieldRequired(
+  schema: ZodObject<Record<string, ZodTypeAny>>,
+  fieldName: string
+): boolean {
+  try {
+    const shape = schema.shape;
+    const field = shape?.[fieldName] as ZodTypeAny | undefined;
+
+    if (!field) return false;
+
+    if (field.isOptional?.()) return false;
+
+    if (field.isNullable?.()) return false;
+
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 type CustomInputComponent = <T extends FieldValues = FieldValues>(
-  props: CustomInputProps<T> & { ref?: React.Ref<HTMLInputElement> }
+  props: CustomInputProps<T> & {
+    ref?: React.Ref<HTMLInputElement>;
+    schema?: ZodObject<Record<string, ZodTypeAny>>;
+  }
 ) => React.ReactElement | null;
 
 function CustomInputInner<T extends FieldValues>(
@@ -28,8 +52,9 @@ function CustomInputInner<T extends FieldValues>(
     name,
     className,
     placeholder,
+    schema,
     ...props
-  }: CustomInputProps<T>,
+  }: CustomInputProps<T> & { schema?: ZodObject<Record<string, ZodTypeAny>> },
   ref: React.Ref<HTMLInputElement>
 ) {
   const t = useTranslations("");
@@ -42,6 +67,11 @@ function CustomInputInner<T extends FieldValues>(
   const isPasswordField =
     name?.toString().toLowerCase().includes("password") ||
     props.type === "password";
+
+  const isRequired =
+    schema && name
+      ? isFieldRequired(schema, name.toString())
+      : !!props.required;
 
   const renderInput = (fieldProps?: ControllerRenderProps<T, Path<T>>) => (
     <div className="relative">
@@ -94,7 +124,12 @@ function CustomInputInner<T extends FieldValues>(
         name={name}
         render={({ field }) => (
           <FormItem className="w-full">
-            {label && <FormLabel>{t(label)}</FormLabel>}
+            {label && (
+              <FormLabel>
+                {t(label)}
+                {isRequired && <span className="text-red-500"> *</span>}
+              </FormLabel>
+            )}
             <FormControl>{renderInput(field)}</FormControl>
             {description && <FormDescription>{t(description)}</FormDescription>}
             <FormMessage />
@@ -104,7 +139,17 @@ function CustomInputInner<T extends FieldValues>(
     );
   }
 
-  return renderInput();
+  return (
+    <>
+      {label && (
+        <FormLabel>
+          {t(label)}
+          {isRequired && <span className="text-red-500"> *</span>}
+        </FormLabel>
+      )}
+      {renderInput()}
+    </>
+  );
 }
 
 const ForwardedCustomInput = React.forwardRef(CustomInputInner);

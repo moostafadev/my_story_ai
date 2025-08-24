@@ -6,7 +6,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Header />
-      <main className="mt-20 min-h-[calc(100vh-5rem)]">{children}</main>
+      <main className="mt-20 min-h-[calc(100dvh-5rem)]">{children}</main>
       <ScrollToTopButton />
     </>
   );

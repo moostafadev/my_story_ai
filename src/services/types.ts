@@ -1,4 +1,3 @@
-// src/types/index.ts
 import { UserRole, StoryState, OrderState } from "@prisma/client";
 
 // ---------- User ----------

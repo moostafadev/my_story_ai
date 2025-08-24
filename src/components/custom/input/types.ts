@@ -8,4 +8,5 @@ export interface CustomInputProps<T extends FieldValues = FieldValues> {
   type?: string;
   control?: Control<T>;
   name?: Path<T>;
+  required?: boolean;
 }

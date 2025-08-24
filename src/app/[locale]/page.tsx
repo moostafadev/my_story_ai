@@ -31,7 +31,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-10 min-h-[calc(100vh-5rem)] flex items-center">
+      <section className="relative overflow-hidden py-10 min-h-[calc(100dvh-5rem)] flex items-center">
         <div className="absolute inset-0 -bottom-6 -z-20 pointer-events-none">
           <svg
             className="w-full h-full"
@@ -102,7 +102,7 @@ export default function HomePage() {
         <CloudIcon className="absolute bottom-[1%] right-[15%] w-24 h-16" />
         <CloudIcon className="absolute bottom-0 right-[5%] w-20 h-14" />
 
-        <div className="container mx-auto flex flex-col md:flex-row items-center gap-6 md:gap-8">
+        <div className="container mx-auto flex flex-col md:flex-row items-center gap-0 md:gap-8">
           <div className="flex-1 flex justify-center order-2 md:order-1">
             <Image
               src={"/logo.png"}
@@ -143,7 +143,7 @@ export default function HomePage() {
 
       {/* Features Section */}
       <section
-        className="relative py-16 min-h-[calc(100vh-4rem)] bg-background-sub"
+        className="relative py-16 min-h-[calc(100dvh-4rem)] bg-background-sub"
         id="features"
       >
         <div className="container mx-auto flex flex-col gap-14 md:gap-16">
@@ -192,7 +192,7 @@ export default function HomePage() {
 
       {/* How It Works Section */}
       <section
-        className="relative overflow-hidden py-16 min-h-[calc(100vh-4rem)] bg-background"
+        className="relative overflow-hidden py-16 min-h-[calc(100dvh-4rem)] bg-background"
         id="how-it-works"
       >
         {/* <div className="container mx-auto relative z-10">

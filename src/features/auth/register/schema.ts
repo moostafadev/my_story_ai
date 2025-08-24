@@ -1,8 +1,7 @@
+import { ClientTranslationFunction } from "@/types/intl";
 import { z } from "zod";
 
-export const registerSchema = (
-  t: (key: string, values?: Record<string, string | number | Date>) => string
-) => {
+export const registerSchema = (t: ClientTranslationFunction) => {
   return z
     .object({
       firstName: z
