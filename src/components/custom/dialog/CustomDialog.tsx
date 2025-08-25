@@ -29,7 +29,10 @@ const CustomDialog = memo(
           <DialogHeader>
             {title && (
               <DialogTitle
-                className={cn("text-primary-foreground", title.className)}
+                className={cn(
+                  "text-primary-foreground leading-tight",
+                  title.className
+                )}
               >
                 {title.text}
               </DialogTitle>
