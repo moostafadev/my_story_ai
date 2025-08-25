@@ -17,8 +17,8 @@ const Header = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isRTL = locale === "ar";
-  const registerLink = "/register";
-  const isOnRegisterPage = pathName === "/register";
+  const loginLink = "/login";
+  const isOnRegisterPage = pathName === "/login";
 
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -124,7 +124,7 @@ const Header = () => {
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
           {!isOnRegisterPage && (
-            <Link href={registerLink} className="hidden lg:flex">
+            <Link href={loginLink} className="hidden lg:flex">
               <Button
                 size={scrollY > 0 ? "sm" : "default"}
                 title={t("header.signIn")}
@@ -195,7 +195,7 @@ const Header = () => {
           ))}
           {!isOnRegisterPage && (
             <Link
-              href={registerLink}
+              href={loginLink}
               onClick={() => setMobileMenuOpen(false)}
               className="self-end"
             >

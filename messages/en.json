@@ -98,5 +98,41 @@
       "passwordMin": "Password must be at least {min} characters",
       "passwordMatch": "Passwords do not match"
     }
+  },
+  "Login": {
+    "title": "Login",
+    "description": "Welcome back! Please sign in using your username and password to access your account.",
+    "username": "Username",
+    "password": "Password",
+    "forgotUsername": "Forgot your username?",
+    "noAccount": "Don’t have an account?",
+    "registerNow": "Create a new account",
+    "signIn": "Sign In",
+    "successTitle": "Login Successful",
+    "successMessage": "Welcome back! You have logged in successfully.",
+    "errorTitle": "Login Error",
+    "errorMessage": "Unable to sign in. Please check your username or password and try again.",
+    "errors": {
+      "required": "This field is required",
+      "wrongCredentials": "Incorrect login credentials"
+    }
+  },
+
+  "RecoverUsername": {
+    "title": "Login with Email or Phone",
+    "description": "You can log in using your registered email address or phone number along with your password.",
+    "emailOrPhone": "Email or Phone Number",
+    "password": "Password",
+    "submit": "Sign In",
+    "successTitle": "Login Successful",
+    "successMessage": "Welcome! You have logged in using your email or phone number.",
+    "errorTitle": "Login Error",
+    "errorMessage": "Unable to sign in. Please check your details and try again.",
+    "noAccount": "Don’t have an account?",
+    "registerNow": "Create a new account",
+    "errors": {
+      "required": "This field is required",
+      "wrongCredentials": "Incorrect login credentials"
+    }
   }
 }

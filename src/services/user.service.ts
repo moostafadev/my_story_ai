@@ -52,6 +52,14 @@ export class UserService {
     return prisma.user.findFirst({ where: { email } });
   }
 
+  static async getUserByUsername(username: string) {
+    return prisma.user.findUnique({ where: { username } });
+  }
+
+  static async getUserByPhoneNumber(phoneNumber: string) {
+    return prisma.user.findFirst({ where: { phoneNumber } });
+  }
+
   static async getAllUsers() {
     return prisma.user.findMany({
       include: { stories: true, orders: true, addresses: true },
