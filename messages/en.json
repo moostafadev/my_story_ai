@@ -84,6 +84,9 @@
     "successMessage": "Your account has been created. You can now log in.",
     "errorTitle": "⚠️ Error",
     "errorMessage": "Account creation failed. Please check your info and try again.",
+    "thanksForRegister": "Thank you for registering",
+    "thanksForRegisterDescription": "Welcome {firstName} {lastName}, we are glad to have you with us.",
+    "thanksForRegisterUsername": "Your username is: {username}",
     "errors": {
       "required": "This field is required",
       "firstNameMin": "First name must be at least {min} characters",

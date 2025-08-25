@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
-import RegisterFrom from "@/features/auth/register/From";
-import { Link } from "@/i18n/navigation";
-import { getTranslations } from "next-intl/server";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import { Button } from "@/components/ui/button";
+import RegisterForm from "@/features/auth/register/Form";
 
 const RegisterPage = async () => {
   const t = await getTranslations("Register");
@@ -21,7 +21,7 @@ const RegisterPage = async () => {
             </p>
           </div>
           <div className="flex flex-col gap-2">
-            <RegisterFrom />
+            <RegisterForm />
             <p className="text-sm sm:text-base text-muted-foreground flex items-center gap-2">
               <span>{t("alreadyHaveAccount")}</span>
               <Link
