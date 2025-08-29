@@ -38,6 +38,10 @@ model User {
   isFree      Boolean   @default(true)
   role        UserRole  @default(USER)
 
+  isVerified    Boolean  @default(false)
+  verificationCode String?
+  verificationExpiry DateTime?
+
   // Relations
   stories     Story[]
   addresses   Address[]

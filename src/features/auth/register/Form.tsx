@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
@@ -14,6 +14,9 @@ import { toast } from "sonner";
 import { CustomDialog } from "@/components/custom/dialog";
 import { User } from "@prisma/client";
 import { useRouter } from "@/i18n/navigation";
+import { OTPInput } from "@/components/custom/CustomOTP";
+import { useOTPManager } from "@/hooks/useOTPManager";
+import { verifyUserOTP } from "./verify_user.action";
 
 const RegisterForm = () => {
   const t = useTranslations("Register");
@@ -21,6 +24,7 @@ const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [userData, setUserData] = useState<User | null>(null);
+  const { value, setValue, timeLeft, length } = useOTPManager(6, 10);
 
   const form = useForm<TRegisterSchema>({
     resolver: zodResolver(registerSchema(t)),
@@ -74,17 +78,6 @@ const RegisterForm = () => {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (isDialogOpen) {
-      timer = setTimeout(() => {
-        setIsDialogOpen(false);
-        router.replace("/login");
-      }, 2000);
-    }
-    return () => clearTimeout(timer);
-  }, [isDialogOpen, router]);
 
   return (
     <>
@@ -157,11 +150,36 @@ const RegisterForm = () => {
           }) as string,
         }}
       >
-        <p className="font-medium">
+        {/* <p className="font-medium">
           {t.rich("thanksForRegisterUsername", {
             username: userData?.username || "",
           })}
+        </p> */}
+
+        <p>
+          Time left: {Math.floor(timeLeft / 60)}:
+          {String(timeLeft % 60).padStart(2, "0")}
         </p>
+        <div className="flex flex-col gap-4 items-center">
+          <OTPInput length={length} onChange={setValue} value={value} />
+
+          <Button
+            className="mt-4"
+            onClick={async () => {
+              if (!userData) return;
+              const result = await verifyUserOTP(userData.id, value);
+              if (result.success) {
+                toast.success("Account verified successfully!");
+                setIsDialogOpen(false);
+                router.push("/dashboard");
+              } else {
+                toast.error(result.message);
+              }
+            }}
+          >
+            Done
+          </Button>
+        </div>
       </CustomDialog>
     </>
   );

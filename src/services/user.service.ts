@@ -1,5 +1,9 @@
+import { setTokenCookies } from "@/lib/cookies";
+import { signRefreshToken, signToken } from "@/lib/jwt";
 import { prisma } from "@/lib/prisma";
 import { CreateUserInput, UpdateUserInput } from "@/services/types";
+import { OTPGenerator } from "@/lib/otpGenerator";
+import { sendVerificationEmail } from "@/components/emails/SendVerificationEmail";
 
 export class UserService {
   private static async generateUniqueUsername(fName: string, lName: string) {
@@ -31,12 +35,65 @@ export class UserService {
         throw new Error("Email or phone number already exists");
       }
     }
+
     const username = await this.generateUniqueUsername(data.fName, data.lName);
 
-    return prisma.user.create({
+    const token = signToken({
+      fName: data.fName,
+      lName: data.lName,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+      username,
+      role: data.role,
+    });
+
+    const refreshToken = signRefreshToken({ token });
+    setTokenCookies(token, refreshToken);
+
+    // generate OTP
+    const { code, expiresAt } = OTPGenerator(6, 15);
+
+    const user = await prisma.user.create({
       data: {
         ...data,
         username,
+        verificationCode: code, // 🔑 store OTP
+        verificationExpiry: expiresAt,
+      },
+    });
+
+    if (user.email) {
+      await sendVerificationEmail(user.email, user.fName, code);
+      // TODO: send OTP email here
+    }
+    if (user.phoneNumber) {
+      // TODO: send OTP via SMS provider
+    }
+
+    return user;
+  }
+
+  static async verifyUser(userId: string, code: string) {
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+
+    if (!user || !user.verificationCode || !user.verificationExpiry) {
+      throw new Error("User not found or no OTP set");
+    }
+
+    if (new Date() > user.verificationExpiry) {
+      throw new Error("OTP expired");
+    }
+
+    if (user.verificationCode !== code) {
+      throw new Error("Invalid OTP");
+    }
+
+    return prisma.user.update({
+      where: { id: userId },
+      data: {
+        isVerified: true,
+        verificationCode: null,
+        verificationExpiry: null,
       },
     });
   }
