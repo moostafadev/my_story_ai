@@ -1,8 +1,8 @@
+import { ClientTranslationFunction } from "@/types/intl";
 import { z } from "zod";
+import { checkUserExists } from "./create_user.action";
 
-export const registerSchema = (
-  t: (key: string, values?: Record<string, string | number | Date>) => string
-) => {
+export const registerSchema = (t: ClientTranslationFunction) => {
   return z
     .object({
       firstName: z
@@ -15,27 +15,31 @@ export const registerSchema = (
         .nonempty({ message: t("errors.required") })
         .min(2, { message: t("errors.lastNameMin", { min: 2 }) }),
 
-      emailOrPhone: z
+      email: z
         .string()
         .nonempty({ message: t("errors.required") })
-        .superRefine((value, ctx) => {
-          const emailRegex = /^\S+@\S+\.\S+$/;
-          const phoneRegex = /^\+?[0-9]{7,15}$/;
+        .email({ message: t("errors.invalidEmail") })
+        .superRefine(async (value, ctx) => {
+          const exists = await checkUserExists(value, "email");
+          if (exists === "email") {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: t("errors.emailExists"),
+            });
+          }
+        }),
 
-          if (/^[0-9+]/.test(value)) {
-            if (!phoneRegex.test(value)) {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: t("errors.invalidPhone"),
-              });
-            }
-          } else {
-            if (!emailRegex.test(value)) {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: t("errors.invalidEmail"),
-              });
-            }
+      phone: z
+        .string()
+        .nonempty({ message: t("errors.required") })
+        .regex(/^\+?[0-9]{7,15}$/, { message: t("errors.invalidPhone") })
+        .superRefine(async (value, ctx) => {
+          const exists = await checkUserExists(value, "phone");
+          if (exists === "phone") {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: t("errors.phoneExists"),
+            });
           }
         }),
 

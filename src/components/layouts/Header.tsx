@@ -7,16 +7,21 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { navData } from "./navData";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
+import { User } from "./types";
+import { CircleUserRound } from "lucide-react";
 
-const Header = () => {
+const Header = ({ user, isFree }: { user: User; isFree: boolean }) => {
   const t = useTranslations("HomePage");
   const locale = useLocale();
+  const pathName = usePathname();
   const [scrollY, setScrollY] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isRTL = locale === "ar";
-  const registerLink = "/register";
+  const loginLink = "/login";
+  const isOnRegisterPage = pathName === "/login";
+  const isOnProfilePage = pathName === "/profile";
 
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -121,22 +126,39 @@ const Header = () => {
 
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
-          <Link href={registerLink} className="hidden lg:flex">
+          {!isOnRegisterPage && !user.userId && (
+            <Link href={loginLink} className="hidden lg:flex">
+              <Button
+                size={scrollY > 0 ? "sm" : "default"}
+                title={t("header.signIn")}
+                variant={"outlineSub"}
+              >
+                {t("header.signIn")}
+              </Button>
+            </Link>
+          )}
+
+          {user.userId && !isOnProfilePage && (
+            <Link href={`/profile`} className="hidden lg:flex">
+              <Button
+                size={"icon"}
+                title={t("header.profile")}
+                variant={"outlineSub"}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <CircleUserRound className="!h-5 !w-5" />
+              </Button>
+            </Link>
+          )}
+          {isFree && (
             <Button
+              className="bg-gradient-to-r from-primary to-primary-foreground text-white transition hover:from-primary-foreground hover:to-primary"
               size={scrollY > 0 ? "sm" : "default"}
-              title={t("header.signIn")}
-              variant={"outlineSub"}
+              title={t("header.tryFree")}
             >
-              {t("header.signIn")}
+              {t("header.tryFree")}
             </Button>
-          </Link>
-          <Button
-            className="bg-gradient-to-r from-primary to-primary-foreground text-white transition hover:from-primary-foreground hover:to-primary"
-            size={scrollY > 0 ? "sm" : "default"}
-            title={t("header.tryFree")}
-          >
-            {t("header.tryFree")}
-          </Button>
+          )}
 
           <Button
             ref={buttonRef}
@@ -189,15 +211,29 @@ const Header = () => {
               {t(title)}
             </Link>
           ))}
-          <Link href={registerLink}>
-            <Button
+          {!isOnRegisterPage && !user.userId && (
+            <Link
+              href={loginLink}
+              onClick={() => setMobileMenuOpen(false)}
               className="self-end"
-              variant={"secondary"}
-              title={t("header.signIn")}
             >
-              {t("header.signIn")}
-            </Button>
-          </Link>
+              <Button variant={"secondary"} title={t("header.signIn")}>
+                {t("header.signIn")}
+              </Button>
+            </Link>
+          )}
+          {user.userId && !isOnProfilePage && (
+            <Link href={`/profile`} className="flex lg:hidden self-end">
+              <Button
+                size={"icon"}
+                title={t("header.profile")}
+                variant={"outlineSub"}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <CircleUserRound className="!h-5 !w-5" />
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
     </header>

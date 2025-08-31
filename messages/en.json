@@ -8,7 +8,9 @@
     },
     "header": {
       "signIn": "Sign In",
-      "tryFree": "Try Free"
+      "tryFree": "Try Free",
+      "profile": "Profile",
+      "logout": "Logout"
     },
     "Hero": {
       "title": "is the Hero",
@@ -70,24 +72,85 @@
     }
   },
   "Register": {
-    "title": "Create Account",
-    "description": "Start your journey with My Story AI today!",
+    "title": "Create Your Account Now",
+    "description": "Join us today and enjoy a unique experience full of opportunities and options tailored just for you",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "emailOrPhone": "Email or Phone Number",
+    "email": "Email",
+    "phone": "Phone Number",
     "password": "Password",
     "confirmPassword": "Confirm Password",
     "alreadyHaveAccount": "Already have an account?",
     "signIn": "Sign In",
     "register": "Register",
+    "successTitle": "Success!",
+    "successMessage": "Your account has been created. You can now sign in.",
+    "errorTitle": "Error",
+    "errorMessage": "Account creation failed. Please check your details and try again.",
+    "thanksForRegister": "Thank you for registering with us",
+    "thanksForRegisterDescription": "Welcome {firstName} {lastName}, we’re glad to have you with us.",
+    "thanksForRegisterUsername": "Your username is: {username}",
+    "verifyAccount": "Verify Account",
+    "verifyAccountDescription": "We’ve sent a verification code to {contact}. Please enter it below to complete the account verification process.",
+    "enterOTP": "Enter Verification Code",
+    "verifyNow": "Verify Now",
+    "resendCode": "Resend Code",
+    "invalidCodeError": "The code you entered is incorrect. Please check the message and try again.",
     "errors": {
       "required": "This field is required",
       "firstNameMin": "First name must be at least {min} characters",
       "lastNameMin": "Last name must be at least {min} characters",
       "invalidEmail": "Invalid email address",
       "invalidPhone": "Invalid phone number",
+      "emailExists": "This email is already registered",
+      "phoneExists": "This phone number is already registered",
       "passwordMin": "Password must be at least {min} characters",
       "passwordMatch": "Passwords do not match"
     }
+  },
+  "Login": {
+    "title": "Login",
+    "description": "Welcome back! Please sign in using your username and password to access your account.",
+    "username": "Username",
+    "password": "Password",
+    "forgotUsername": "Login with Email or Phone",
+    "noAccount": "Don’t have an account?",
+    "registerNow": "Create a new account",
+    "signIn": "Sign In",
+    "successTitle": "Login Successful",
+    "successMessage": "Welcome back! You have logged in successfully.",
+    "errorTitle": "Login Error",
+    "errorMessage": "Unable to sign in. Please check your username or password and try again.",
+    "errors": {
+      "required": "This field is required",
+      "wrongCredentials": "Incorrect login credentials"
+    }
+  },
+  "RecoverUsername": {
+    "title": "Login with Email or Phone",
+    "description": "You can log in using your registered email address or phone number along with your password.",
+    "emailOrPhone": "Email or Phone Number",
+    "password": "Password",
+    "submit": "Sign In",
+    "successTitle": "Login Successful",
+    "successMessage": "Welcome! You have logged in using your email or phone number.",
+    "errorTitle": "Login Error",
+    "errorMessage": "Unable to sign in. Please check your details and try again.",
+    "noAccount": "Don’t have an account?",
+    "registerNow": "Create a new account",
+    "errors": {
+      "required": "This field is required",
+      "wrongCredentials": "Incorrect login credentials"
+    }
+  },
+  "Profile": {
+    "title": "Profile",
+    "FullName": "Full name",
+    "Username": "Username",
+    "Email": "Email",
+    "FreeTrialLabel": "Free Trial",
+    "FreeTrial": "Available",
+    "FreeTrialUsed": "Free trial already used",
+    "CreatedAt": "Created At"
   }
 }

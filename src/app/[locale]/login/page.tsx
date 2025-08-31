@@ -3,10 +3,10 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
-import RegisterForm from "@/features/auth/register/Form";
+import LoginForm from "@/features/auth/login/Form";
 
-const RegisterPage = async () => {
-  const t = await getTranslations("Register");
+const LoginPage = async () => {
+  const t = await getTranslations("Login");
 
   return (
     <section className="min-h-[calc(100vh-5rem)] flex">
@@ -21,14 +21,16 @@ const RegisterPage = async () => {
             </p>
           </div>
           <div className="flex flex-col gap-2">
-            <RegisterForm />
+            <LoginForm />
             <p className="text-sm sm:text-base text-muted-foreground flex items-center gap-2">
-              <span>{t("alreadyHaveAccount")}</span>
+              <span>{t("noAccount")}</span>
               <Link
-                href="/login"
+                href="/register"
                 className="text-primary hover:underline hover:underline-offset-4"
               >
-                <Button variant={"link"}>{t("signIn")}</Button>
+                <Button variant={"link"} className="h-fit">
+                  {t("registerNow")}
+                </Button>
               </Link>
             </p>
           </div>
@@ -47,4 +49,4 @@ const RegisterPage = async () => {
   );
 };
 
-export default RegisterPage;
+export default LoginPage;

@@ -7,7 +7,7 @@ const buttonVariants = cva(
   `
     flex items-center justify-center cursor-pointer gap-2 whitespace-nowrap 
     rounded-md text-sm font-medium shrink-0
-    disabled:pointer-events-none disabled:opacity-50
+    disabled:opacity-50 disabled:!cursor-not-allowed
     [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0
     
     outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] 
@@ -37,7 +37,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
         ghost: "hover:bg-background-accent",
         ghostSub: "hover:bg-secondary hover:text-secondary-foreground",
-        link: "text-accent-foreground underline-offset-4 hover:underline",
+        link: "text-accent-foreground underline-offset-4 hover:underline hover:shadow-none !p-0",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
@@ -53,15 +53,51 @@ const buttonVariants = cva(
   }
 );
 
+const LoadingDots = ({ size }: { size: "sm" | "default" | "lg" | "icon" }) => {
+  const dotSize =
+    size === "sm" ? "w-1 h-1" : size === "lg" ? "w-2 h-2" : "w-1.5 h-1.5";
+  const gap = size === "sm" ? "gap-0.5" : size === "lg" ? "gap-1.5" : "gap-1";
+
+  return (
+    <span className={cn("flex items-center", gap)} aria-label="Loading">
+      <span
+        className={cn(
+          dotSize,
+          "rounded-full bg-current opacity-80",
+          "animate-bounce [animation-duration:0.8s] [animation-delay:-0.32s]"
+        )}
+      />
+      <span
+        className={cn(
+          dotSize,
+          "rounded-full bg-current opacity-80",
+          "animate-bounce [animation-duration:0.8s] [animation-delay:-0.16s]"
+        )}
+      />
+      <span
+        className={cn(
+          dotSize,
+          "rounded-full bg-current opacity-80",
+          "animate-bounce [animation-duration:0.8s]"
+        )}
+      />
+    </span>
+  );
+};
+
 function Button({
   className,
   variant,
   size,
   asChild = false,
+  loading = false,
+  children,
+  disabled,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
+    loading?: boolean;
   }) {
   const Comp = asChild ? Slot : "button";
 
@@ -69,8 +105,12 @@ function Button({
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
+      disabled={disabled || loading}
+      aria-busy={loading}
       {...props}
-    />
+    >
+      {loading ? <LoadingDots size={size || "default"} /> : children}
+    </Comp>
   );
 }
 
