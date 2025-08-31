@@ -22,12 +22,12 @@ export async function sendVerificationEmail(
     to: [{ email: to, name }],
     subject: "🔑 Verify Your Account | MyStoryAI",
     htmlContent: `
-      <div style="font-family: Arial, sans-serif; background-color:#f9f9f9; padding:30px; text-align:center;">
+      <div style="font-family: Arial, sans-serif; background-color:#f9f9f9; padding:10px; text-align:center;">
         <!-- Logo -->
-        <img src="https://res.cloudinary.com/deharbts9/image/upload/v1756487074/xms8huioj65b9iqd5r8a.png" alt="MyStoryAI Logo" width="120" style="margin-bottom:20px;" />
+        <img src="https://res.cloudinary.com/deharbts9/image/upload/v1756487074/xms8huioj65b9iqd5r8a.png" alt="MyStoryAI Logo" width="200" style="margin:0 auto 20px auto; width:100%; max-width:600px;" />
 
         <!-- Card -->
-        <div style="max-width:600px; margin:0 auto; background:#fff; padding:30px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1); text-align:left;">
+        <div style="max-width:600px; margin:0 auto; background:#fff; padding:10px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.1); text-align:left;">
           <h2 style="color:#333;">Hello ${name} 👋</h2>
           <p style="color:#555; font-size:16px;">
             Thank you for joining <strong>MyStoryAI</strong> 🚀  
@@ -52,7 +52,7 @@ export async function sendVerificationEmail(
           © ${new Date().getFullYear()} MyStoryAI. All rights reserved.  
           <br/>
           <a href="${domain}" style="color:#555; text-decoration:none;">Official Website</a> | 
-          <a href="twitter.com/yourapp" style="color:#555; text-decoration:none;">Twitter</a>
+          <a href="mailto:mystoryai.webiste@gmail.com" style="color:#555; text-decoration:none;">Contact Us</a>
         </p>
       </div>
     `,

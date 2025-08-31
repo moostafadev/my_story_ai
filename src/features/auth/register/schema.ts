@@ -15,38 +15,30 @@ export const registerSchema = (t: ClientTranslationFunction) => {
         .nonempty({ message: t("errors.required") })
         .min(2, { message: t("errors.lastNameMin", { min: 2 }) }),
 
-      emailOrPhone: z
+      email: z
         .string()
         .nonempty({ message: t("errors.required") })
+        .email({ message: t("errors.invalidEmail") })
         .superRefine(async (value, ctx) => {
-          const emailRegex = /^\S+@\S+\.\S+$/;
-          const phoneRegex = /^\+?[0-9]{7,15}$/;
-          if (/^[0-9+]/.test(value)) {
-            if (!phoneRegex.test(value)) {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: t("errors.invalidPhone"),
-              });
-              return;
-            }
-          } else {
-            if (!emailRegex.test(value)) {
-              ctx.addIssue({
-                code: z.ZodIssueCode.custom,
-                message: t("errors.invalidEmail"),
-              });
-              return;
-            }
-          }
-
-          const exists = await checkUserExists(value);
-          if (exists) {
+          const exists = await checkUserExists(value, "email");
+          if (exists === "email") {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
-              message:
-                exists === "email"
-                  ? t("errors.emailExists")
-                  : t("errors.phoneExists"),
+              message: t("errors.emailExists"),
+            });
+          }
+        }),
+
+      phone: z
+        .string()
+        .nonempty({ message: t("errors.required") })
+        .regex(/^\+?[0-9]{7,15}$/, { message: t("errors.invalidPhone") })
+        .superRefine(async (value, ctx) => {
+          const exists = await checkUserExists(value, "phone");
+          if (exists === "phone") {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: t("errors.phoneExists"),
             });
           }
         }),

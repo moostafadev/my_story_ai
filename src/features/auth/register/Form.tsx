@@ -16,22 +16,27 @@ import { User } from "@prisma/client";
 import { useRouter } from "@/i18n/navigation";
 import { OTPInput } from "@/components/custom/CustomOTP";
 import { useOTPManager } from "@/hooks/useOTPManager";
-import { verifyUserOTP } from "./verify_user.action";
+import { resendUserOTP, verifyUserOTP } from "./otp.action";
+import { Label } from "@/components/ui/label";
 
 const RegisterForm = () => {
   const t = useTranslations("Register");
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [isResending, setIsResending] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [userData, setUserData] = useState<User | null>(null);
-  const { value, setValue, timeLeft, length } = useOTPManager(6, 10);
+  const { value, setValue, length, reset } = useOTPManager(6, 10);
+  const [verifyError, setVerifyError] = useState<string | null>(null);
 
   const form = useForm<TRegisterSchema>({
     resolver: zodResolver(registerSchema(t)),
     defaultValues: {
       firstName: "",
       lastName: "",
-      emailOrPhone: "",
+      email: "",
+      phone: "",
       password: "",
       confirmPassword: "",
     },
@@ -41,8 +46,18 @@ const RegisterForm = () => {
     setUserData(user);
     toast.success(
       <div>
-        <strong>{t("successTitle")}</strong>
-        <div>{t("successMessage")}</div>
+        <strong>{t("thanksForRegister")}</strong>
+        <div>
+          {t.rich("thanksForRegisterDescription", {
+            firstName: user?.fName || "",
+            lastName: user?.lName || "",
+          })}
+        </div>
+        <div>
+          {t.rich("thanksForRegisterUsername", {
+            username: user?.username || "",
+          })}
+        </div>
       </div>
     );
     setIsDialogOpen(true);
@@ -79,6 +94,53 @@ const RegisterForm = () => {
     }
   };
 
+  const handleVerifyOTP = async () => {
+    if (!userData) return;
+
+    try {
+      setIsVerifying(true);
+      const result = await verifyUserOTP(userData.id, value);
+
+      if (result.success) {
+        toast.success(
+          <div>
+            <strong>{t("successTitle")}</strong>
+            <div>{t("successMessage")}</div>
+          </div>
+        );
+        reset();
+        setIsDialogOpen(false);
+        router.push("/login");
+      } else {
+        setVerifyError(t("invalidCodeError"));
+      }
+    } catch (error) {
+      console.error("OTP Verification Error:", error);
+      toast.error(t("invalidCodeError"));
+    } finally {
+      setIsVerifying(false);
+    }
+  };
+
+  const handleResendOTP = async () => {
+    if (!userData) return;
+    try {
+      setIsResending(true);
+      const result = await resendUserOTP(userData.id);
+
+      if (result.success) {
+        toast.success(t("resendCode") + " ✅");
+      } else {
+        toast.error(result.success || "Failed to resend OTP");
+      }
+    } catch (error) {
+      console.error("Resend OTP Error:", error);
+      toast.error("Failed to resend OTP");
+    } finally {
+      setIsResending(false);
+    }
+  };
+
   return (
     <>
       <Form {...form}>
@@ -105,14 +167,25 @@ const RegisterForm = () => {
                 schema={registerSchema(t)}
               />
             </div>
-            <CustomInput
-              control={form.control}
-              name="emailOrPhone"
-              label="Register.emailOrPhone"
-              placeholder="Register.emailOrPhone"
-              className="w-full"
-              schema={registerSchema(t)}
-            />
+
+            <div className="flex flex-col md:flex-row gap-4 !w-full">
+              <CustomInput
+                control={form.control}
+                name="email"
+                label="Register.email"
+                placeholder="Register.email"
+                className="w-full"
+                schema={registerSchema(t)}
+              />
+              <CustomInput
+                control={form.control}
+                name="phone"
+                label="Register.phone"
+                placeholder="Register.phone"
+                className="w-full"
+                schema={registerSchema(t)}
+              />
+            </div>
             <div className="flex flex-col md:flex-row gap-4">
               <CustomInput
                 control={form.control}
@@ -137,47 +210,49 @@ const RegisterForm = () => {
           </Button>
         </form>
       </Form>
+
       <CustomDialog
         open={isDialogOpen}
-        onOpenChange={setIsDialogOpen}
+        onOpenChange={(open) => {
+          if (open) {
+            setIsDialogOpen(false);
+            reset();
+          } else {
+            setIsDialogOpen(true);
+          }
+        }}
         title={{
-          text: t("thanksForRegister"),
+          text: t("verifyAccount"),
         }}
         description={{
-          text: t.rich("thanksForRegisterDescription", {
-            firstName: userData?.fName || "",
-            lastName: userData?.lName || "",
+          text: t.rich("verifyAccountDescription", {
+            contact: userData?.email || "",
           }) as string,
         }}
       >
-        {/* <p className="font-medium">
-          {t.rich("thanksForRegisterUsername", {
-            username: userData?.username || "",
-          })}
-        </p> */}
+        <div className="flex flex-col gap-3 items-center">
+          <div className="flex flex-col gap-2 items-center">
+            <Label htmlFor="OTP">{t("enterOTP")}</Label>
+            <OTPInput
+              length={length}
+              onChange={setValue}
+              value={value}
+              id="OTP"
+            />
+            {verifyError && (
+              <span className="text-sm text-red-500">{verifyError}</span>
+            )}
+          </div>
 
-        <p>
-          Time left: {Math.floor(timeLeft / 60)}:
-          {String(timeLeft % 60).padStart(2, "0")}
-        </p>
-        <div className="flex flex-col gap-4 items-center">
-          <OTPInput length={length} onChange={setValue} value={value} />
-
+          <Button onClick={handleVerifyOTP} loading={isVerifying}>
+            {t("verifyNow")}
+          </Button>
           <Button
-            className="mt-4"
-            onClick={async () => {
-              if (!userData) return;
-              const result = await verifyUserOTP(userData.id, value);
-              if (result.success) {
-                toast.success("Account verified successfully!");
-                setIsDialogOpen(false);
-                router.push("/dashboard");
-              } else {
-                toast.error(result.message);
-              }
-            }}
+            variant="outline"
+            onClick={handleResendOTP}
+            loading={isResending}
           >
-            Done
+            {t("resendCode")}
           </Button>
         </div>
       </CustomDialog>

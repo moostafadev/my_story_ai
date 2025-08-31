@@ -98,7 +98,10 @@ const CustomInputInner = React.memo(
                   : "password"
                 : props.type
             }
-            className={cn(className, isRTL ? "pl-10" : "pr-10")}
+            className={cn(
+              className,
+              isPasswordField ? (isRTL ? "pl-10" : "pr-10") : ""
+            )}
             placeholder={t(placeholder ?? "")}
             value={fieldProps?.value ?? localValue}
             onChange={(e) => {

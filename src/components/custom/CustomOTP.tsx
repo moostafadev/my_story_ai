@@ -12,6 +12,7 @@ interface OTPInputProps {
   pattern?: string;
   value: string;
   onChange: (val: string) => void;
+  id?: string;
 }
 
 export function OTPInput({
@@ -19,6 +20,7 @@ export function OTPInput({
   pattern = REGEXP_ONLY_DIGITS_AND_CHARS,
   value,
   onChange,
+  id,
 }: OTPInputProps) {
   return (
     <InputOTP
@@ -27,6 +29,8 @@ export function OTPInput({
       value={value}
       onChange={onChange}
       dir="ltr"
+      id={id}
+      className="w-fit"
     >
       <InputOTPGroup dir="ltr">
         {Array.from({ length }).map((_, index) => (

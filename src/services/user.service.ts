@@ -1,8 +1,6 @@
-import { setTokenCookies } from "@/lib/cookies";
-import { signRefreshToken, signToken } from "@/lib/jwt";
 import { prisma } from "@/lib/prisma";
 import { CreateUserInput, UpdateUserInput } from "@/services/types";
-import { OTPGenerator } from "@/lib/otpGenerator";
+import { hashOTP, OTPGenerator, verifyOTP } from "@/lib/otpGenerator";
 import { sendVerificationEmail } from "@/components/emails/SendVerificationEmail";
 
 export class UserService {
@@ -20,6 +18,25 @@ export class UserService {
     return username;
   }
 
+  static async checkUserExists(
+    value: string,
+    type: "email" | "phone"
+  ): Promise<"email" | "phone" | null> {
+    const exists = await prisma.user.findFirst({
+      where:
+        type === "email"
+          ? { email: value, isVerified: true }
+          : { phoneNumber: value, isVerified: true },
+      select: { id: true },
+    });
+
+    if (exists) {
+      return type;
+    }
+
+    return null;
+  }
+
   static async createUser(data: CreateUserInput) {
     if (data.email || data.phoneNumber) {
       const exists = await prisma.user.findFirst({
@@ -32,42 +49,34 @@ export class UserService {
       });
 
       if (exists) {
-        throw new Error("Email or phone number already exists");
+        if (exists.isVerified) {
+          throw new Error("User already exists and is verified");
+        } else {
+          // user exists but not verified → resend OTP
+          await this.resendOTP(exists.id);
+          return { ...exists, message: "Verification code resent" };
+        }
       }
     }
 
     const username = await this.generateUniqueUsername(data.fName, data.lName);
 
-    const token = signToken({
-      fName: data.fName,
-      lName: data.lName,
-      email: data.email,
-      phoneNumber: data.phoneNumber,
-      username,
-      role: data.role,
-    });
-
-    const refreshToken = signRefreshToken({ token });
-    setTokenCookies(token, refreshToken);
-
     // generate OTP
     const { code, expiresAt } = OTPGenerator(6, 15);
+    const hashedCode = hashOTP(code);
 
     const user = await prisma.user.create({
       data: {
         ...data,
         username,
-        verificationCode: code, // 🔑 store OTP
+        isVerified: false,
+        verificationCode: hashedCode,
         verificationExpiry: expiresAt,
       },
     });
 
     if (user.email) {
       await sendVerificationEmail(user.email, user.fName, code);
-      // TODO: send OTP email here
-    }
-    if (user.phoneNumber) {
-      // TODO: send OTP via SMS provider
     }
 
     return user;
@@ -80,12 +89,14 @@ export class UserService {
       throw new Error("User not found or no OTP set");
     }
 
-    if (new Date() > user.verificationExpiry) {
-      throw new Error("OTP expired");
-    }
+    const isVerified = verifyOTP(
+      code,
+      user.verificationCode,
+      user.verificationExpiry
+    );
 
-    if (user.verificationCode !== code) {
-      throw new Error("Invalid OTP");
+    if (!isVerified) {
+      throw new Error("Invalid or expired OTP");
     }
 
     return prisma.user.update({
@@ -98,6 +109,34 @@ export class UserService {
     });
   }
 
+  static async resendOTP(userId: string) {
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // generate new OTP
+    const { code, expiresAt } = OTPGenerator(6, 15);
+    const hashedCode = hashOTP(code);
+
+    // update user with new OTP
+    await prisma.user.update({
+      where: { id: userId },
+      data: {
+        verificationCode: hashedCode,
+        verificationExpiry: expiresAt,
+      },
+    });
+
+    // send via email if exists
+    if (user.email) {
+      await sendVerificationEmail(user.email, user.fName, code);
+    }
+
+    return { success: true };
+  }
+
   static async getUserById(id: string) {
     return prisma.user.findUnique({
       where: { id },
@@ -106,15 +145,15 @@ export class UserService {
   }
 
   static async getUserByEmail(email: string) {
-    return prisma.user.findFirst({ where: { email } });
+    return prisma.user.findFirst({ where: { email, isVerified: true } });
   }
 
   static async getUserByUsername(username: string) {
-    return prisma.user.findUnique({ where: { username } });
+    return prisma.user.findUnique({ where: { username, isVerified: true } });
   }
 
   static async getUserByPhoneNumber(phoneNumber: string) {
-    return prisma.user.findFirst({ where: { phoneNumber } });
+    return prisma.user.findFirst({ where: { phoneNumber, isVerified: true } });
   }
 
   static async getAllUsers() {
