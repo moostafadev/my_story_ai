@@ -1,9 +1,11 @@
-import SibApiV3Sdk from "@sendinblue/client";
+import {
+  TransactionalEmailsApi,
+  TransactionalEmailsApiApiKeys,
+} from "@sendinblue/client";
 
-const client = new SibApiV3Sdk.TransactionalEmailsApi();
-
+const client = new TransactionalEmailsApi();
 client.setApiKey(
-  SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
+  TransactionalEmailsApiApiKeys.apiKey,
   process.env.BREVO_API_KEY as string
 );
 
