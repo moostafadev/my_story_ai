@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import ScrollToTopButton from "../ScrollToTopButton";
+import ScrollToTopButton from "../../ScrollToTopButton";
 import { Toaster } from "sonner";
 import { cookies } from "next/headers";
 import { UserService } from "@/services/user.service";
@@ -12,8 +12,9 @@ const MainLayout = async ({ children }: { children: React.ReactNode }) => {
   const lastName = cookieStore.get("lastName")?.value || null;
 
   const result = userId ? await UserService.getUserById(userId) : null;
+  const isAdmin = result?.role === "ADMIN" ? true : false;
 
-  const user = { userId, firstName, lastName };
+  const user = { userId, firstName, lastName, role: isAdmin };
   return (
     <>
       <Header user={user} isFree={result?.isFree ?? true} />

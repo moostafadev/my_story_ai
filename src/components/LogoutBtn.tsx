@@ -2,12 +2,18 @@
 
 import React, { useState } from "react";
 import { Button } from "./ui/button";
-import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { removeUserCookies } from "@/lib/cookies";
 
-const LogoutBtn = ({ className }: { className?: string }) => {
-  const t = useTranslations("HomePage.header");
+const LogoutBtn = ({
+  title,
+  className,
+  children,
+}: {
+  title?: string;
+  className?: string;
+  children?: React.ReactNode;
+}) => {
   const [loading, setLoading] = useState(false);
   return (
     <Button
@@ -20,7 +26,7 @@ const LogoutBtn = ({ className }: { className?: string }) => {
       }}
       loading={loading}
     >
-      {t("logout")}
+      {children ? children : title}
     </Button>
   );
 };

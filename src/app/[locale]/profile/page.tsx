@@ -2,12 +2,14 @@ import { UserService } from "@/services/user.service";
 import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import { User, AtSign, Mail, Gift, Calendar } from "lucide-react";
 import LogoutBtn from "@/components/LogoutBtn";
+import Loading from "./loading";
 
 const ProfilePage = async () => {
   const t = await getTranslations("Profile");
+  const tHeader = await getTranslations("HomePage.header");
   const cookiesStore = await cookies();
   const userId = cookiesStore.get("userId")?.value;
 
@@ -16,7 +18,7 @@ const ProfilePage = async () => {
     redirect("/");
   }
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       <section className="py-10">
         <div className="container flex flex-col gap-6 md:gap-8">
           <h1 className="text-2xl md:text-3xl font-semibold text-primary-foreground text-center">
@@ -83,9 +85,9 @@ const ProfilePage = async () => {
         </div>
       </section>
       <section className="flex flex-col container">
-        <LogoutBtn />
+        <LogoutBtn title={tHeader("logout")} />
       </section>
-    </>
+    </Suspense>
   );
 };
 

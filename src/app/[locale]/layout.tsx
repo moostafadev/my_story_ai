@@ -9,8 +9,7 @@ import "@/styles/globals.css";
 import "@/styles/animations.css";
 import "@/styles/shadows.css";
 
-import MainLayout from "@/components/layouts/MainLayout";
-import { StoryService } from "@/services/story.service";
+import MainLayout from "@/components/layouts/Client/MainLayout";
 
 const roboto = Roboto({
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
@@ -41,12 +40,9 @@ export default async function LocaleLayout({
 }) {
   // Ensure that the incoming `locale` is valid
   const { locale } = await params;
-  const stories = await StoryService.getAllStories();
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
-
-  console.log(stories);
 
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
