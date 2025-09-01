@@ -9,6 +9,7 @@ import Loading from "./loading";
 
 const ProfilePage = async () => {
   const t = await getTranslations("Profile");
+  const tHeader = await getTranslations("HomePage.header");
   const cookiesStore = await cookies();
   const userId = cookiesStore.get("userId")?.value;
 
@@ -84,7 +85,7 @@ const ProfilePage = async () => {
         </div>
       </section>
       <section className="flex flex-col container">
-        <LogoutBtn />
+        <LogoutBtn title={tHeader("logout")} />
       </section>
     </Suspense>
   );

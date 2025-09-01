@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import LanguageSwitcher from "../LanguageSwitcher";
-import { Button } from "../ui/button";
+import LanguageSwitcher from "../../LanguageSwitcher";
+import { Button } from "../../ui/button";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { navData } from "./navData";
 import { Link, usePathname } from "@/i18n/navigation";
+import LinkNext from "next/link";
 import { User } from "./types";
 import { CircleUserRound } from "lucide-react";
 
@@ -139,7 +140,10 @@ const Header = ({ user, isFree }: { user: User; isFree: boolean }) => {
           )}
 
           {user.userId && !isOnProfilePage && (
-            <Link href={`/profile`} className="hidden lg:flex">
+            <LinkNext
+              href={user.role ? `/admin` : `${isRTL ? "ar" : "en"}/profile`}
+              className="hidden lg:flex"
+            >
               <Button
                 size={"icon"}
                 title={t("header.profile")}
@@ -148,9 +152,9 @@ const Header = ({ user, isFree }: { user: User; isFree: boolean }) => {
               >
                 <CircleUserRound className="!h-5 !w-5" />
               </Button>
-            </Link>
+            </LinkNext>
           )}
-          {isFree && (
+          {isFree && !user.role && (
             <Button
               className="bg-gradient-to-r from-primary to-primary-foreground text-white transition hover:from-primary-foreground hover:to-primary"
               size={scrollY > 0 ? "sm" : "default"}
@@ -223,7 +227,10 @@ const Header = ({ user, isFree }: { user: User; isFree: boolean }) => {
             </Link>
           )}
           {user.userId && !isOnProfilePage && (
-            <Link href={`/profile`} className="flex lg:hidden self-end">
+            <LinkNext
+              href={user.role ? `/admin` : `${isRTL ? "ar" : "en"}/profile`}
+              className="flex lg:hidden self-end"
+            >
               <Button
                 size={"icon"}
                 title={t("header.profile")}
@@ -232,7 +239,7 @@ const Header = ({ user, isFree }: { user: User; isFree: boolean }) => {
               >
                 <CircleUserRound className="!h-5 !w-5" />
               </Button>
-            </Link>
+            </LinkNext>
           )}
         </div>
       </div>
