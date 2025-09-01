@@ -2,9 +2,10 @@ import { UserService } from "@/services/user.service";
 import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import { User, AtSign, Mail, Gift, Calendar } from "lucide-react";
 import LogoutBtn from "@/components/LogoutBtn";
+import Loading from "./loading";
 
 const ProfilePage = async () => {
   const t = await getTranslations("Profile");
@@ -16,7 +17,7 @@ const ProfilePage = async () => {
     redirect("/");
   }
   return (
-    <>
+    <Suspense fallback={<Loading />}>
       <section className="py-10">
         <div className="container flex flex-col gap-6 md:gap-8">
           <h1 className="text-2xl md:text-3xl font-semibold text-primary-foreground text-center">
@@ -85,7 +86,7 @@ const ProfilePage = async () => {
       <section className="flex flex-col container">
         <LogoutBtn />
       </section>
-    </>
+    </Suspense>
   );
 };
 
