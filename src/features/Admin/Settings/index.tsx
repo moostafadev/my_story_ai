@@ -8,6 +8,7 @@ import { Settings } from "@prisma/client";
 import { updateSettingsAction } from "./settings.action";
 import { toast } from "sonner";
 import { CustomSelect } from "@/components/custom/select";
+import Link from "next/link";
 
 const SettingsFeature = ({ data }: { data: Settings | null }) => {
   const [storyCreationPrice, setStoryCreationPrice] = useState(
@@ -70,9 +71,11 @@ const SettingsFeature = ({ data }: { data: Settings | null }) => {
 
         <div className="flex flex-col gap-2">
           <Label>اسعار التوصيل:</Label>
-          <Button size={"lg"} variant={"outline"} className="w-fit">
-            هنا
-          </Button>
+          <Link href={"/admin/settings/deliveryPricing"} className="w-fit">
+            <Button size={"lg"} variant={"outline"} className="w-fit">
+              هنا
+            </Button>
+          </Link>
         </div>
       </div>
 

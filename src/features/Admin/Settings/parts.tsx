@@ -5,8 +5,6 @@ import { Input } from "@/components/ui/input";
 import { CustomSelect } from "@/components/custom/select";
 import React, { useState } from "react";
 
-// ================== Sub Components ==================
-
 interface StoryPriceInputProps {
   value: number;
   currency: string;

@@ -21,7 +21,6 @@ export class SettingsService {
       data,
     });
   }
-
   static async upsertDeliveryPrice(
     city: string,
     price: number,
