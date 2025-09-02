@@ -4,6 +4,7 @@ import React from "react";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/contexts/SidebarContext";
 import SidebarCore from "./Sidebar/SidebarCore";
+import { Toaster } from "sonner";
 
 const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
   const { isOpen } = useSidebar();
@@ -25,6 +26,7 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
       >
         {children}
       </main>
+      <Toaster />
     </>
   );
 };

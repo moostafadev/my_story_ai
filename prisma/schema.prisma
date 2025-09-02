@@ -129,3 +129,19 @@ model Pdf {
 
   story       Story[]
 }
+
+model Settings {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  uuid        String   @unique @default(uuid())
+
+  storyCreationPrice    Float    @default(0)
+  storyCreationCurrency String   @default("USD")
+
+  deliveryPrices        Json
+
+  supportEmail          String?
+  supportPhone          String?
+
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}

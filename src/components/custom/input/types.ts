@@ -11,4 +11,6 @@ export interface CustomInputProps<T extends FieldValues = FieldValues> {
   name?: Path<T>;
   required?: boolean;
   schema?: ZodObject<Record<string, ZodTypeAny>>;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
