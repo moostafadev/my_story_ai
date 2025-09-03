@@ -1,22 +1,14 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { Pen, Trash } from "lucide-react";
 import React, { useState } from "react";
 import PricingDeliveryForm from "./Form";
-import Image from "next/image";
 import { removeDeliveryPriceAction } from "../settings.action";
 import { toast } from "sonner";
 import { DeliveryPriceSchema } from "./schma";
 import { CustomDialog } from "@/components/custom/dialog";
+import { Column, TableAction } from "@/components/custom/table/types";
+import CustomTable from "@/components/custom/table";
 
 const PricingDelivery = ({
   data,
@@ -37,6 +29,12 @@ const PricingDelivery = ({
     null
   );
 
+  const tableData = Object.entries(data).map(([key, value], idx) => ({
+    id: key,
+    idx: idx + 1,
+    ...value,
+  }));
+
   const handleDelete = async (city: string) => {
     try {
       setIsLoading(true);
@@ -53,87 +51,47 @@ const PricingDelivery = ({
     }
   };
 
-  const handleEdit = (
-    cityKey: string,
-    cityData: {
-      nameAr: string;
-      nameEn: string;
-      price: number;
-      currency: string;
-    }
-  ) => {
-    setSelectedCity({ ...cityData });
+  const handleEdit = (item: DeliveryPriceSchema) => {
+    setSelectedCity(item);
     setEditDialogOpen(true);
   };
 
-  const hasData = Object.entries(data).length > 0;
+  const columns: Column<DeliveryPriceSchema & { idx: number; id: string }>[] = [
+    { key: "idx", label: "ID" },
+    { key: "nameAr", label: "المدينة" },
+    {
+      key: "price",
+      label: "المبلغ",
+      render: (item) => `${item.price} ${item.currency}`,
+    },
+  ];
+
+  const actions: TableAction<
+    DeliveryPriceSchema & { idx: number; id: string }
+  >[] = [
+    {
+      label: "Edit",
+      icon: <Pen className="w-4 h-4" />,
+      variant: "secondary",
+      onClick: handleEdit,
+    },
+    {
+      label: "Delete",
+      icon: <Trash className="w-4 h-4" />,
+      variant: "destructive",
+      onClick: (item) => handleDelete(item.id),
+      loading: isLoading,
+    },
+  ];
 
   return (
-    <div className="flex flex-col bg-primary/80 shadow-sm hover:shadow-md rounded-md overflow-hidden duration-300">
-      <div className="p-3 md:p-4 flex flex-col gap-4 text-background">
-        <h4 className="text-lg sm:text-xl font-semibold">إضافة سعر</h4>
-        <PricingDeliveryForm />
-      </div>
-
-      {hasData ? (
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>ID</TableHead>
-              <TableHead>المدينة</TableHead>
-              <TableHead>المبلغ</TableHead>
-              <TableHead className="text-end">التحكم</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {Object.entries(data).map(
-              ([location, { nameAr, nameEn, price, currency }], idx) => (
-                <TableRow key={location}>
-                  <TableCell className="font-medium">{idx + 1}</TableCell>
-                  <TableCell className="font-medium">{nameAr}</TableCell>
-                  <TableCell>
-                    {price} {currency}
-                  </TableCell>
-                  <TableCell className="flex items-center gap-1 justify-end">
-                    <Button
-                      variant="secondary"
-                      size="icon"
-                      onClick={() =>
-                        handleEdit(location, {
-                          nameAr,
-                          nameEn,
-                          price,
-                          currency,
-                        })
-                      }
-                    >
-                      <Pen className="w-4 h-4" />
-                    </Button>
-                    <Button
-                      variant="destructive"
-                      size="icon"
-                      loading={isLoading}
-                      onClick={() => handleDelete(location)}
-                    >
-                      <Trash className="w-4 h-4" />
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              )
-            )}
-          </TableBody>
-        </Table>
-      ) : (
-        <div className="flex flex-col items-center justify-center gap-2 p-6 text-muted-foreground bg-background">
-          <Image
-            src="/no_data.svg"
-            alt="لا توجد بيانات"
-            width={120}
-            height={120}
-          />
-          <p className="text-sm sm:text-base">لا توجد أسعار توصيل مضافة</p>
+    <>
+      <CustomTable data={tableData} columns={columns} actions={actions}>
+        <div className="p-3 md:p-4 flex flex-col gap-4 text-background">
+          <h4 className="text-lg sm:text-xl font-semibold">إضافة سعر</h4>
+          <PricingDeliveryForm />
         </div>
-      )}
+      </CustomTable>
 
       <CustomDialog
         open={editDialogOpen}
@@ -147,7 +105,7 @@ const PricingDelivery = ({
           />
         )}
       </CustomDialog>
-    </div>
+    </>
   );
 };
 
