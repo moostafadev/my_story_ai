@@ -1,6 +1,7 @@
 "use server";
 
 import { SettingsService } from "@/services/settings.service";
+import { revalidatePath } from "next/cache";
 
 export async function updateSettingsAction(data: {
   storyCreationPrice?: number;
@@ -10,6 +11,7 @@ export async function updateSettingsAction(data: {
 }) {
   try {
     const updated = await SettingsService.updateSettings(data);
+    revalidatePath("/admin/settings/deliveryPricing");
     return { success: true, data: updated };
   } catch (error) {
     console.error("Update Settings Error:", error);
@@ -18,16 +20,19 @@ export async function updateSettingsAction(data: {
 }
 
 export async function upsertDeliveryPriceAction(
-  city: string,
+  nameAr: string,
+  nameEn: string,
   price: number,
   currency = "USD"
 ) {
   try {
     const updated = await SettingsService.upsertDeliveryPrice(
-      city,
+      nameAr,
+      nameEn,
       price,
       currency
     );
+    revalidatePath("/admin/settings/deliveryPricing");
     return { success: true, data: updated };
   } catch (error) {
     console.error("Upsert Delivery Price Error:", error);
@@ -38,6 +43,7 @@ export async function upsertDeliveryPriceAction(
 export async function removeDeliveryPriceAction(city: string) {
   try {
     const updated = await SettingsService.removeDeliveryPrice(city);
+    revalidatePath("/admin/settings/deliveryPricing");
     return { success: true, data: updated };
   } catch (error) {
     console.error("Remove Delivery Price Error:", error);

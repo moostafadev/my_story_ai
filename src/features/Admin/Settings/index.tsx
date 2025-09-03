@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,10 +20,11 @@ const SettingsFeature = ({ data }: { data: Settings | null }) => {
   const [supportEmail, setSupportEmail] = useState(data?.supportEmail ?? "");
   const [supportPhone, setSupportPhone] = useState(data?.supportPhone ?? "");
 
-  const [isPending, startTransition] = useTransition();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = () => {
-    startTransition(async () => {
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
       const result = await updateSettingsAction({
         storyCreationPrice,
         storyCreationCurrency,
@@ -36,7 +37,12 @@ const SettingsFeature = ({ data }: { data: Settings | null }) => {
       } else {
         toast.error(result.error || "خطأ غير متوقع");
       }
-    });
+    } catch (error) {
+      toast.error("حصل خطأ أثناء الحفظ ❌");
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -53,7 +59,7 @@ const SettingsFeature = ({ data }: { data: Settings | null }) => {
                 setStoryCreationPrice(parseFloat(e.target.value))
               }
               className="flex-1"
-              disabled={isPending}
+              disabled={isLoading}
             />
             <CustomSelect
               value={storyCreationCurrency}
@@ -64,7 +70,7 @@ const SettingsFeature = ({ data }: { data: Settings | null }) => {
               ]}
               placeholder="العملة"
               className="min-w-[100px]"
-              disabled={isPending}
+              disabled={isLoading}
             />
           </div>
         </div>
@@ -87,7 +93,7 @@ const SettingsFeature = ({ data }: { data: Settings | null }) => {
             value={supportEmail}
             onChange={(e) => setSupportEmail(e.target.value)}
             type="email"
-            disabled={isPending}
+            disabled={isLoading}
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -97,7 +103,7 @@ const SettingsFeature = ({ data }: { data: Settings | null }) => {
             value={supportPhone}
             onChange={(e) => setSupportPhone(e.target.value)}
             type="tel"
-            disabled={isPending}
+            disabled={isLoading}
           />
         </div>
       </div>
@@ -106,7 +112,7 @@ const SettingsFeature = ({ data }: { data: Settings | null }) => {
         size={"lg"}
         className="w-fit"
         onClick={handleSubmit}
-        loading={isPending}
+        loading={isLoading}
       >
         حفظ الاعدادات
       </Button>

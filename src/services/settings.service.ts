@@ -21,8 +21,10 @@ export class SettingsService {
       data,
     });
   }
+
   static async upsertDeliveryPrice(
-    city: string,
+    nameAr: string,
+    nameEn: string,
     price: number,
     currency = "USD"
   ) {
@@ -32,10 +34,15 @@ export class SettingsService {
     const deliveryPrices =
       (settings.deliveryPrices as Record<
         string,
-        { price: number; currency: string }
+        { nameAr: string; nameEn: string; price: number; currency: string }
       >) || {};
 
-    deliveryPrices[city.toLowerCase()] = { price, currency };
+    deliveryPrices[nameEn.toLowerCase()] = {
+      nameAr,
+      nameEn,
+      price,
+      currency,
+    };
 
     return prisma.settings.update({
       where: { id: settings.id },
@@ -78,7 +85,12 @@ export class SettingsService {
 
     return settings.deliveryPrices as Record<
       string,
-      { price: number; currency: string }
+      {
+        nameAr: string;
+        nameEn: string;
+        price: number;
+        currency: string;
+      }
     >;
   }
 }
