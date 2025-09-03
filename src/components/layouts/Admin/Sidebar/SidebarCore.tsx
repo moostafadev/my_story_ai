@@ -42,10 +42,10 @@ const SidebarCore = () => {
           <Image
             src={"/logo.png"}
             alt="Logo"
-            width={40}
-            height={40}
+            width={200}
+            height={200}
             priority
-            className="max-w-20 w-full"
+            className="max-w-28 w-full"
           />
         </Link>
 

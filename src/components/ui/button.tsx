@@ -55,7 +55,11 @@ const buttonVariants = cva(
 
 const LoadingDots = ({ size }: { size: "sm" | "default" | "lg" | "icon" }) => {
   const dotSize =
-    size === "sm" ? "w-1 h-1" : size === "lg" ? "w-2 h-2" : "w-1.5 h-1.5";
+    size === "sm"
+      ? "w-[3px] h-[3px]"
+      : size === "lg"
+      ? "w-2 h-2"
+      : "w-1.5 h-1.5";
   const gap = size === "sm" ? "gap-0.5" : size === "lg" ? "gap-1.5" : "gap-1";
 
   return (
