@@ -13,7 +13,7 @@ const CustomTable = <T extends { id?: string | number }>({
 }: GenericTableProps<T>) => {
   return (
     <div className="flex flex-col bg-primary/80 shadow-sm hover:shadow-md rounded-md overflow-hidden duration-300">
-      {children}
+      <div className="p-3 md:p-4">{children}</div>
 
       <GenericTable<T>
         data={data}

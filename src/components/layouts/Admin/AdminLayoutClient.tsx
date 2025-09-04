@@ -20,7 +20,7 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
       ></header>
       <main
         className={cn(
-          "!mr-16 m-2 mt-[72px] p-3 md:p-4 space-y-4 md:space-y-8 rounded-md shadow-sm hover:shadow-md bg-white min-h-[calc(100vh-72px-8px)] transition-[margin-right] duration-300",
+          "!mr-16 m-2 mt-[72px] p-3 md:p-4 space-y-4 md:space-y-8 rounded-md shadow-sm hover:shadow-md bg-white min-h-[calc(100vh-72px-8px)] duration-300",
           isOpen ? "md:!mr-[264px]" : "md:!mr-[88px]"
         )}
       >

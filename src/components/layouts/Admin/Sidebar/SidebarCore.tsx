@@ -29,7 +29,7 @@ const SidebarCore = () => {
         {/* Toggle button */}
         <SidebarToggleButton
           className={cn(
-            "text-primary/60 hover:bg-primary/20 bg-primary/10 hover:text-primary/70 absolute top-3 w-10 h-10 flex items-center justify-center p-0 duration-300 transition-[right]",
+            "text-primary/60 hover:bg-primary/20 bg-primary/10 hover:text-primary/70 absolute top-3 w-10 h-10 flex items-center justify-center p-0",
             sidebarOpenToggle(isOpen)
           )}
         />

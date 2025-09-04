@@ -87,7 +87,7 @@ const PricingDelivery = ({
   return (
     <>
       <CustomTable data={tableData} columns={columns} actions={actions}>
-        <div className="p-3 md:p-4 flex flex-col gap-4 text-background">
+        <div className="flex flex-col gap-4 text-background">
           <h4 className="text-lg sm:text-xl font-semibold">إضافة سعر</h4>
           <PricingDeliveryForm />
         </div>
