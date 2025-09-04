@@ -141,7 +141,7 @@ const Header = ({ user, isFree }: { user: User; isFree: boolean }) => {
 
           {user.userId && !isOnProfilePage && (
             <LinkNext
-              href={user.role ? `/admin` : `${isRTL ? "ar" : "en"}/profile`}
+              href={`${isRTL ? "ar" : "en"}/profile`}
               className="hidden lg:flex"
             >
               <Button
@@ -228,7 +228,7 @@ const Header = ({ user, isFree }: { user: User; isFree: boolean }) => {
           )}
           {user.userId && !isOnProfilePage && (
             <LinkNext
-              href={user.role ? `/admin` : `${isRTL ? "ar" : "en"}/profile`}
+              href={`${isRTL ? "ar" : "en"}/profile`}
               className="flex lg:hidden self-end"
             >
               <Button

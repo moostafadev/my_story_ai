@@ -148,9 +148,15 @@
     "FullName": "الاسم الكامل",
     "Username": "اسم المستخدم",
     "Email": "البريد الإلكتروني",
+    "Phone": "رقم الهاتف",
+    "EditPhone": "تعديل رقم الهاتف",
+    "SuccessEditPhone": "تم تعديل رقم الهاتف بنجاح",
+    "ErrorEditPhone": "خطأ",
+    "DoneEditPhone": "تأكيد",
     "FreeTrialLabel": "التجربة المجانية",
     "FreeTrial": "متاحة",
     "FreeTrialUsed": "تم استخدام التجربة المجانية",
-    "CreatedAt": "تاريخ الإنشاء"
+    "CreatedAt": "تاريخ الإنشاء",
+    "Dashboard": "لوحة التحكم"
   }
 }

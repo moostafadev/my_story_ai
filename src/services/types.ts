@@ -1,4 +1,7 @@
 import { UserRole, StoryState, OrderState } from "@prisma/client";
+import { UserService } from "./user.service";
+import { StoryService } from "./story.service";
+import { OrderService } from "./order.service";
 
 // ---------- User ----------
 export interface CreateUserInput {
@@ -59,3 +62,18 @@ export interface CreatePdfInput {
   url: string;
 }
 export type UpdatePdfInput = Partial<CreatePdfInput>;
+
+// ✅ User with relations (stories, orders, addresses)
+export type UserWithRelations = Awaited<
+  ReturnType<typeof UserService.getAllUsers>
+>[0];
+
+// ✅ Story with relations (user, order, image, pdf)
+export type StoryWithRelations = Awaited<
+  ReturnType<typeof StoryService.getAllStories>
+>[0];
+
+// ✅ Order with relations (user, stories, etc.)
+export type OrderWithRelations = Awaited<
+  ReturnType<typeof OrderService.getAllOrders>
+>[0];

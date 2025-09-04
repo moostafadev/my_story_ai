@@ -159,6 +159,11 @@ export class UserService {
   static async getAllUsers() {
     return prisma.user.findMany({
       include: { stories: true, orders: true, addresses: true },
+      where: {
+        NOT: {
+          username: "mystory.ai",
+        },
+      },
     });
   }
 

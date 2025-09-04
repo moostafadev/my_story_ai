@@ -28,22 +28,42 @@ const TableRowItem = <T extends Record<string, unknown>>({
           {actions.map((action, idx) => {
             const content = action.icon ?? action.label;
 
-            return action.href ? (
-              <Button
-                key={idx}
-                asChild
-                variant={action.variant ?? "default"}
-                size="icon"
-              >
-                <Link href={action.href}>{content}</Link>
-              </Button>
-            ) : (
+            if (action.href) {
+              const href =
+                typeof action.href === "function"
+                  ? action.href(item)
+                  : action.href;
+
+              return (
+                <Button
+                  key={idx}
+                  asChild
+                  variant={action.variant ?? "default"}
+                  size="icon"
+                >
+                  <Link
+                    href={href}
+                    target={
+                      typeof action.href === "function" ? "_blank" : "_self"
+                    }
+                  >
+                    {content}
+                  </Link>
+                </Button>
+              );
+            }
+
+            return (
               <Button
                 key={idx}
                 variant={action.variant ?? "default"}
                 size="icon"
                 onClick={() => action.onClick?.(item)}
-                loading={action.loading}
+                loading={
+                  typeof action.loading === "function"
+                    ? action.loading(item)
+                    : action.loading
+                }
               >
                 {content}
               </Button>

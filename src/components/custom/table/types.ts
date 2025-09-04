@@ -11,8 +11,8 @@ export interface TableAction<T> {
   icon?: ReactNode;
   variant?: "default" | "secondary" | "destructive" | "outline";
   onClick?: (item: T) => void;
-  href?: string;
-  loading?: boolean;
+  href?: string | ((item: T) => string);
+  loading?: boolean | ((item: T) => boolean);
 }
 
 export interface GenericTableProps<T> {
