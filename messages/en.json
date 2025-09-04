@@ -148,9 +148,15 @@
     "FullName": "Full name",
     "Username": "Username",
     "Email": "Email",
+    "Phone": "Phone Number",
+    "EditPhone": "Edit phone number",
+    "SuccessEditPhone": "Edit phone number successfully",
+    "ErrorEditPhone": "Wrong",
+    "DoneEditPhone": "Done",
     "FreeTrialLabel": "Free Trial",
     "FreeTrial": "Available",
     "FreeTrialUsed": "Free trial already used",
-    "CreatedAt": "Created At"
+    "CreatedAt": "Created At",
+    "Dashboard": "Dashboard"
   }
 }

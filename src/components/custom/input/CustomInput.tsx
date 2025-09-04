@@ -17,6 +17,7 @@ import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ZodTypeAny, ZodObject } from "zod";
+import { Label } from "@/components/ui/label";
 
 function isFieldRequired(
   schema: ZodObject<Record<string, ZodTypeAny>>,
@@ -102,7 +103,7 @@ const CustomInputInner = React.memo(
               className,
               isPasswordField ? (isRTL ? "pl-10" : "pr-10") : ""
             )}
-            placeholder={t(placeholder ?? "")}
+            placeholder={placeholder ? t(placeholder) : ""}
             value={fieldProps?.value ?? props.value ?? localValue}
             onChange={(e) => {
               fieldProps?.onChange?.(e);
@@ -179,10 +180,10 @@ const CustomInputInner = React.memo(
     return (
       <>
         {label && (
-          <FormLabel>
+          <Label>
             {t(label)}
             {isRequired && <span className="text-red-500"> *</span>}
-          </FormLabel>
+          </Label>
         )}
         {renderInput()}
       </>
