@@ -9,18 +9,18 @@ export class StoryService {
   static async getStoryById(id: string) {
     return prisma.story.findUnique({
       where: { id },
-      include: { user: true, order: true, image: true, pdf: true },
     });
   }
 
   static async getAllStories() {
-    return prisma.story.findMany({
-      include: { user: true, order: true, image: true, pdf: true },
-    });
+    return prisma.story.findMany();
   }
 
   static async updateStory(id: string, data: UpdateStoryInput) {
-    return prisma.story.update({ where: { id }, data });
+    return prisma.story.update({
+      where: { id },
+      data,
+    });
   }
 
   static async deleteStory(id: string) {

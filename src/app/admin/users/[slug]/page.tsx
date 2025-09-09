@@ -84,7 +84,7 @@ const UsernamePage = async ({
         </div>
       </DefaultPage>
 
-      <DefaultPage title={`${user.orders.length} طلب`}>
+      <DefaultPage title={`${user.orders.length} طلب`} showBackBtn={false}>
         <Soon />
       </DefaultPage>
     </>

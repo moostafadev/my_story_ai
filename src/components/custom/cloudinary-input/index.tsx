@@ -181,13 +181,13 @@ export const CloudinaryInput: React.FC<CloudinaryInputProps> = ({
               const hasError = progress === -1;
               return (
                 <div key={fileName} className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3 flex-1 min-w-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex items-center space-x-1 sm:space-x-3 flex-1 min-w-0">
                       <span className="text-xl flex-shrink-0">
                         {getStatusIcon(progress)}
                       </span>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium text-gray-900 truncate">
+                        <p className="text-xs sm:text-sm font-medium text-gray-900 truncate max-w-fit">
                           {fileName}
                         </p>
                         {hasError && errors[fileName] && (
@@ -198,7 +198,7 @@ export const CloudinaryInput: React.FC<CloudinaryInputProps> = ({
                       </div>
                     </div>
 
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 self-end">
                       <span
                         className={`text-xs px-2 py-1 rounded-full font-medium ${
                           hasError
@@ -285,6 +285,7 @@ export const CloudinaryBtn = ({
       onClick={() => handleDownload(fileUrl)}
       variant={variant}
       className={className}
+      type="button"
     >
       {children}
     </Button>

@@ -77,16 +77,11 @@ model Story {
 
   state     StoryState @default(DRAFT)
 
-  // Media
-  imageEnId String?    @db.ObjectId
-  imageEn   Image?     @relation("StoryImageEn", fields: [imageEnId], references: [id])
-  imageArId String?    @db.ObjectId
-  imageAr   Image?     @relation("StoryImageAr", fields: [imageArId], references: [id])
-
-  pdfEnId   String?    @db.ObjectId
-  pdfEn     Pdf?       @relation("StoryPdfEn", fields: [pdfEnId], references: [id])
-  pdfArId   String?    @db.ObjectId
-  pdfAr     Pdf?       @relation("StoryPdfAr", fields: [pdfArId], references: [id])
+  // Media (URLs directly from Cloudinary)
+  imageEnUrl String?
+  imageArUrl String?
+  pdfEnUrl   String?
+  pdfArUrl   String?
 
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
@@ -142,28 +137,6 @@ model Order {
 
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
-}
-
-model Image {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  uuid      String   @unique @default(uuid())
-  url       String
-  alt       String?
-  createdAt DateTime @default(now())
-
-  // Relations
-  storyEn   Story[]  @relation("StoryImageEn")
-  storyAr   Story[]  @relation("StoryImageAr")
-}
-model Pdf {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  uuid      String   @unique @default(uuid())
-  url       String
-  createdAt DateTime @default(now())
-
-  // Relations
-  storyEn   Story[]  @relation("StoryPdfEn")
-  storyAr   Story[]  @relation("StoryPdfAr")
 }
 
 model Settings {

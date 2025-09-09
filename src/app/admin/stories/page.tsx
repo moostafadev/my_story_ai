@@ -1,11 +1,18 @@
 import DefaultPage from "@/components/layouts/Admin/DefaultPage";
-import Soon from "@/components/Soon";
+import { getStoriesAction } from "@/features/Admin/stories/story.action";
+import StoriesData from "@/features/Admin/stories/Table";
+import { redirect } from "next/navigation";
 
-const StoriesPage = () => {
+const StoriesPage = async () => {
+  const data = await getStoriesAction();
+
+  if (!data.stories) {
+    redirect("/admin");
+  }
   return (
     <>
       <DefaultPage title="القصص">
-        <Soon />
+        <StoriesData data={data.stories} />
       </DefaultPage>
     </>
   );
