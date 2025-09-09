@@ -4,7 +4,8 @@ import { getStoryByIdAction } from "@/features/Admin/stories/story.action";
 import { redirect } from "next/navigation";
 import React from "react";
 
-const StoryPage = async ({ params: { id } }: { params: { id: string } }) => {
+const StoryPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
   const data = await getStoryByIdAction(id);
 
   if (!data.story) {
