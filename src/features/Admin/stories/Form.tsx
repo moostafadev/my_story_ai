@@ -56,7 +56,6 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
   async function onSubmit(values: TStorySchema) {
     let hasError = false;
 
-    // ✅ لو في create لازم الملفات، في edit ممكن تسيب القديمة
     if (mode === "create") {
       if (!files.imageAr) {
         form.setError("root.imageAr", {
