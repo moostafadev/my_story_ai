@@ -6,10 +6,11 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 const UsernamePage = async ({
-  params: { slug },
+  params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) => {
+  const { slug } = await params;
   const user = await UserService.getUserByUsername(slug);
   if (!user) {
     redirect("/admin/users");
