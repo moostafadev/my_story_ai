@@ -13,7 +13,7 @@ import { OrderService } from "./order.service";
 export interface CreateUserInput {
   fName: string;
   lName: string;
-  username: string;
+  username?: string;
   email?: string;
   password: string;
   phoneNumber?: string;
