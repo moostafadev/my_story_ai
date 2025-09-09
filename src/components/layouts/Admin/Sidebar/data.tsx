@@ -1,4 +1,10 @@
-import { LayoutDashboard, Users, ShoppingCart, Settings } from "lucide-react";
+import {
+  LayoutDashboard,
+  Users,
+  ShoppingCart,
+  Settings,
+  BookOpen,
+} from "lucide-react";
 
 export const sidebarData = [
   {
@@ -10,6 +16,11 @@ export const sidebarData = [
     href: "users",
     label: "المستخدمين",
     icon: <Users />,
+  },
+  {
+    href: "stories",
+    label: "القصص",
+    icon: <BookOpen />,
   },
   {
     href: "orders",

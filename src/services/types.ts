@@ -1,4 +1,10 @@
-import { UserRole, StoryState, OrderState } from "@prisma/client";
+import {
+  UserRole,
+  StoryState,
+  OrderState,
+  ORDERTYPE,
+  GENDER,
+} from "@prisma/client";
 import { UserService } from "./user.service";
 import { StoryService } from "./story.service";
 import { OrderService } from "./order.service";
@@ -17,15 +23,19 @@ export type UpdateUserInput = Partial<CreateUserInput>;
 
 // ---------- Story ----------
 export interface CreateStoryInput {
-  title: string;
-  desc: string;
-  miniDesc?: string;
-  price?: number;
+  titleEn: string;
+  titleAr: string;
+  descEn: string;
+  descAr: string;
+  miniDescEn?: string;
+  miniDescAr?: string;
   state?: StoryState;
-  userId: string;
-  imageId?: string;
-  pdfId?: string;
-  orderId?: string;
+
+  // Media (URLs, not relations)
+  imageEnUrl?: string;
+  imageArUrl?: string;
+  pdfEnUrl?: string;
+  pdfArUrl?: string;
 }
 export type UpdateStoryInput = Partial<CreateStoryInput>;
 
@@ -47,6 +57,30 @@ export interface CreateOrderInput {
   ANote?: string;
   state?: OrderState;
   userId: string;
+
+  city: string;
+  street: string;
+  houseNumber: string;
+
+  name: string;
+  age: number;
+  hobbies: string;
+  language: string;
+  description: string;
+  gender: GENDER;
+
+  // Optional fields
+  hair_color?: string;
+  hair_style?: string;
+  eye_color?: string;
+  skin_tone?: string;
+  clothing_description?: string;
+  accessory_description?: string;
+  personality_traits?: string;
+  moral_value?: string;
+
+  child_image: string;
+  type?: ORDERTYPE; // COD / VISA
 }
 export type UpdateOrderInput = Partial<CreateOrderInput>;
 
@@ -68,12 +102,12 @@ export type UserWithRelations = Awaited<
   ReturnType<typeof UserService.getAllUsers>
 >[0];
 
-// ✅ Story with relations (user, order, image, pdf)
+// ✅ Story with relations
 export type StoryWithRelations = Awaited<
   ReturnType<typeof StoryService.getAllStories>
 >[0];
 
-// ✅ Order with relations (user, stories, etc.)
+// ✅ Order with relations
 export type OrderWithRelations = Awaited<
   ReturnType<typeof OrderService.getAllOrders>
 >[0];

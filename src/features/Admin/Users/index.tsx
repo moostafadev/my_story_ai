@@ -9,28 +9,34 @@ import { MessageCircle, Trash } from "lucide-react";
 import { UserWithRelations } from "@/services/types";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import DeleteConfirmDialog from "../DeleteConfirmDialog";
 
 const UsersData = ({ data }: { data: UserWithRelations[] }) => {
-  const [loadingId, setLoadingId] = useState<string | null>(null);
+  const [id, setId] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const tableData = Object.entries(data).map(([, value], idx) => ({
     idx: idx + 1,
     ...value,
   }));
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async () => {
+    if (!id) return;
     try {
-      setLoadingId(id);
+      setLoading(true);
       const res = await removeUserAction(id);
       if (res.success) {
-        toast.success("تم حذف سعر التوصيل بنجاح ✅");
+        toast.success("تم حذف المستخدم بنجاح ✅");
       } else {
         toast.error(res.error || "حدث خطأ أثناء الحذف ❌");
       }
     } catch {
       toast.error("حدث خطأ أثناء الحذف ❌");
     } finally {
-      setLoadingId(null);
+      setLoading(false);
+      setOpen(false);
+      setId(null);
     }
   };
 
@@ -65,11 +71,33 @@ const UsersData = ({ data }: { data: UserWithRelations[] }) => {
       label: "Delete",
       icon: <Trash className="w-4 h-4" />,
       variant: "destructive",
-      onClick: (item) => handleDelete(item.id),
-      loading: (item) => loadingId === item.id,
+      onClick: (item) => {
+        setId(item.id);
+        setOpen(true);
+      },
     },
   ];
-  return <CustomTable data={tableData} columns={columns} actions={actions} />;
+
+  const selectedUser = data.find((item) => item.id === id);
+
+  return (
+    <>
+      <CustomTable data={tableData} columns={columns} actions={actions} />
+      <DeleteConfirmDialog
+        open={open}
+        onOpenChange={setOpen}
+        title="تأكيد الحذف"
+        description={
+          selectedUser
+            ? `هل تريد حذف المستخدم ${selectedUser.fName} ${selectedUser.lName} ؟`
+            : "هل تريد حذف هذا المستخدم ؟"
+        }
+        onConfirm={handleDelete}
+        loading={loading}
+        onCancel={() => setId(null)}
+      />
+    </>
+  );
 };
 
 export default UsersData;

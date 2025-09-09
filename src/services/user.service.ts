@@ -140,7 +140,7 @@ export class UserService {
   static async getUserById(id: string) {
     return prisma.user.findUnique({
       where: { id },
-      include: { stories: true, orders: true, addresses: true },
+      include: { orders: true, addresses: true },
     });
   }
 
@@ -149,7 +149,10 @@ export class UserService {
   }
 
   static async getUserByUsername(username: string) {
-    return prisma.user.findUnique({ where: { username, isVerified: true } });
+    return prisma.user.findUnique({
+      where: { username, isVerified: true },
+      include: { orders: true, addresses: true },
+    });
   }
 
   static async getUserByPhoneNumber(phoneNumber: string) {
@@ -158,7 +161,7 @@ export class UserService {
 
   static async getAllUsers() {
     return prisma.user.findMany({
-      include: { stories: true, orders: true, addresses: true },
+      include: { orders: true, addresses: true },
       where: {
         NOT: {
           username: "mystory.ai",

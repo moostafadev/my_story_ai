@@ -9,13 +9,13 @@ export class OrderService {
   static async getOrderById(id: string) {
     return prisma.order.findUnique({
       where: { id },
-      include: { user: true, stories: true },
+      include: { user: true },
     });
   }
 
   static async getAllOrders() {
     return prisma.order.findMany({
-      include: { user: true, stories: true },
+      include: { user: true },
     });
   }
 
