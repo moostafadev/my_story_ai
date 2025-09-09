@@ -1,4 +1,4 @@
-import { UserRole, StoryState, OrderState } from "@prisma/client";
+import { UserRole, StoryState, OrderState, GENDER } from "@prisma/client";
 import { UserService } from "./user.service";
 import { StoryService } from "./story.service";
 import { OrderService } from "./order.service";
@@ -7,7 +7,7 @@ import { OrderService } from "./order.service";
 export interface CreateUserInput {
   fName: string;
   lName: string;
-  username?: string;
+  username: string;
   email?: string;
   password: string;
   phoneNumber?: string;
@@ -22,10 +22,8 @@ export interface CreateStoryInput {
   miniDesc?: string;
   price?: number;
   state?: StoryState;
-  userId: string;
   imageId?: string;
   pdfId?: string;
-  orderId?: string;
 }
 export type UpdateStoryInput = Partial<CreateStoryInput>;
 
@@ -47,6 +45,29 @@ export interface CreateOrderInput {
   ANote?: string;
   state?: OrderState;
   userId: string;
+
+  city: string;
+  street: string;
+  houseNumber: string;
+
+  name: string;
+  age: number;
+  hobbies: string;
+  language: string;
+  description: string;
+  gender: GENDER;
+
+  // Optional fields from schema
+  hair_color?: string;
+  hair_style?: string;
+  eye_color?: string;
+  skin_tone?: string;
+  clothing_description?: string;
+  accessory_description?: string;
+  personality_traits?: string;
+  moral_value?: string;
+
+  child_image: string;
 }
 export type UpdateOrderInput = Partial<CreateOrderInput>;
 

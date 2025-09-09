@@ -89,6 +89,8 @@ const LoadingDots = ({ size }: { size: "sm" | "default" | "lg" | "icon" }) => {
   );
 };
 
+export type ButtonVariants = VariantProps<typeof buttonVariants>["variant"];
+
 function Button({
   className,
   variant,

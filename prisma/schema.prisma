@@ -26,6 +26,16 @@ enum OrderState {
   CANCELLED
 }
 
+enum ORDERTYPE {
+  COD
+  VISA
+}
+
+enum GENDER {
+  MALE
+  FEMALE
+}
+
 model User {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   uuid        String    @unique @default(uuid())
@@ -43,7 +53,6 @@ model User {
   verificationExpiry DateTime?
 
   // Relations
-  stories     Story[]
   addresses   Address[]
   orders      Order[]
 
@@ -55,29 +64,32 @@ model User {
 }
 
 model Story {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  uuid        String     @unique @default(uuid())
-  title       String
-  desc        String
-  miniDesc    String?
-  price       Float      @default(0)
-  state       StoryState @default(DRAFT)
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  uuid      String     @unique @default(uuid())
+
+  // Titles & Descriptions
+  titleEn   String
+  titleAr   String
+  descEn    String
+  descAr    String
+  miniDescEn String?
+  miniDescAr String?
+
+  state     StoryState @default(DRAFT)
 
   // Media
-  imageId     String?    @db.ObjectId
-  image       Image?     @relation(fields: [imageId], references: [id])
-  pdfId       String?    @db.ObjectId
-  pdf         Pdf?       @relation(fields: [pdfId], references: [id])
+  imageEnId String?    @db.ObjectId
+  imageEn   Image?     @relation("StoryImageEn", fields: [imageEnId], references: [id])
+  imageArId String?    @db.ObjectId
+  imageAr   Image?     @relation("StoryImageAr", fields: [imageArId], references: [id])
 
-  // Relations
-  userId      String     @db.ObjectId
-  user        User       @relation(fields: [userId], references: [id])
+  pdfEnId   String?    @db.ObjectId
+  pdfEn     Pdf?       @relation("StoryPdfEn", fields: [pdfEnId], references: [id])
+  pdfArId   String?    @db.ObjectId
+  pdfAr     Pdf?       @relation("StoryPdfAr", fields: [pdfArId], references: [id])
 
-  orderId     String?    @db.ObjectId
-  order       Order?     @relation(fields: [orderId], references: [id])
-
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
 }
 
 model Address {
@@ -105,29 +117,53 @@ model Order {
   // Relations
   userId        String     @db.ObjectId
   user          User       @relation(fields: [userId], references: [id])
-  stories       Story[]
+
+  city          String
+  street        String
+  houseNumber   String
+
+  name          String
+  age           Int
+  hobbies       String
+  language      String
+  description   String
+  gender        GENDER
+  hair_color    String?
+  hair_style    String?
+  eye_color     String?
+  skin_tone     String?
+  clothing_description     String?
+  accessory_description    String?
+  personality_traits       String?
+  moral_value              String?
+  child_image   String
+
+  type          ORDERTYPE  @default(COD)
 
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 }
 
 model Image {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  uuid        String    @unique @default(uuid())
-  url         String
-  alt         String?
-  createdAt   DateTime  @default(now())
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  uuid      String   @unique @default(uuid())
+  url       String
+  alt       String?
+  createdAt DateTime @default(now())
 
-  story       Story[]
+  // Relations
+  storyEn   Story[]  @relation("StoryImageEn")
+  storyAr   Story[]  @relation("StoryImageAr")
 }
-
 model Pdf {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  uuid        String    @unique @default(uuid())
-  url         String
-  createdAt   DateTime  @default(now())
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  uuid      String   @unique @default(uuid())
+  url       String
+  createdAt DateTime @default(now())
 
-  story       Story[]
+  // Relations
+  storyEn   Story[]  @relation("StoryPdfEn")
+  storyAr   Story[]  @relation("StoryPdfAr")
 }
 
 model Settings {

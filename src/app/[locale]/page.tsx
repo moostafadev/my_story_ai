@@ -130,12 +130,15 @@ export default function HomePage() {
             </div>
 
             <div className="flex items-center gap-2 sm:gap-4 justify-center md:justify-start">
-              <Button className="px-10 text-base font-semibold shadow-md hover:scale-105">
-                {t("Hero.ctaPrimary")}
+              <Button
+                asChild
+                className="px-10 text-base font-semibold shadow-md hover:scale-105"
+              >
+                <Link href={"/createStory"}>{t("Hero.ctaPrimary")}</Link>
               </Button>
-              <Link href={"#features"}>
-                <Button variant={"outline"}>{t("Hero.ctaSecondary")}</Button>
-              </Link>
+              <Button asChild variant={"outline"}>
+                <Link href={"#features"}>{t("Hero.ctaSecondary")}</Link>
+              </Button>
             </div>
           </div>
         </div>
