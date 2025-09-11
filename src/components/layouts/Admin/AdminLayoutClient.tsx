@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/contexts/SidebarContext";
 import SidebarCore from "./Sidebar/SidebarCore";
 import { Toaster } from "sonner";
+import Loading from "@/app/admin/loading";
 
 const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
   const { isOpen } = useSidebar();
@@ -24,7 +25,7 @@ const AdminLayoutClient = ({ children }: { children: React.ReactNode }) => {
           isOpen ? "md:!mr-[264px]" : "md:!mr-[88px]"
         )}
       >
-        {children}
+        <Suspense fallback={<Loading />}>{children}</Suspense>
       </main>
       <Toaster />
     </>

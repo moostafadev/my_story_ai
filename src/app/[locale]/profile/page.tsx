@@ -2,10 +2,9 @@ import { UserService } from "@/services/user.service";
 import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import React, { Suspense } from "react";
+import React from "react";
 import { User, AtSign, Mail, Gift, Calendar, Phone } from "lucide-react";
 import LogoutBtn from "@/components/LogoutBtn";
-import Loading from "./loading";
 import EditPhoneNumber from "@/features/home/Profile/EditPhoneNumber";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -21,7 +20,7 @@ const ProfilePage = async () => {
     redirect("/");
   }
   return (
-    <Suspense fallback={<Loading />}>
+    <>
       <section className="py-10">
         <div className="container flex flex-col gap-6 md:gap-8">
           <h1 className="text-2xl md:text-3xl font-semibold text-primary-foreground text-center">
@@ -111,7 +110,7 @@ const ProfilePage = async () => {
         </Button>
         <LogoutBtn title={tHeader("logout")} />
       </section>
-    </Suspense>
+    </>
   );
 };
 
