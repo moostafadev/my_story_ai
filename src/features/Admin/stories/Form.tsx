@@ -71,20 +71,6 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
         });
         hasError = true;
       }
-      if (!files.pdfAr) {
-        form.setError("root.pdfAr", {
-          type: "manual",
-          message: "ملف PDF (بالعربي) مطلوب",
-        });
-        hasError = true;
-      }
-      if (!files.pdfEn) {
-        form.setError("root.pdfEn", {
-          type: "manual",
-          message: "ملف PDF (بالانجليزي) مطلوب",
-        });
-        hasError = true;
-      }
     }
 
     if (hasError) return;

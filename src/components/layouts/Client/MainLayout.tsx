@@ -18,7 +18,7 @@ const MainLayout = async ({ children }: { children: React.ReactNode }) => {
   const user = { userId, firstName, lastName, role: isAdmin };
   return (
     <>
-      <Header user={user} isFree={result?.isFree ?? true} />
+      <Header user={user} />
       <main className="mt-20 min-h-[calc(100dvh-5rem)]">
         <Suspense fallback={<Loading />}>{children}</Suspense>
       </main>

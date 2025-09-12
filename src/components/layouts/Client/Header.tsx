@@ -12,7 +12,7 @@ import LinkNext from "next/link";
 import { User } from "./types";
 import { CircleUserRound } from "lucide-react";
 
-const Header = ({ user, isFree }: { user: User; isFree: boolean }) => {
+const Header = ({ user }: { user: User }) => {
   const t = useTranslations("HomePage");
   const locale = useLocale();
   const pathName = usePathname();
@@ -153,15 +153,6 @@ const Header = ({ user, isFree }: { user: User; isFree: boolean }) => {
                 <CircleUserRound className="!h-5 !w-5" />
               </Button>
             </LinkNext>
-          )}
-          {isFree && !user.role && (
-            <Button
-              className="bg-gradient-to-r from-primary to-primary-foreground text-white transition hover:from-primary-foreground hover:to-primary"
-              size={scrollY > 0 ? "sm" : "default"}
-              title={t("header.tryFree")}
-            >
-              {t("header.tryFree")}
-            </Button>
           )}
 
           <Button

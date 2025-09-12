@@ -2,8 +2,8 @@
 
 import { StoryService } from "@/services/story.service";
 import { CreateStoryInput, UpdateStoryInput } from "@/services/types";
+import { revalidatePath } from "next/cache";
 
-// 🟢 إنشاء قصة
 export async function createStoryAction(data: CreateStoryInput) {
   try {
     const story = await StoryService.createStory(data);
@@ -14,7 +14,6 @@ export async function createStoryAction(data: CreateStoryInput) {
   }
 }
 
-// 🟡 تحديث قصة
 export async function updateStoryAction(id: string, data: UpdateStoryInput) {
   try {
     const story = await StoryService.updateStory(id, data);
@@ -25,10 +24,10 @@ export async function updateStoryAction(id: string, data: UpdateStoryInput) {
   }
 }
 
-// 🔴 حذف قصة
 export async function deleteStoryAction(id: string) {
   try {
     await StoryService.deleteStory(id);
+    revalidatePath("/admin/stories");
     return { success: true };
   } catch (error) {
     console.error("❌ Error deleting story:", error);
@@ -36,7 +35,6 @@ export async function deleteStoryAction(id: string) {
   }
 }
 
-// 🔵 جلب كل القصص
 export async function getStoriesAction() {
   try {
     const stories = await StoryService.getAllStories();
@@ -47,7 +45,6 @@ export async function getStoriesAction() {
   }
 }
 
-// 🟣 جلب قصة بالـ ID
 export async function getStoryByIdAction(id: string) {
   try {
     const story = await StoryService.getStoryById(id);
