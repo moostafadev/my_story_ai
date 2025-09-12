@@ -113,9 +113,11 @@ model Order {
   userId        String     @db.ObjectId
   user          User       @relation(fields: [userId], references: [id])
 
-  city          String
-  street        String
-  houseNumber   String
+  city          String?
+  street        String?
+  houseNumber   String?
+  houseNumber2  String?
+  addressDetails   String?
 
   name          String
   age           Int
@@ -134,6 +136,7 @@ model Order {
   child_image   String
 
   type          ORDERTYPE  @default(COD)
+  order_id      String?
 
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt

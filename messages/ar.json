@@ -158,5 +158,72 @@
     "FreeTrialUsed": "تم استخدام التجربة المجانية",
     "CreatedAt": "تاريخ الإنشاء",
     "Dashboard": "لوحة التحكم"
+  },
+  "CreateStory": {
+    "form": {
+      "labels": {
+        "name": "اسم الطفل",
+        "age": "عمر الطفل",
+        "hobbies": "هوايات الطفل",
+        "language": "لغة الطفل",
+        "description": "وصف الطفل",
+        "gender": "نوع الطفل",
+        "hair_color": "لون شعر الطفل",
+        "hair_style": "تصفيفة شعر الطفل",
+        "eye_color": "لون عين الطفل",
+        "skin_tone": "لون بشرة الطفل",
+        "clothing_description": "وصف ملابس الطفل",
+        "accessory_description": "وصف إكسسوارات الطفل",
+        "personality_traits": "صفات الطفل الشخصية",
+        "moral_value": "القيم الأخلاقية للطفل",
+        "child_image": "صورة الطفل"
+      },
+      "placeholders": {
+        "name": "أدخل اسم طفلك",
+        "age": "أدخل عمر طفلك",
+        "hobbies": "أدخل هوايات طفلك",
+        "language": "اختر لغة طفلك",
+        "description": "اكتب وصفًا لطفلك",
+        "gender": "اختر نوع طفلك",
+        "hair_color": "أدخل لون شعر طفلك",
+        "hair_style": "أدخل تصفيفة شعر طفلك",
+        "eye_color": "أدخل لون عين طفلك",
+        "skin_tone": "أدخل لون بشرة طفلك",
+        "clothing_description": "صف ملابس طفلك",
+        "accessory_description": "صف إكسسوارات طفلك",
+        "personality_traits": "أدخل صفات طفلك الشخصية",
+        "moral_value": "أدخل القيم الأخلاقية لطفلك",
+        "child_image": "قم برفع صورة طفلك"
+      },
+      "buttons": {
+        "submit": "التالي",
+        "reset": "إعادة تعيين",
+        "cancel": "إلغاء"
+      },
+      "gender": {
+        "male": "ذكر",
+        "female": "أنثى"
+      },
+      "additional_info": "معلومات إضافية",
+      "additional_info_note": "يمكنك كتابة هذه البيانات إذا أحببت تخصيص القصة بشكل أكبر"
+    },
+    "errors": {
+      "name_required": "اسم الطفل مطلوب",
+      "age_required": "عمر الطفل مطلوب",
+      "age_invalid": "يجب أن يكون عمر الطفل رقمًا صحيحًا",
+      "hobbies_required": "هوايات الطفل مطلوبة",
+      "language_required": "لغة الطفل مطلوبة",
+      "description_required": "الوصف مطلوب",
+      "gender_required": "نوع الطفل مطلوب",
+      "hair_color_required": "لون شعر الطفل مطلوب",
+      "hair_style_required": "تصفيفة شعر الطفل مطلوبة",
+      "eye_color_required": "لون عين الطفل مطلوب",
+      "skin_tone_required": "لون بشرة الطفل مطلوبة",
+      "clothing_description_required": "وصف ملابس الطفل مطلوب",
+      "accessory_description_required": "وصف إكسسوارات الطفل مطلوبة",
+      "personality_traits_required": "صفات الطفل الشخصية مطلوبة",
+      "moral_value_required": "القيم الأخلاقية للطفل مطلوبة",
+      "child_image_required": "صورة الطفل مطلوبة"
+    }
   }
 }

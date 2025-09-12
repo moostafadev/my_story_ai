@@ -58,9 +58,12 @@ export interface CreateOrderInput {
   state?: OrderState;
   userId: string;
 
-  city: string;
-  street: string;
-  houseNumber: string;
+  // Address fields (optional in DB, so optional here)
+  city?: string;
+  street?: string;
+  houseNumber?: string;
+  houseNumber2?: string;
+  addressDetails?: string;
 
   name: string;
   age: number;

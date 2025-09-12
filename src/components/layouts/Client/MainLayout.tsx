@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Header from "./Header";
 import ScrollToTopButton from "../../ScrollToTopButton";
 import { Toaster } from "sonner";
 import { cookies } from "next/headers";
 import { UserService } from "@/services/user.service";
+import Loading from "@/app/[locale]/loading";
 
 const MainLayout = async ({ children }: { children: React.ReactNode }) => {
   const cookieStore = await cookies();
@@ -17,8 +18,10 @@ const MainLayout = async ({ children }: { children: React.ReactNode }) => {
   const user = { userId, firstName, lastName, role: isAdmin };
   return (
     <>
-      <Header user={user} isFree={result?.isFree ?? true} />
-      <main className="mt-20 min-h-[calc(100dvh-5rem)]">{children}</main>
+      <Header user={user} />
+      <main className="mt-20 min-h-[calc(100dvh-5rem)]">
+        <Suspense fallback={<Loading />}>{children}</Suspense>
+      </main>
       <ScrollToTopButton />
       <Toaster />
     </>
