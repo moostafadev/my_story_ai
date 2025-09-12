@@ -141,7 +141,7 @@ const Header = ({ user }: { user: User }) => {
 
           {user.userId && !isOnProfilePage && (
             <LinkNext
-              href={`${isRTL ? "ar" : "en"}/profile`}
+              href={`${isRTL ? "/ar" : "/en"}/profile`}
               className="hidden lg:flex"
             >
               <Button
@@ -219,7 +219,7 @@ const Header = ({ user }: { user: User }) => {
           )}
           {user.userId && !isOnProfilePage && (
             <LinkNext
-              href={`${isRTL ? "ar" : "en"}/profile`}
+              href={`${isRTL ? "/ar" : "/en"}/profile`}
               className="flex lg:hidden self-end"
             >
               <Button

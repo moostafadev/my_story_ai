@@ -158,5 +158,72 @@
     "FreeTrialUsed": "Free trial already used",
     "CreatedAt": "Created At",
     "Dashboard": "Dashboard"
+  },
+  "CreateStory": {
+    "form": {
+      "labels": {
+        "name": "Child's Name",
+        "age": "Child's Age",
+        "hobbies": "Child's Hobbies",
+        "language": "Child's Language",
+        "description": "Child's Description",
+        "gender": "Child's Gender",
+        "hair_color": "Child's Hair Color",
+        "hair_style": "Child's Hair Style",
+        "eye_color": "Child's Eye Color",
+        "skin_tone": "Child's Skin Tone",
+        "clothing_description": "Child's Clothing Description",
+        "accessory_description": "Child's Accessories Description",
+        "personality_traits": "Child's Personality Traits",
+        "moral_value": "Child's Moral Values",
+        "child_image": "Child's Image"
+      },
+      "placeholders": {
+        "name": "Enter your child's name",
+        "age": "Enter your child's age",
+        "hobbies": "Enter your child's hobbies",
+        "language": "Select your child's language",
+        "description": "Write a description for your child",
+        "gender": "Choose your child's gender",
+        "hair_color": "Enter your child's hair color",
+        "hair_style": "Enter your child's hair style",
+        "eye_color": "Enter your child's eye color",
+        "skin_tone": "Enter your child's skin tone",
+        "clothing_description": "Describe your child's clothing",
+        "accessory_description": "Describe your child's accessories",
+        "personality_traits": "Enter your child's personality traits",
+        "moral_value": "Enter your child's moral values",
+        "child_image": "Upload your child's image"
+      },
+      "buttons": {
+        "submit": "Next",
+        "reset": "Reset",
+        "cancel": "Cancel"
+      },
+      "gender": {
+        "male": "Male",
+        "female": "Female"
+      },
+      "additional_info": "Additional Information",
+      "additional_info_note": "You can fill these fields if you want to personalize the story more"
+    },
+    "errors": {
+      "name_required": "Child's name is required",
+      "age_required": "Child's age is required",
+      "age_invalid": "Child's age must be a valid number",
+      "hobbies_required": "Child's hobbies are required",
+      "language_required": "Child's language is required",
+      "description_required": "Description is required",
+      "gender_required": "Child's gender is required",
+      "hair_color_required": "Child's hair color is required",
+      "hair_style_required": "Child's hair style is required",
+      "eye_color_required": "Child's eye color is required",
+      "skin_tone_required": "Child's skin tone is required",
+      "clothing_description_required": "Child's clothing description is required",
+      "accessory_description_required": "Child's accessories description is required",
+      "personality_traits_required": "Child's personality traits are required",
+      "moral_value_required": "Child's moral values are required",
+      "child_image_required": "Child's image is required"
+    }
   }
 }
