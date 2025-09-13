@@ -3,13 +3,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
 import { orderSchema, TOrderSchema } from "./schema";
 import { createOrderAction } from "./order.action";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -22,9 +21,12 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { CustomSelect } from "@/components/custom/select";
 import { CloudinaryInput } from "@/components/custom/cloudinary-input";
+import { CustomInput } from "@/components/custom/input";
+import { Lang } from "@/components/custom/cloudinary-input/types";
 
 const OrderFormStepOne = ({ userId }: { userId: string }) => {
   const t = useTranslations("CreateStory");
+  const locale = useLocale();
   const [loading, setLoading] = useState(false);
   const [childImage, setChildImage] = useState("");
 
@@ -32,7 +34,7 @@ const OrderFormStepOne = ({ userId }: { userId: string }) => {
     resolver: zodResolver(orderSchema(t)),
     defaultValues: {
       name: "",
-      age: 0,
+      age: 3,
       hobbies: "",
       language: "",
       description: "",
@@ -84,117 +86,100 @@ const OrderFormStepOne = ({ userId }: { userId: string }) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col gap-4"
       >
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("form.labels.name")}</FormLabel>
-              <FormControl>
-                <Input placeholder={t("form.placeholders.name")} {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
+          <CustomInput
+            control={form.control}
+            name="name"
+            schema={orderSchema(t)}
+            label="CreateStory.form.labels.name"
+            placeholder="CreateStory.form.placeholders.name"
+            required
+          />
+          <CustomInput
+            control={form.control}
+            name="age"
+            schema={orderSchema(t)}
+            label="CreateStory.form.labels.age"
+            placeholder="CreateStory.form.placeholders.age"
+            type="number"
+            onChange={(e) => form.setValue("age", Number(e.target.value))}
+            required
+          />
+        </div>
 
-        <FormField
-          control={form.control}
-          name="age"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("form.labels.age")}</FormLabel>
-              <FormControl>
-                <Input
-                  type="number"
-                  placeholder={t("form.placeholders.age")}
-                  {...field}
-                  onChange={(e) => field.onChange(Number(e.target.value))}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
+          <FormField
+            control={form.control}
+            name="hobbies"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("form.labels.hobbies")}</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder={t("form.placeholders.hobbies")}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("form.labels.description")}</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder={t("form.placeholders.description")}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
-        <FormField
-          control={form.control}
-          name="hobbies"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("form.labels.hobbies")}</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder={t("form.placeholders.hobbies")}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="language"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("form.labels.language")}</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder={t("form.placeholders.language")}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="description"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("form.labels.description")}</FormLabel>
-              <FormControl>
-                <Textarea
-                  placeholder={t("form.placeholders.description")}
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="gender"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t("form.labels.gender")}</FormLabel>
-              <FormControl>
-                <CustomSelect
-                  value={field.value}
-                  onChange={field.onChange}
-                  options={[
-                    { label: t("form.gender.male"), value: "MALE" },
-                    { label: t("form.gender.female"), value: "FEMALE" },
-                  ]}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
+          <CustomInput
+            control={form.control}
+            name="language"
+            schema={orderSchema(t)}
+            label="CreateStory.form.labels.language"
+            placeholder="CreateStory.form.placeholders.language"
+            required
+          />
+          <FormField
+            control={form.control}
+            name="gender"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("form.labels.gender")}</FormLabel>
+                <FormControl>
+                  <CustomSelect
+                    value={field.value}
+                    onChange={field.onChange}
+                    className="w-full"
+                    options={[
+                      { label: t("form.gender.male"), value: "MALE" },
+                      { label: t("form.gender.female"), value: "FEMALE" },
+                    ]}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <FormItem>
           <FormLabel>{t("form.labels.child_image")}</FormLabel>
           <CloudinaryInput
             setFilesURL={(url) => setChildImage(url[0])}
             accept="image/*"
-            lang="ar"
+            lang={locale as Lang}
             maxFiles={1}
           />
           {form.formState.errors.child_image && (
@@ -206,152 +191,132 @@ const OrderFormStepOne = ({ userId }: { userId: string }) => {
 
         <div className="border-t pt-4 mt-4 flex flex-col gap-4">
           <div className="flex flex-col gap-2">
-            <h3 className="text-lg font-semibold">
+            <h2 className="text-xl sm:text-3xl font-semibold">
               {t("form.additional_info")}
-            </h3>
-            <p className="text-sm text-muted-foreground mb-4">
+            </h2>
+            <p className="text-sm sm:text-base text-muted-foreground">
               {t("form.additional_info_note")}
             </p>
           </div>
 
           <div className="flex flex-col gap-4">
-            <FormField
-              control={form.control}
-              name="hair_color"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("form.labels.hair_color")}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={t("form.placeholders.hair_color")}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
+              <CustomInput
+                control={form.control}
+                name="hair_color"
+                schema={orderSchema(t)}
+                label="CreateStory.form.labels.hair_color"
+                placeholder="CreateStory.form.placeholders.hair_color"
+                required
+              />
+              <CustomInput
+                control={form.control}
+                name="hair_style"
+                schema={orderSchema(t)}
+                label="CreateStory.form.labels.hair_style"
+                placeholder="CreateStory.form.placeholders.hair_style"
+                required
+                type="number"
+              />
+            </div>
 
-            <FormField
-              control={form.control}
-              name="hair_style"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("form.labels.hair_style")}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={t("form.placeholders.hair_style")}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
+              <CustomInput
+                control={form.control}
+                name="eye_color"
+                schema={orderSchema(t)}
+                label="CreateStory.form.labels.eye_color"
+                placeholder="CreateStory.form.placeholders.eye_color"
+                required
+              />
+              <CustomInput
+                control={form.control}
+                name="skin_tone"
+                schema={orderSchema(t)}
+                label="CreateStory.form.labels.skin_tone"
+                placeholder="CreateStory.form.placeholders.skin_tone"
+                required
+                type="number"
+              />
+            </div>
 
-            <FormField
-              control={form.control}
-              name="eye_color"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("form.labels.eye_color")}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={t("form.placeholders.eye_color")}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="clothing_description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {t("form.labels.clothing_description")}
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder={t(
+                          "form.placeholders.clothing_description"
+                        )}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="accessory_description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      {t("form.labels.accessory_description")}
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder={t(
+                          "form.placeholders.accessory_description"
+                        )}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
-            <FormField
-              control={form.control}
-              name="skin_tone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("form.labels.skin_tone")}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder={t("form.placeholders.skin_tone")}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="clothing_description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("form.labels.clothing_description")}</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder={t("form.placeholders.clothing_description")}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="accessory_description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    {t("form.labels.accessory_description")}
-                  </FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder={t("form.placeholders.accessory_description")}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="personality_traits"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("form.labels.personality_traits")}</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder={t("form.placeholders.personality_traits")}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="moral_value"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t("form.labels.moral_value")}</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder={t("form.placeholders.moral_value")}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="personality_traits"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("form.labels.personality_traits")}</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder={t("form.placeholders.personality_traits")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="moral_value"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("form.labels.moral_value")}</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder={t("form.placeholders.moral_value")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
         </div>
 

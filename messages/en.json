@@ -160,6 +160,8 @@
     "Dashboard": "Dashboard"
   },
   "CreateStory": {
+    "title": "Create a Story for Your Child",
+    "desc": "Enter your child’s details to generate a personalized story that reflects their personality and hobbies.",
     "form": {
       "labels": {
         "name": "Child's Name",

@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import React from "react";
-import { User, AtSign, Mail, Gift, Calendar, Phone } from "lucide-react";
+import { User, AtSign, Mail, Calendar, Phone } from "lucide-react";
 import LogoutBtn from "@/components/LogoutBtn";
 import EditPhoneNumber from "@/features/home/Profile/EditPhoneNumber";
 import { Button } from "@/components/ui/button";
@@ -77,18 +77,6 @@ const ProfilePage = async () => {
                     />
                   </div>
                 </div>
-              </div>
-
-              <div className="flex items-center sm:gap-1 bg-primary/5 rounded-md overflow-hidden">
-                <div className="p-2 bg-primary-foreground h-full flex items-center justify-center">
-                  <Gift className="w-5 h-5 text-background" />
-                </div>
-                <p className="flex items-center gap-1 p-1">
-                  <span className="font-medium">{t("FreeTrialLabel")} :</span>
-                  <span>
-                    {user.isFree ? t("FreeTrial") : t("FreeTrialUsed")}
-                  </span>
-                </p>
               </div>
 
               <div className="flex items-center sm:gap-1 bg-primary/5 rounded-md overflow-hidden">

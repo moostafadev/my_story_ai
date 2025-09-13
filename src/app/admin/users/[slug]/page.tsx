@@ -1,7 +1,7 @@
 import DefaultPage from "@/components/layouts/Admin/DefaultPage";
 import Soon from "@/components/Soon";
 import { UserService } from "@/services/user.service";
-import { AtSign, Calendar, Gift, Mail, Phone, User } from "lucide-react";
+import { AtSign, Calendar, Mail, Phone, User } from "lucide-react";
 import { redirect } from "next/navigation";
 import React from "react";
 
@@ -58,16 +58,6 @@ const UsernamePage = async ({
             <p className="flex sm:items-center flex-col sm:flex-row gap-1 p-1">
               <span className="font-medium">رقم الهاتف :</span>
               <span>{user.phoneNumber}</span>
-            </p>
-          </div>
-
-          <div className="flex items-center sm:gap-1 bg-primary/5 rounded-md overflow-hidden">
-            <div className="p-2 bg-primary-foreground h-full flex items-center justify-center">
-              <Gift className="w-5 h-5 text-background" />
-            </div>
-            <p className="flex items-center gap-1 p-1">
-              <span className="font-medium">التجربة المجانية :</span>
-              <span>{user.isFree ? "متاحة" : "غير متاحة"}</span>
             </p>
           </div>
 
