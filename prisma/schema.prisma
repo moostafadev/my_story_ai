@@ -93,32 +93,43 @@ model Address {
   city        String
   street      String
   houseNumber String
+  area        String?
+  details     String?
 
-  // Relation
+  // Relations
   userId      String    @db.ObjectId
-  user        User      @relation(fields: [userId], references: [id])
+  user        User      @relation(fields: [userId], references: [id],onDelete: Cascade)
 }
 
 model Order {
   id            String     @id @default(auto()) @map("_id") @db.ObjectId
   uuid          String     @unique @default(uuid())
-  storiesPrice  Float      @default(0) // total price of stories
-  deliveryPrice Float      @default(0) // delivery fee
-  fPrice        Float      @default(0) // final price (storiesPrice + deliveryPrice)
-  cNote         String?    // Customer note
-  ANote         String?    // Admin note
+  storiesPrice  Float      @default(0)
+  deliveryPrice Float      @default(0)
+  fPrice        Float      @default(0)
+  cNote         String?
+  ANote         String?
   state         OrderState @default(PENDING)
 
   // Relations
   userId        String     @db.ObjectId
-  user          User       @relation(fields: [userId], references: [id])
+  user          User       @relation(fields: [userId], references: [id],onDelete: Cascade)
+  
+  customerPhone String?
 
+  // Snapshot Address
   city          String?
   street        String?
+  area          String?
   houseNumber   String?
-  houseNumber2  String?
-  addressDetails   String?
+  details       String?
 
+  // Location
+  latitude      Float?
+  longitude     Float?
+  mapsLink      String?
+
+  // Child info
   name          String
   age           Int
   hobbies       String

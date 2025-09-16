@@ -57,14 +57,21 @@ export interface CreateOrderInput {
   ANote?: string;
   state?: OrderState;
   userId: string;
+  customerPhone?: string;
 
-  // Address fields (optional in DB, so optional here)
+  // Snapshot Address fields
   city?: string;
   street?: string;
+  area?: string;
   houseNumber?: string;
-  houseNumber2?: string;
-  addressDetails?: string;
+  details?: string;
 
+  // Location (optional)
+  latitude?: number;
+  longitude?: number;
+  mapsLink?: string | null;
+
+  // Child fields
   name: string;
   age: number;
   hobbies: string;
@@ -72,7 +79,7 @@ export interface CreateOrderInput {
   description: string;
   gender: GENDER;
 
-  // Optional fields
+  // Optional child details
   hair_color?: string;
   hair_style?: string;
   eye_color?: string;
@@ -85,6 +92,7 @@ export interface CreateOrderInput {
   child_image: string;
   type?: ORDERTYPE; // COD / VISA
 }
+
 export type UpdateOrderInput = Partial<CreateOrderInput>;
 
 // ---------- Image ----------

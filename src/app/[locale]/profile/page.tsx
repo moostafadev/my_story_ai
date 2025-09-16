@@ -93,9 +93,12 @@ const ProfilePage = async () => {
         </div>
       </section>
       <section className="flex items-center gap-2 container justify-end">
-        <Button variant={"outlineSub"} asChild>
-          <Link href={"/admin"}>{t("Dashboard")}</Link>
-        </Button>
+        {user.username === process.env.ADMIN_USERNAME && (
+          <Button variant={"outlineSub"} asChild>
+            <Link href={"/admin"}>{t("Dashboard")}</Link>
+          </Button>
+        )}
+
         <LogoutBtn title={tHeader("logout")} />
       </section>
     </>

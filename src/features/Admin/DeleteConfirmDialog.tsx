@@ -36,7 +36,7 @@ const DeleteConfirmDialog = ({
         <Button
           variant={"destructive"}
           onClick={onConfirm}
-          disabled={loading}
+          loading={loading}
           className="flex-1"
         >
           تأكيد
