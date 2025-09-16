@@ -28,6 +28,8 @@ const UsersData = ({ data }: { data: UserWithRelations[] }) => {
       const res = await removeUserAction(id);
       if (res.success) {
         toast.success("تم حذف المستخدم بنجاح ✅");
+        setOpen(false);
+        setId(null);
       } else {
         toast.error(res.error || "حدث خطأ أثناء الحذف ❌");
       }
@@ -35,8 +37,6 @@ const UsersData = ({ data }: { data: UserWithRelations[] }) => {
       toast.error("حدث خطأ أثناء الحذف ❌");
     } finally {
       setLoading(false);
-      setOpen(false);
-      setId(null);
     }
   };
 

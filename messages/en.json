@@ -160,6 +160,8 @@
     "Dashboard": "Dashboard"
   },
   "CreateStory": {
+    "title": "Create a Story for Your Child",
+    "desc": "Enter your child’s details to generate a personalized story that reflects their personality and hobbies.",
     "form": {
       "labels": {
         "name": "Child's Name",
@@ -225,5 +227,43 @@
       "moral_value_required": "Child's moral values are required",
       "child_image_required": "Child's image is required"
     }
+  },
+  "AddressForm": {
+    "manual": "Enter address manually",
+    "geo": "📍 Use my current location",
+    "coordinates": "Coordinates",
+    "loading": "Fetching location...",
+    "labels": {
+      "city": "City / Governorate",
+      "area": "Area",
+      "street": "Street",
+      "houseNumber": "House / Building Number",
+      "apartment": "Apartment Number",
+      "payment": "Payment Method"
+    },
+    "placeholders": {
+      "city": "Enter your city/governorate",
+      "area": "Enter your area",
+      "street": "Enter your street name",
+      "houseNumber": "Enter your house/building number",
+      "apartment": "Enter your apartment number (optional)"
+    },
+    "buttons": {
+      "use_location": "📍 Use my current location",
+      "submit": "Done",
+      "next": "Continue"
+    },
+    "payment": {
+      "cod": "Cash on Delivery",
+      "visa": "Visa Card"
+    },
+    "errors": {
+      "address_required": "You must enter your address or use location",
+      "payment_required": "Payment method is required",
+      "geo_not_supported": "Your browser does not support geolocation",
+      "geo_failed": "Unable to get your location",
+      "failed": "Failed to update address"
+    },
+    "success": "✅ Address updated successfully"
   }
 }

@@ -143,6 +143,7 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
             )}
           />
         </div>
+
         <div className="flex flex-col md:flex-row gap-4">
           <FormField
             control={form.control}
@@ -175,6 +176,7 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
             )}
           />
         </div>
+
         <div className="flex flex-col md:flex-row gap-4">
           <FormField
             control={form.control}
@@ -207,6 +209,7 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
             )}
           />
         </div>
+
         <FormField
           control={form.control}
           name="state"
@@ -230,31 +233,29 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
             </FormItem>
           )}
         />
+
         <div className="flex flex-col md:flex-row gap-4">
           <FormItem className="w-full">
             <FormLabel>الصورة (بالعربي)</FormLabel>
-            {mode === "create" ? (
-              <CloudinaryInput
-                setFilesURL={(url) =>
-                  setFiles((prev) => ({ ...prev, imageAr: url[0] }))
-                }
-                accept="image/*"
-                lang="ar"
-                maxFiles={1}
-              />
-            ) : (
-              files.imageAr && (
-                <div className="relative">
-                  <Image
-                    src={files.imageAr}
-                    alt="Arabic image"
-                    className="rounded-md border min-h-fit"
-                    width={400}
-                    height={400}
-                  />
-                </div>
-              )
+            {files.imageAr && (
+              <div className="relative mb-2">
+                <Image
+                  src={files.imageAr}
+                  alt="Arabic image"
+                  className="rounded-md border min-h-fit"
+                  width={400}
+                  height={400}
+                />
+              </div>
             )}
+            <CloudinaryInput
+              setFilesURL={(url) =>
+                setFiles((prev) => ({ ...prev, imageAr: url[0] }))
+              }
+              accept="image/*"
+              lang="ar"
+              maxFiles={1}
+            />
             {form.formState.errors.root?.imageAr && (
               <p className="text-red-500 text-sm">
                 {form.formState.errors.root.imageAr.message}
@@ -264,28 +265,25 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
 
           <FormItem className="w-full">
             <FormLabel>الصورة (بالانجليزي)</FormLabel>
-            {mode === "create" ? (
-              <CloudinaryInput
-                setFilesURL={(url) =>
-                  setFiles((prev) => ({ ...prev, imageEn: url[0] }))
-                }
-                accept="image/*"
-                lang="en"
-                maxFiles={1}
-              />
-            ) : (
-              files.imageEn && (
-                <div className="relative">
-                  <Image
-                    src={files.imageEn}
-                    alt="English image"
-                    width={400}
-                    height={400}
-                    className="rounded-md border min-h-fit"
-                  />
-                </div>
-              )
+            {files.imageEn && (
+              <div className="relative mb-2">
+                <Image
+                  src={files.imageEn}
+                  alt="English image"
+                  width={400}
+                  height={400}
+                  className="rounded-md border min-h-fit"
+                />
+              </div>
             )}
+            <CloudinaryInput
+              setFilesURL={(url) =>
+                setFiles((prev) => ({ ...prev, imageEn: url[0] }))
+              }
+              accept="image/*"
+              lang="ar"
+              maxFiles={1}
+            />
             {form.formState.errors.root?.imageEn && (
               <p className="text-red-500 text-sm">
                 {form.formState.errors.root.imageEn.message}
@@ -293,29 +291,27 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
             )}
           </FormItem>
         </div>
+
         <div className="flex flex-col md:flex-row gap-4">
           <FormItem className="w-full">
             <FormLabel>ملف PDF (بالعربي)</FormLabel>
-            {mode === "create" ? (
-              <CloudinaryInput
-                setFilesURL={(url) =>
-                  setFiles((prev) => ({ ...prev, pdfAr: url[0] }))
-                }
-                accept=".pdf"
-                lang="ar"
-                maxFiles={1}
-              />
-            ) : (
-              files.pdfAr && (
-                <CloudinaryBtn
-                  fileUrl={files.pdfAr}
-                  className="w-fit"
-                  variant={"outline"}
-                >
-                  تحميل القصة
-                </CloudinaryBtn>
-              )
+            {files.pdfAr && (
+              <CloudinaryBtn
+                fileUrl={files.pdfAr}
+                className="w-fit mb-2"
+                variant={"outline"}
+              >
+                تحميل القصة الحالية
+              </CloudinaryBtn>
             )}
+            <CloudinaryInput
+              setFilesURL={(url) =>
+                setFiles((prev) => ({ ...prev, pdfAr: url[0] }))
+              }
+              accept=".pdf"
+              lang="ar"
+              maxFiles={1}
+            />
             {form.formState.errors.root?.pdfAr && (
               <p className="text-red-500 text-sm">
                 {form.formState.errors.root.pdfAr.message}
@@ -325,26 +321,23 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
 
           <FormItem className="w-full">
             <FormLabel>ملف PDF (بالانجليزي)</FormLabel>
-            {mode === "create" ? (
-              <CloudinaryInput
-                setFilesURL={(url) =>
-                  setFiles((prev) => ({ ...prev, pdfEn: url[0] }))
-                }
-                accept=".pdf"
-                lang="en"
-                maxFiles={1}
-              />
-            ) : (
-              files.pdfEn && (
-                <CloudinaryBtn
-                  fileUrl={files.pdfEn}
-                  className="w-fit"
-                  variant={"outline"}
-                >
-                  تحميل القصة
-                </CloudinaryBtn>
-              )
+            {files.pdfEn && (
+              <CloudinaryBtn
+                fileUrl={files.pdfEn}
+                className="w-fit mb-2"
+                variant={"outline"}
+              >
+                تحميل القصة الحالية
+              </CloudinaryBtn>
             )}
+            <CloudinaryInput
+              setFilesURL={(url) =>
+                setFiles((prev) => ({ ...prev, pdfEn: url[0] }))
+              }
+              accept=".pdf"
+              lang="ar"
+              maxFiles={1}
+            />
             {form.formState.errors.root?.pdfEn && (
               <p className="text-red-500 text-sm">
                 {form.formState.errors.root.pdfEn.message}

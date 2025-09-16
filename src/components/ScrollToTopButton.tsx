@@ -1,8 +1,11 @@
 "use client";
+
 import React, { useState, useEffect, useCallback } from "react";
 import { ArrowUp } from "lucide-react";
+import { useLocale } from "next-intl";
 
 const ScrollToTopButton: React.FC = () => {
+  const locale = useLocale();
   const [visible, setVisible] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -68,7 +71,7 @@ const ScrollToTopButton: React.FC = () => {
     <button
       onClick={scrollToTop}
       className={`
-        fixed bottom-4 right-4 z-50 
+        fixed bottom-4 ${locale === "ar" ? "right-4" : "left-4"} z-50 
         w-12 h-12 sm:w-14 sm:h-14
         rounded-full 
         bg-primary hover:primary/80 active:bg-primary/70
