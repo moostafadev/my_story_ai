@@ -4,15 +4,15 @@ export const navData = [
     href: "#features",
   },
   {
-    title: "nav.howItWorks",
-    href: "#how-it-works",
-  },
-  {
     title: "nav.stories",
     href: "#stories",
   },
   {
-    title: "nav.testimonials",
-    href: "#testimonials",
+    title: "nav.faqs",
+    href: "#faqs",
   },
+  // {
+  //   title: "nav.testimonials",
+  //   href: "#testimonials",
+  // },
 ];

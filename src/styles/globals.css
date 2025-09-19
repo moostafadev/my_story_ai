@@ -186,10 +186,10 @@
   @apply w-3;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-background;
+  @apply bg-background rounded-lg overflow-hidden;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-primary;
+  @apply bg-primary rounded-lg overflow-hidden;
 }
 
 input:-webkit-autofill,
