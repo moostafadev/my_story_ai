@@ -2,8 +2,8 @@
   "HomePage": {
     "nav": {
       "features": "Features",
-      "howItWorks": "How It Works",
       "stories": "Stories",
+      "faqs": "FAQs",
       "testimonials": "Reviews"
     },
     "header": {
@@ -48,27 +48,32 @@
         "description": "Share your child's stories with friends and family easily"
       }
     },
-    "HowItWorks": {
-      "title": "How It Works",
-      "subtitle": "Simple Steps to Fun",
-      "description": "In three easy steps, get a personalized story for your child filled with adventures and educational values",
-      "step1": {
-        "title": "Upload Your Child's Photo",
-        "description": "Start by uploading a clear photo of your child to make them the real hero of the story",
-        "stepNumber": "Step One"
+    "Stories": {
+      "title": "Stories",
+      "more": "More",
+      "downloadBtn": "Download Story"
+    },
+    "Footer": {
+      "logoAlt": "My Story AI logo",
+      "taglineLine1": "We help you turn ideas into unforgettable stories.",
+      "taglineLine2": "Fast, human-like, and beautifully written.",
+      "sections": { "title": "Explore" },
+      "company": {
+        "title": "Company",
+        "about": "About Us",
+        "careers": "Careers",
+        "privacy": "Privacy Policy"
       },
-      "step2": {
-        "title": "Choose Educational Value",
-        "description": "Select the value or lesson you want the story to carry for your child",
-        "stepNumber": "Step Two"
+      "contact": {
+        "title": "Contact",
+        "addressTitle": "Address",
+        "address": "123 Nile Street, Cairo, Egypt",
+        "emailTitle": "Email",
+        "phoneTitle": "Phone"
       },
-      "step3": {
-        "title": "Get Your Story",
-        "description": "Enjoy a unique story personalized for your child with beautiful illustrations",
-        "stepNumber": "Step Three"
-      },
-      "cta": "Start Now for Free",
-      "processTime": "In less than 2 minutes"
+      "copyrightText": "{year} My Story AI",
+      "rightsReserved": "All rights reserved to",
+      "nav": { "features": "Features", "stories": "Stories", "faqs": "FAQs" }
     }
   },
   "Register": {

@@ -16,6 +16,15 @@ export class StoryService {
     return prisma.story.findMany();
   }
 
+  static async getPublishedStories(take?: number) {
+    return prisma.story.findMany({
+      take,
+      where: {
+        state: "PUBLISHED",
+      },
+    });
+  }
+
   static async updateStory(id: string, data: UpdateStoryInput) {
     return prisma.story.update({
       where: { id },

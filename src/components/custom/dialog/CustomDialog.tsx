@@ -24,8 +24,14 @@ const CustomDialog = memo(
   }: DialogProps) => {
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogTrigger>{trigger}</DialogTrigger>
-        <DialogContent className={className}>
+        {trigger && <DialogTrigger>{trigger}</DialogTrigger>}
+
+        <DialogContent
+          className={cn(
+            "max-h-[95%] overflow-y-scroll rtl:pl-1 ltr:pr-1",
+            className
+          )}
+        >
           <DialogHeader>
             {title && (
               <DialogTitle

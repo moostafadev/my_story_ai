@@ -1,33 +1,12 @@
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { CloudIcon, HeartIcon, MoonIcon, StarIcon } from "@/components/icons";
 import { Link } from "@/i18n/navigation";
+import { getTranslations } from "next-intl/server";
+import StoriesSection from "@/features/home/Stories/Section";
 
-export default function HomePage() {
-  const t = useTranslations("HomePage");
-  const locale = useLocale();
-  const isRTL = locale === "ar";
-
-  const steps = [
-    {
-      key: "step1",
-      colors: "from-primary to-primary-foreground",
-      arrowColor: "text-primary/60",
-    },
-    {
-      key: "step2",
-      colors: "from-secondary to-secondary-foreground",
-      arrowColor: "text-secondary/60",
-    },
-    {
-      key: "step3",
-      colors: "from-accent to-accent-foreground",
-      arrowColor: null,
-      stars: true,
-    },
-  ];
-
+export default async function HomePage() {
+  const t = await getTranslations("HomePage");
   return (
     <>
       {/* Hero Section */}
@@ -193,112 +172,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section
-        className="relative overflow-hidden py-16 min-h-[calc(100dvh-4rem)] bg-background"
-        id="how-it-works"
-      >
-        {/* <div className="container mx-auto relative z-10">
-          <div className="text-center mb-20 max-w-3xl mx-auto">
-            <div className="flex items-center justify-center flex-col gap-2 mb-6">
-              <h2 className="text-4xl xl:text-6xl leading-normal font-bold bg-gradient-to-r from-foreground to-primary-foreground bg-clip-text text-transparent">
-                {t("HowItWorks.title")}
-              </h2>
-              <h3 className="text-2xl xl:text-3xl font-semibold text-primary-foreground">
-                {t("HowItWorks.subtitle")}
-              </h3>
-            </div>
-            <p className="text-lg text-foreground leading-relaxed mb-4">
-              {t("HowItWorks.description")}
-            </p>
-            <div className="flex items-center gap-2 w-fit mx-auto bg-secondary/50 backdrop-blur-sm border border-foreground/30 rounded-full px-6 py-2">
-              <span className="text-secondary-foreground font-semibold">
-                {t("HowItWorks.processTime")}
-              </span>
-            </div>
-          </div>
-
-          <div className="relative max-w-6xl mx-auto">
-            <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-full transform -translate-y-1/2 z-0" />
-
-            <div
-              className={`grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 relative z-10 ${
-                isRTL ? "lg:flex-row-reverse" : ""
-              }`}
-            >
-              {(isRTL ? [...steps].reverse() : steps).map((step, index) => (
-                <div
-                  key={step.key}
-                  className="flex flex-col items-center group"
-                >
-                  <div className="relative mb-8">
-                    <div
-                      className={`w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br ${step.colors} rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-all duration-500 border-4 border-white/20`}
-                    >
-                      <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/90 rounded-full flex items-center justify-center backdrop-blur-sm">
-                        <Image
-                          src="/logo.png"
-                          alt={t(`HowItWorks.${step.key}.title`)}
-                          width={48}
-                          height={48}
-                          className="w-10 h-10 sm:w-12 sm:h-12"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="absolute -top-4 -right-4 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-accent to-accent-foreground rounded-full flex items-center justify-center shadow-lg">
-                      <span className="text-white font-bold text-base sm:text-lg">
-                        {index + 1}
-                      </span>
-                    </div>
-
-                    {step.arrowColor && (
-                      <div
-                        className={`hidden lg:block absolute top-1/2 -right-16 transform -translate-y-1/2`}
-                      >
-                        <svg
-                          className={`w-10 h-6 sm:w-12 sm:h-8 ${step.arrowColor}`}
-                          viewBox="0 0 24 12"
-                          fill="currentColor"
-                        >
-                          <path
-                            d="M20 6H4m12-4l4 4-4 4"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            fill="none"
-                          />
-                        </svg>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="text-center max-w-sm">
-                    <div className="mb-3">
-                      <span
-                        className={`${
-                          step.colors.includes("primary")
-                            ? "text-primary"
-                            : step.colors.includes("secondary")
-                            ? "text-secondary"
-                            : "text-accent"
-                        } font-semibold text-sm uppercase tracking-wide`}
-                      >
-                        {t(`HowItWorks.${step.key}.stepNumber`)}
-                      </span>
-                    </div>
-                    <h4 className="text-2xl font-bold text-card-foreground mb-4 group-hover:text-white transition-colors">
-                      {t(`HowItWorks.${step.key}.title`)}
-                    </h4>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {t(`HowItWorks.${step.key}.description`)}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div> */}
-      </section>
+      {/* Stories Section */}
+      <StoriesSection />
     </>
   );
 }
