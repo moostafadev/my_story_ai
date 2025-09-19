@@ -52,6 +52,30 @@
       "title": "القصص",
       "more": "المزيد",
       "downloadBtn": "تحميل القصة"
+    },
+    "Footer": {
+      "logoAlt": "شعار ماي ستوري AI",
+      "taglineLine1": "نحو تحويل أفكارك إلى قصص لا تُنسى.",
+      "taglineLine2": "بسرعة، بصوت بشري، وبأسلوب رائع.",
+      "sections": { "title": "استكشف" },
+      "company": {
+        "title": "الشركة",
+        "about": "من نحن",
+        "careers": "الوظائف",
+        "privacy": "سياسة الخصوصية",
+        "vat": "الضريبة",
+        "reg": "سجل"
+      },
+      "contact": {
+        "title": "تواصل معنا",
+        "addressTitle": "العنوان",
+        "address": "١٢٣ شارع النيل، القاهرة، مصر",
+        "emailTitle": "البريد الإلكتروني",
+        "phoneTitle": "الهاتف"
+      },
+      "copyrightText": "{year} ماي ستوري AI",
+      "rightsReserved": "جميع الحقوق محفوظة لدي",
+      "nav": { "features": "المزايا", "stories": "القصص", "faqs": "الأسئلة" }
     }
   },
   "Register": {

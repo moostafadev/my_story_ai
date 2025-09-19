@@ -52,6 +52,28 @@
       "title": "Stories",
       "more": "More",
       "downloadBtn": "Download Story"
+    },
+    "Footer": {
+      "logoAlt": "My Story AI logo",
+      "taglineLine1": "We help you turn ideas into unforgettable stories.",
+      "taglineLine2": "Fast, human-like, and beautifully written.",
+      "sections": { "title": "Explore" },
+      "company": {
+        "title": "Company",
+        "about": "About Us",
+        "careers": "Careers",
+        "privacy": "Privacy Policy"
+      },
+      "contact": {
+        "title": "Contact",
+        "addressTitle": "Address",
+        "address": "123 Nile Street, Cairo, Egypt",
+        "emailTitle": "Email",
+        "phoneTitle": "Phone"
+      },
+      "copyrightText": "{year} My Story AI",
+      "rightsReserved": "All rights reserved to",
+      "nav": { "features": "Features", "stories": "Stories", "faqs": "FAQs" }
     }
   },
   "Register": {
