@@ -4,6 +4,7 @@ import { CloudIcon, HeartIcon, MoonIcon, StarIcon } from "@/components/icons";
 import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
 import StoriesSection from "@/features/home/Stories/Section";
+import HeroVideo from "@/features/home/HeroVideo";
 
 export default async function HomePage() {
   const t = await getTranslations("HomePage");
@@ -81,16 +82,9 @@ export default async function HomePage() {
         <CloudIcon className="absolute bottom-[1%] right-[15%] w-24 h-16" />
         <CloudIcon className="absolute bottom-0 right-[5%] w-20 h-14" />
 
-        <div className="container mx-auto flex flex-col md:flex-row items-center gap-0 md:gap-8">
-          <div className="flex-1 flex justify-center order-2 md:order-1">
-            <Image
-              src={"/logo.png"}
-              alt={t("Hero.title")}
-              width={400}
-              height={400}
-              className="max-w-[400px] w-full drop-shadow-lg"
-              priority
-            />
+        <div className="container mx-auto flex flex-col md:flex-row items-center gap-8">
+          <div className="flex-1 flex justify-center order-2 md:order-1 relative">
+            <HeroVideo />
           </div>
 
           <div className="flex-1 text-center md:text-start order-1 md:order-2 gap-4 md:gap-6 flex flex-col">
