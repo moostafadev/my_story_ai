@@ -16,25 +16,43 @@ const StoriesSection = async () => {
 
     if (locale === "ar") {
       const res: IResult[] = stories.map(
-        ({ id, titleAr, miniDescAr, descAr, pdfArUrl, imageArUrl }) => ({
+        ({
+          id,
+          titleAr,
+          miniDescAr,
+          descAr,
+          pdfArUrl,
+          imageArUrl,
+          coverArUrl,
+        }) => ({
           id,
           title: titleAr,
           miniDesc: miniDescAr,
           desc: descAr,
           pdf: pdfArUrl,
-          image: imageArUrl,
+          images: imageArUrl,
+          cover: coverArUrl,
         })
       );
       result.push(...res);
     } else {
       const res: IResult[] = stories.map(
-        ({ id, titleEn, miniDescEn, descEn, pdfEnUrl, imageEnUrl }) => ({
+        ({
+          id,
+          titleEn,
+          miniDescEn,
+          descEn,
+          pdfEnUrl,
+          imageEnUrl,
+          coverArUrl,
+        }) => ({
           id,
           title: titleEn,
           miniDesc: miniDescEn,
           desc: descEn,
           pdf: pdfEnUrl,
-          image: imageEnUrl,
+          images: imageEnUrl,
+          cover: coverArUrl,
         })
       );
       result.push(...res);
@@ -53,7 +71,7 @@ const StoriesSection = async () => {
           {t("Stories.title")}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
-          {data().map(({ id, title, miniDesc, desc, pdf, image }) => (
+          {data().map(({ id, title, miniDesc, desc, pdf, images, cover }) => (
             <div
               key={id}
               className="flex flex-col border-2 border-primary bg-background-sub overflow-hidden shadow-sm hover:shadow-md duration-300 rounded-md"
@@ -62,7 +80,7 @@ const StoriesSection = async () => {
                 <Image
                   width={1000}
                   height={1000}
-                  src={image ?? ""}
+                  src={cover ?? ""}
                   alt={title}
                   className="object-cover !h-full"
                 />
@@ -73,7 +91,7 @@ const StoriesSection = async () => {
                   {miniDesc?.replaceAll('"', "")}
                 </p>
                 <StoryDetailsBtn
-                  item={{ id, title, miniDesc, desc, pdf, image }}
+                  item={{ id, title, miniDesc, desc, pdf, cover, images }}
                 />
               </div>
             </div>

@@ -4,5 +4,6 @@ export interface IResult {
   miniDesc: string | null;
   desc: string;
   pdf: string | null;
-  image: string | null;
+  cover: string | null;
+  images: string[] | null;
 }

@@ -31,12 +31,14 @@ export interface CreateStoryInput {
   miniDescAr?: string;
   state?: StoryState;
 
-  // Media (URLs, not relations)
-  imageEnUrl?: string;
-  imageArUrl?: string;
+  imageEnUrl: string[];
+  imageArUrl: string[];
+  coverEnUrl?: string;
+  coverArUrl?: string;
   pdfEnUrl?: string;
   pdfArUrl?: string;
 }
+
 export type UpdateStoryInput = Partial<CreateStoryInput>;
 
 // ---------- Address ----------

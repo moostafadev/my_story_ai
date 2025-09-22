@@ -19,8 +19,6 @@ const MainLayout = async ({ children }: { children: React.ReactNode }) => {
 
   const settings = await SettingsService.getSettings();
 
-  console.log(settings?.supportEmail);
-
   const user = { userId, firstName, lastName, role: isAdmin };
   return (
     <>
