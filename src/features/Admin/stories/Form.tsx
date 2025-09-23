@@ -34,8 +34,10 @@ interface StoryFormProps {
 const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState({
-    imageAr: story?.imageArUrl || "",
-    imageEn: story?.imageEnUrl || "",
+    imageAr: story?.imageArUrl || [], // array
+    imageEn: story?.imageEnUrl || [],
+    coverAr: story?.coverArUrl || "",
+    coverEn: story?.coverEnUrl || "",
     pdfAr: story?.pdfArUrl || "",
     pdfEn: story?.pdfEnUrl || "",
   });
@@ -81,8 +83,10 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
       ...values,
       imageArUrl: files.imageAr,
       imageEnUrl: files.imageEn,
-      pdfArUrl: files.pdfAr,
-      pdfEnUrl: files.pdfEn,
+      coverArUrl: files.coverAr || undefined,
+      coverEnUrl: files.coverEn || undefined,
+      pdfArUrl: files.pdfAr || undefined,
+      pdfEnUrl: files.pdfEn || undefined,
     };
 
     let res;
@@ -236,61 +240,95 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
 
         <div className="flex flex-col md:flex-row gap-4">
           <FormItem className="w-full">
-            <FormLabel>الصورة (بالعربي)</FormLabel>
-            {files.imageAr && (
-              <div className="relative mb-2">
-                <Image
-                  src={files.imageAr}
-                  alt="Arabic image"
-                  className="rounded-md border min-h-fit"
-                  width={400}
-                  height={400}
-                />
-              </div>
+            <FormLabel>صورة الغلاف (بالعربي)</FormLabel>
+            {files.coverAr && (
+              <Image
+                src={files.coverAr}
+                alt="Arabic cover"
+                width={400}
+                height={400}
+              />
             )}
             <CloudinaryInput
               setFilesURL={(url) =>
-                setFiles((prev) => ({ ...prev, imageAr: url[0] }))
+                setFiles((prev) => ({ ...prev, coverAr: url[0] }))
               }
               accept="image/*"
               lang="ar"
               maxFiles={1}
             />
-            {form.formState.errors.root?.imageAr && (
-              <p className="text-red-500 text-sm">
-                {form.formState.errors.root.imageAr.message}
-              </p>
-            )}
           </FormItem>
 
           <FormItem className="w-full">
-            <FormLabel>الصورة (بالانجليزي)</FormLabel>
-            {files.imageEn && (
-              <div className="relative mb-2">
-                <Image
-                  src={files.imageEn}
-                  alt="English image"
-                  width={400}
-                  height={400}
-                  className="rounded-md border min-h-fit"
-                />
-              </div>
+            <FormLabel>صورة الغلاف (بالانجليزي)</FormLabel>
+            {files.coverEn && (
+              <Image
+                src={files.coverEn}
+                alt="English cover"
+                width={400}
+                height={400}
+              />
             )}
             <CloudinaryInput
               setFilesURL={(url) =>
-                setFiles((prev) => ({ ...prev, imageEn: url[0] }))
+                setFiles((prev) => ({ ...prev, coverEn: url[0] }))
               }
               accept="image/*"
-              lang="ar"
+              lang="en"
               maxFiles={1}
             />
-            {form.formState.errors.root?.imageEn && (
-              <p className="text-red-500 text-sm">
-                {form.formState.errors.root.imageEn.message}
-              </p>
-            )}
           </FormItem>
         </div>
+
+        <FormItem className="w-full">
+          <FormLabel>الصور (بالعربي)</FormLabel>
+          {files.imageAr.length > 0 && (
+            <div className="grid grid-cols-2 gap-2 mb-2">
+              {files.imageAr.map((img, idx) => (
+                <Image
+                  key={idx}
+                  src={img}
+                  alt="Arabic image"
+                  width={200}
+                  height={200}
+                />
+              ))}
+            </div>
+          )}
+          <CloudinaryInput
+            setFilesURL={(urls) =>
+              setFiles((prev) => ({ ...prev, imageAr: urls }))
+            }
+            accept="image/*"
+            lang="ar"
+            maxFiles={5}
+          />
+        </FormItem>
+
+        <FormItem className="w-full">
+          <FormLabel>الصور (بالانجليزي)</FormLabel>
+          {files.imageEn.length > 0 && (
+            <div className="grid grid-cols-2 gap-2 mb-2">
+              {files.imageEn.map((img, idx) => (
+                <Image
+                  key={idx}
+                  src={img}
+                  alt="English image"
+                  width={200}
+                  height={200}
+                />
+              ))}
+            </div>
+          )}
+          <CloudinaryInput
+            setFilesURL={(urls) =>
+              setFiles((prev) => ({ ...prev, imageEn: urls }))
+            }
+            accept="image/*"
+            lang="en"
+            maxFiles={5}
+          />
+        </FormItem>
 
         <div className="flex flex-col md:flex-row gap-4">
           <FormItem className="w-full">

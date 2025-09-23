@@ -207,7 +207,6 @@ const OrderFormStepOne = ({ userId }: { userId: string }) => {
                 schema={orderSchema(t)}
                 label="CreateStory.form.labels.hair_color"
                 placeholder="CreateStory.form.placeholders.hair_color"
-                required
               />
               <CustomInput
                 control={form.control}
@@ -215,7 +214,6 @@ const OrderFormStepOne = ({ userId }: { userId: string }) => {
                 schema={orderSchema(t)}
                 label="CreateStory.form.labels.hair_style"
                 placeholder="CreateStory.form.placeholders.hair_style"
-                required
                 type="number"
               />
             </div>
@@ -227,7 +225,6 @@ const OrderFormStepOne = ({ userId }: { userId: string }) => {
                 schema={orderSchema(t)}
                 label="CreateStory.form.labels.eye_color"
                 placeholder="CreateStory.form.placeholders.eye_color"
-                required
               />
               <CustomInput
                 control={form.control}
@@ -235,7 +232,6 @@ const OrderFormStepOne = ({ userId }: { userId: string }) => {
                 schema={orderSchema(t)}
                 label="CreateStory.form.labels.skin_tone"
                 placeholder="CreateStory.form.placeholders.skin_tone"
-                required
                 type="number"
               />
             </div>

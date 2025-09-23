@@ -9,7 +9,7 @@ import Image from "next/image";
 import { CloudinaryBtn } from "@/components/custom/cloudinary-input";
 
 const StoryDetailsBtn = ({
-  item: { title, miniDesc, desc, pdf, image },
+  item: { title, miniDesc, desc, pdf, images, cover },
 }: {
   item: IResult;
 }) => {
@@ -37,11 +37,22 @@ const StoryDetailsBtn = ({
             <Image
               width={1000}
               height={1000}
-              src={image ?? ""}
+              src={cover ?? ""}
               alt={title}
               className="w-full"
             />
           </div>
+          {images?.map((image) => (
+            <div className="flex" key={image}>
+              <Image
+                width={1000}
+                height={1000}
+                src={image ?? ""}
+                alt={title}
+                className="w-full"
+              />
+            </div>
+          ))}
           <div className="flex flex-col gap-2 p-3 sm:p-4 flex-1 !h-full">
             <p className="text-sm sm:text-base text-card-foreground">
               {miniDesc?.replaceAll('"', "")}

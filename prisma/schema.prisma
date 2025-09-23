@@ -19,7 +19,8 @@ enum StoryState {
 }
 
 enum OrderState {
-  PENDING
+  STEP1
+  STEP2
   PAID
   SHIPPED
   COMPLETED
@@ -78,8 +79,10 @@ model Story {
   state     StoryState @default(DRAFT)
 
   // Media (URLs directly from Cloudinary)
-  imageEnUrl String?
-  imageArUrl String?
+  imageArUrl String[]
+  imageEnUrl String[]
+  coverArUrl String?
+  coverEnUrl String?
   pdfEnUrl   String?
   pdfArUrl   String?
 
@@ -109,7 +112,7 @@ model Order {
   fPrice        Float      @default(0)
   cNote         String?
   ANote         String?
-  state         OrderState @default(PENDING)
+  state         OrderState @default(STEP1)
 
   // Relations
   userId        String     @db.ObjectId
