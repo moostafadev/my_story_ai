@@ -242,12 +242,24 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
           <FormItem className="w-full">
             <FormLabel>صورة الغلاف (بالعربي)</FormLabel>
             {files.coverAr && (
-              <Image
-                src={files.coverAr}
-                alt="Arabic cover"
-                width={400}
-                height={400}
-              />
+              <div className="relative w-fit">
+                <Image
+                  src={files.coverAr}
+                  alt="Arabic cover"
+                  width={400}
+                  height={400}
+                  className="rounded"
+                />
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="destructive"
+                  className="absolute top-2 right-2"
+                  onClick={() => setFiles((prev) => ({ ...prev, coverAr: "" }))}
+                >
+                  حذف
+                </Button>
+              </div>
             )}
             <CloudinaryInput
               setFilesURL={(url) =>
@@ -260,22 +272,43 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
           </FormItem>
 
           <FormItem className="w-full">
-            <FormLabel>صورة الغلاف (بالانجليزي)</FormLabel>
-            {files.coverEn && (
-              <Image
-                src={files.coverEn}
-                alt="English cover"
-                width={400}
-                height={400}
-              />
+            <FormLabel>الصور (بالعربي)</FormLabel>
+            {files.imageAr.length > 0 && (
+              <div className="grid grid-cols-2 gap-2 mb-2">
+                {files.imageAr.map((img, idx) => (
+                  <div key={idx} className="relative">
+                    <Image
+                      src={img}
+                      alt="Arabic image"
+                      width={200}
+                      height={200}
+                      className="rounded"
+                    />
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="destructive"
+                      className="absolute top-2 right-2"
+                      onClick={() =>
+                        setFiles((prev) => ({
+                          ...prev,
+                          imageAr: prev.imageAr.filter((_, i) => i !== idx),
+                        }))
+                      }
+                    >
+                      حذف
+                    </Button>
+                  </div>
+                ))}
+              </div>
             )}
             <CloudinaryInput
-              setFilesURL={(url) =>
-                setFiles((prev) => ({ ...prev, coverEn: url[0] }))
+              setFilesURL={(urls) =>
+                setFiles((prev) => ({ ...prev, imageAr: urls }))
               }
               accept="image/*"
-              lang="en"
-              maxFiles={1}
+              lang="ar"
+              maxFiles={5}
             />
           </FormItem>
         </div>
@@ -285,13 +318,29 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
           {files.imageAr.length > 0 && (
             <div className="grid grid-cols-2 gap-2 mb-2">
               {files.imageAr.map((img, idx) => (
-                <Image
-                  key={idx}
-                  src={img}
-                  alt="Arabic image"
-                  width={200}
-                  height={200}
-                />
+                <div key={idx} className="relative">
+                  <Image
+                    src={img}
+                    alt="Arabic image"
+                    width={200}
+                    height={200}
+                    className="rounded"
+                  />
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="destructive"
+                    className="absolute top-2 right-2"
+                    onClick={() =>
+                      setFiles((prev) => ({
+                        ...prev,
+                        imageAr: prev.imageAr.filter((_, i) => i !== idx),
+                      }))
+                    }
+                  >
+                    حذف
+                  </Button>
+                </div>
               ))}
             </div>
           )}
@@ -310,13 +359,29 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
           {files.imageEn.length > 0 && (
             <div className="grid grid-cols-2 gap-2 mb-2">
               {files.imageEn.map((img, idx) => (
-                <Image
-                  key={idx}
-                  src={img}
-                  alt="English image"
-                  width={200}
-                  height={200}
-                />
+                <div key={idx} className="relative">
+                  <Image
+                    src={img}
+                    alt="English image"
+                    width={200}
+                    height={200}
+                    className="rounded"
+                  />
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="destructive"
+                    className="absolute top-2 right-2"
+                    onClick={() =>
+                      setFiles((prev) => ({
+                        ...prev,
+                        imageEn: prev.imageEn.filter((_, i) => i !== idx),
+                      }))
+                    }
+                  >
+                    حذف
+                  </Button>
+                </div>
               ))}
             </div>
           )}
