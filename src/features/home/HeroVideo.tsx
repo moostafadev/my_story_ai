@@ -7,23 +7,20 @@ const HeroVideo = () => {
   const [hasError, setHasError] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // تحميل وتشغيل الفيديو مباشرة
   useEffect(() => {
     const video = videoRef.current;
     if (video) {
-      // محاولة تشغيل الفيديو
       const attemptPlay = async () => {
         try {
-          video.load(); // إعادة تحميل
+          video.load();
           await video.play();
           setIsLoaded(true);
         } catch (error) {
           console.log("Autoplay prevented or video failed:", error);
-          setIsLoaded(true); // إظهار الفيديو حتى لو لم يشتغل تلقائياً
+          setIsLoaded(true);
         }
       };
 
-      // تأخير بسيط ثم محاولة التشغيل
       const timer = setTimeout(attemptPlay, 100);
       return () => clearTimeout(timer);
     }
@@ -36,14 +33,13 @@ const HeroVideo = () => {
   const handleVideoError = () => {
     console.log("Video failed to load");
     setHasError(true);
-    setIsLoaded(true); // إظهار placeholder
+    setIsLoaded(true);
   };
 
   const handleCanPlay = () => {
     setIsLoaded(true);
     if (videoRef.current) {
       videoRef.current.play().catch(() => {
-        // محاولة أخيرة للتشغيل
         console.log("Final play attempt failed");
       });
     }
@@ -75,7 +71,7 @@ const HeroVideo = () => {
             disablePictureInPicture
             controlsList="nodownload nofullscreen noremoteplayback"
             preload="auto"
-            className={`max-w-[400px] w-full h-auto rounded-lg object-cover shadow-lg 
+            className={`2xl:max-w-[800px] max-w-[500px] w-full h-auto rounded-lg object-cover shadow-lg 
                        transition-all duration-500 ease-out
                        [&::-webkit-media-controls]:hidden [&::-webkit-media-controls-panel]:hidden 
                        [&::-webkit-media-controls-play-button]:hidden [&::-webkit-media-controls-start-playback-button]:hidden

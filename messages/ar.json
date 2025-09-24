@@ -51,7 +51,8 @@
     "Stories": {
       "title": "القصص",
       "more": "المزيد",
-      "downloadBtn": "تحميل القصة"
+      "downloadBtn": "تحميل القصة",
+      "moreStories": "المزيد من القصص"
     },
     "Footer": {
       "logoAlt": "شعار ماي ستوري AI",

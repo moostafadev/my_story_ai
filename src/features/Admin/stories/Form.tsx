@@ -272,43 +272,34 @@ const StoryForm = ({ mode = "create", story }: StoryFormProps) => {
           </FormItem>
 
           <FormItem className="w-full">
-            <FormLabel>الصور (بالعربي)</FormLabel>
-            {files.imageAr.length > 0 && (
-              <div className="grid grid-cols-2 gap-2 mb-2">
-                {files.imageAr.map((img, idx) => (
-                  <div key={idx} className="relative">
-                    <Image
-                      src={img}
-                      alt="Arabic image"
-                      width={200}
-                      height={200}
-                      className="rounded"
-                    />
-                    <Button
-                      type="button"
-                      size="sm"
-                      variant="destructive"
-                      className="absolute top-2 right-2"
-                      onClick={() =>
-                        setFiles((prev) => ({
-                          ...prev,
-                          imageAr: prev.imageAr.filter((_, i) => i !== idx),
-                        }))
-                      }
-                    >
-                      حذف
-                    </Button>
-                  </div>
-                ))}
+            <FormLabel>صورة الغلاف (بالانجليزي)</FormLabel>
+            {files.coverEn && (
+              <div className="relative w-fit">
+                <Image
+                  src={files.coverAr}
+                  alt="English cover"
+                  width={400}
+                  height={400}
+                  className="rounded"
+                />
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="destructive"
+                  className="absolute top-2 right-2"
+                  onClick={() => setFiles((prev) => ({ ...prev, coverEn: "" }))}
+                >
+                  حذف
+                </Button>
               </div>
             )}
             <CloudinaryInput
-              setFilesURL={(urls) =>
-                setFiles((prev) => ({ ...prev, imageAr: urls }))
+              setFilesURL={(url) =>
+                setFiles((prev) => ({ ...prev, coverEn: url[0] }))
               }
               accept="image/*"
               lang="ar"
-              maxFiles={5}
+              maxFiles={1}
             />
           </FormItem>
         </div>
