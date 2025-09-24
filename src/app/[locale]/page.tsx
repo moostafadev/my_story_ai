@@ -82,12 +82,12 @@ export default async function HomePage() {
         <CloudIcon className="absolute bottom-[1%] right-[15%] w-24 h-16" />
         <CloudIcon className="absolute bottom-0 right-[5%] w-20 h-14" />
 
-        <div className="container mx-auto flex flex-col md:flex-row items-center gap-8">
-          <div className="flex-1 flex justify-center order-2 md:order-1 relative">
+        <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16">
+          <div className="flex-[3] flex justify-center order-2 md:order-1 relative">
             <HeroVideo />
           </div>
 
-          <div className="flex-1 text-center md:text-start order-1 md:order-2 gap-4 md:gap-6 flex flex-col">
+          <div className="flex-[2] text-center md:text-start order-1 md:order-2 gap-4 md:gap-6 flex flex-col">
             <div className="flex flex-col gap-3">
               <h1 className="text-3xl xl:text-5xl sm:rtl:text-5xl font-bold text-primary-foreground relative w-fit mx-auto md:mx-0">
                 <span className="shadow-child text-3xl xl:text-5xl sm:rtl:text-5xl">

@@ -51,7 +51,8 @@
     "Stories": {
       "title": "Stories",
       "more": "More",
-      "downloadBtn": "Download Story"
+      "downloadBtn": "Download Story",
+      "moreStories": "More Stories"
     },
     "Footer": {
       "logoAlt": "My Story AI logo",

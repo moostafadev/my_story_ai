@@ -1,16 +1,13 @@
-import { StoryService } from "@/services/story.service";
-import React from "react";
-import { getLocale, getTranslations } from "next-intl/server";
 import StoryCard from "@/components/StoryCard";
 import { IStoryCard } from "@/components/StoryCard/types";
-import { Button } from "@/components/ui/button";
-import { Link } from "@/i18n/navigation";
+import { StoryService } from "@/services/story.service";
+import { getLocale, getTranslations } from "next-intl/server";
+import React from "react";
 
-const StoriesSection = async () => {
+const StoriesPage = async () => {
   const t = await getTranslations("HomePage");
   const locale = await getLocale();
-
-  const stories = await StoryService.getPublishedStories(3);
+  const stories = await StoryService.getPublishedStories();
 
   const data = () => {
     const result: IStoryCard[] = [];
@@ -52,32 +49,21 @@ const StoriesSection = async () => {
   };
 
   return (
-    <section
-      className="relative overflow-hidden py-16 min-h-[calc(100dvh-4rem)] bg-background"
-      id="stories"
-    >
-      <div className="container flex flex-col gap-10">
-        <h2 className="text-4xl xl:text-6xl leading-normal font-bold bg-gradient-to-r from-foreground to-primary-foreground bg-clip-text text-transparent w-fit mx-auto">
-          {t("Stories.title")}
-        </h2>
-        <div className="flex flex-col gap-6">
+    <>
+      <section className="min-h-[calc(100dvh-5rem)] py-12 md:py-16">
+        <div className="container flex flex-col gap-10">
+          <h2 className="text-4xl xl:text-6xl leading-normal font-bold bg-gradient-to-r from-foreground to-primary-foreground bg-clip-text text-transparent w-fit mx-auto">
+            {t("Stories.title")}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
             {data().map(({ id, title, miniDesc, cover }) => (
               <StoryCard key={id} story={{ id, cover, miniDesc, title }} />
             ))}
           </div>
-          <Button
-            variant={"outlineSub"}
-            size={"lg"}
-            className="w-fit mx-auto"
-            asChild
-          >
-            <Link href={"/stories"}>{t("Stories.moreStories")}</Link>
-          </Button>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
-export default StoriesSection;
+export default StoriesPage;
