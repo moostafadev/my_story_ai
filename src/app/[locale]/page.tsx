@@ -11,7 +11,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-10 min-h-[calc(100dvh-5rem)] flex items-center">
+      <section className="relative overflow-hidden flex items-center">
         <div className="absolute inset-0 -bottom-6 -z-20 pointer-events-none">
           <svg
             className="w-full h-full"
@@ -74,20 +74,20 @@ export default async function HomePage() {
           </svg>
         </div>
 
-        <StarIcon className="absolute top-0 left-[5%] w-8 h-8" />
-        <StarIcon className="absolute top-[5%] left-[13%] w-7 h-7" />
-        <MoonIcon className="absolute top-[8%] left-[3%] w-10 h-10" />
-        <HeartIcon className="absolute top-[5%] right-[5%] w-8 h-8 -z-10" />
-        <CloudIcon className="absolute bottom-[5%] right-[2%] w-20 h-12" />
-        <CloudIcon className="absolute bottom-[1%] right-[15%] w-24 h-16" />
-        <CloudIcon className="absolute bottom-0 right-[5%] w-20 h-14" />
+        <StarIcon className="absolute top-0 ltr:left-[5%] rtl:right-[5%] w-8 h-8" />
+        <StarIcon className="absolute top-[5%] ltr:left-[13%] rtl:right-[13%] w-7 h-7" />
+        <MoonIcon className="absolute top-[8%] ltr:left-[3%] rtl:right-[3%] w-10 h-10" />
+        <HeartIcon className="absolute top-[5%] ltr:right-[5%] rtl:left-[5%] w-8 h-8 -z-10" />
+        <CloudIcon className="absolute bottom-[5%] ltr:right-[2%] rtl:left-[2%] w-20 h-12" />
+        <CloudIcon className="absolute bottom-[1%] ltr:right-[15%] rtl:left-[15%] w-24 h-16" />
+        <CloudIcon className="absolute bottom-0 ltr:right-[5%] rtl:left-[5%] w-20 h-14" />
 
-        <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16">
-          <div className="flex-[3] flex justify-center order-2 md:order-1 relative">
+        <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-16 min-h-[calc(100dvh-5rem)] mx-auto lg:mx-0 py-6 lg:py-0">
+          <div className="flex-[3] order-2 lg:order-1 relative h-full p-4 lg:p-0 flex lg:block items-center">
             <HeroVideo />
           </div>
 
-          <div className="flex-[2] text-center md:text-start order-1 md:order-2 gap-4 md:gap-6 flex flex-col">
+          <div className="flex-[2] lg:py-10 text-center lg:text-start order-1 lg:order-2 gap-4 lg:gap-6 flex flex-col items-center lg:items-start justify-center">
             <div className="flex flex-col gap-3">
               <h1 className="text-3xl xl:text-5xl sm:rtl:text-5xl font-bold text-primary-foreground relative w-fit mx-auto md:mx-0">
                 <span className="shadow-child text-3xl xl:text-5xl sm:rtl:text-5xl">
