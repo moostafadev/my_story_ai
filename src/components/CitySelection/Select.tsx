@@ -23,7 +23,7 @@ const SelectCities = ({ data, onChange, value }: IProps) => {
     <CustomSelect
       options={data.map((item) => ({
         label: locale === "ar" ? item.nameAr : item.nameEn,
-        value: item.price.toString(),
+        value: locale === "ar" ? item.nameAr : item.nameEn,
       }))}
       onChange={onChange}
       value={value}

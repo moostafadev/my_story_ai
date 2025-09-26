@@ -19,6 +19,19 @@ export class OrderService {
     });
   }
 
+  static async getAllOrdersAdmin() {
+    return prisma.order.findMany({
+      include: { user: true },
+      where: {
+        NOT: {
+          state: {
+            in: ["STEP1", "STEP2"],
+          },
+        },
+      },
+    });
+  }
+
   static async updateOrder(id: string, data: UpdateOrderInput) {
     return prisma.order.update({ where: { id }, data });
   }

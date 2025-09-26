@@ -150,6 +150,8 @@ model Order {
   moral_value              String?
   child_image   String
 
+  storyPdfEnUrl String?
+  storyPdfArUrl String?
   type          ORDERTYPE  @default(COD)
   storyType     STORYTYPE  @default(PDF)
   order_id      String?

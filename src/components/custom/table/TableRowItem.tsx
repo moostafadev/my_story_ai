@@ -41,12 +41,7 @@ const TableRowItem = <T extends Record<string, unknown>>({
                   variant={action.variant ?? "default"}
                   size="icon"
                 >
-                  <Link
-                    href={href}
-                    target={
-                      typeof action.href === "function" ? "_blank" : "_self"
-                    }
-                  >
+                  <Link href={href} target={action.target ?? "_self"}>
                     {content}
                   </Link>
                 </Button>

@@ -163,7 +163,8 @@
     "FreeTrial": "Available",
     "FreeTrialUsed": "Free trial already used",
     "CreatedAt": "Created At",
-    "Dashboard": "Dashboard"
+    "Dashboard": "Dashboard",
+    "MyOrders": "My Orders"
   },
   "CreateStory": {
     "title": "Create a Story for Your Child",

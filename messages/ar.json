@@ -165,7 +165,8 @@
     "FreeTrial": "متاحة",
     "FreeTrialUsed": "تم استخدام التجربة المجانية",
     "CreatedAt": "تاريخ الإنشاء",
-    "Dashboard": "لوحة التحكم"
+    "Dashboard": "لوحة التحكم",
+    "MyOrders": "طلباتي"
   },
   "CreateStory": {
     "title": "إنشاء قصة لطفلك",

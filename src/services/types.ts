@@ -92,6 +92,9 @@ export interface CreateOrderInput {
   personality_traits?: string;
   moral_value?: string;
 
+  storyPdfEnUrl?: string;
+  storyPdfArUrl?: string;
+
   child_image: string;
   type?: ORDERTYPE;
   storyType?: STORYTYPE;

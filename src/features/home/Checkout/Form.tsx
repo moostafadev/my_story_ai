@@ -20,6 +20,7 @@ import CitySelection from "@/components/CitySelection";
 import { useState } from "react";
 import { CustomInput } from "@/components/custom/input";
 import { STORYTYPE } from "@prisma/client";
+import { fetchCities } from "@/components/CitySelection/city.action";
 
 type Props = {
   orderId: string;
@@ -44,6 +45,14 @@ export default function AddressForm({
 
   const onSubmit = async (values: TAddressSchema) => {
     setLoading(true);
+
+    const cities = await fetchCities();
+    const selectedCity = cities.find(
+      (c) => c.nameAr === values.city || c.nameEn === values.city
+    );
+
+    const deliveryPrice = selectedCity ? selectedCity.price : 0;
+
     const res = await updateOrderAddressAction(orderId, {
       city: values.city,
       area: values.area,
@@ -51,8 +60,8 @@ export default function AddressForm({
       houseNumber: values.houseNumber,
       type: values.type,
       state: "STEP2",
-      deliveryPrice: +values.city,
-      fPrice: +values.city + (storyType === "SOFT" ? softPrice : hardPrice),
+      deliveryPrice,
+      fPrice: deliveryPrice + (storyType === "SOFT" ? softPrice : hardPrice),
     });
 
     if (res.success) {
@@ -65,6 +74,7 @@ export default function AddressForm({
     } else {
       toast.error(res.message || t("errors.failed"));
     }
+
     setLoading(false);
   };
 

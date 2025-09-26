@@ -66,6 +66,7 @@ const UsersData = ({ data }: { data: UserWithRelations[] }) => {
       variant: "outline",
       href: (item) =>
         `https://api.whatsapp.com/send?phone=2${item.phoneNumber}`,
+      target: "_blank",
     },
     {
       label: "Delete",
