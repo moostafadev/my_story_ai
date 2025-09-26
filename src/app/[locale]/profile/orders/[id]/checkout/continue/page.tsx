@@ -1,41 +1,38 @@
-"use client";
+import CheckoutSection from "@/features/home/Checkout";
+import { getUserFromCookies } from "@/lib/cookies";
+import { OrderService } from "@/services/order.service";
+import { getTranslations } from "next-intl/server";
+import { redirect } from "next/navigation";
 
-import { useState } from "react";
+const ContinuePage = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
+  const { id } = await params;
+  const t = await getTranslations("CheackoutPage");
 
-const ContinuePage = () => {
-  const [loading, setLoading] = useState(false);
-
-  const handlePay = async () => {
-    setLoading(true);
-
-    const res = await fetch("/api/create-payment", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: 100, currency: "EGP" }),
-    });
-
-    const data = await res.json();
-
-    if (data.checkout_url) {
-      window.location.href = data.checkout_url;
-    } else {
-      alert("Payment init failed");
-    }
-
-    setLoading(false);
-  };
+  const order = await OrderService.getOrderById(id);
+  const userId = await getUserFromCookies();
+  if (!order?.userId || order?.userId !== userId?.userId || !order) {
+    redirect("/");
+  }
 
   return (
-    <div className="flex flex-col items-center gap-4 p-10">
-      <h1 className="text-2xl font-bold">Checkout Page</h1>
-      <button
-        onClick={handlePay}
-        disabled={loading}
-        className="px-6 py-3 bg-blue-600 text-white rounded-xl shadow-lg hover:bg-blue-700"
-      >
-        {loading ? "Processing..." : "Pay 100 EGP"}
-      </button>
-    </div>
+    <section className="min-h-[calc(100vh-5rem)] py-8 lg:p-12">
+      <div className="container flex flex-col items-center gap-6">
+        <h1 className="text-2xl font-bold">{t("title")}</h1>
+        <CheckoutSection
+          order={{
+            id: order.id,
+            storyPrice: order.storiesPrice,
+            deliveryPrice: order.deliveryPrice,
+            totalPrice: order.fPrice,
+            storyType: order.storyType,
+          }}
+        />
+      </div>
+    </section>
   );
 };
 

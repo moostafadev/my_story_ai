@@ -82,8 +82,8 @@ export default async function HomePage() {
         <CloudIcon className="absolute bottom-[1%] ltr:right-[15%] rtl:left-[15%] w-24 h-16" />
         <CloudIcon className="absolute bottom-0 ltr:right-[5%] rtl:left-[5%] w-20 h-14" />
 
-        <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-16 min-h-[calc(100dvh-5rem)] mx-auto lg:mx-0 py-6 lg:py-0">
-          <div className="flex-[3] order-2 lg:order-1 relative h-full p-4 lg:p-0 flex lg:block items-center">
+        <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-16 h-fit lg:h-[480px] xl:h-[540px] 2xl:h-[580px] mx-auto lg:mx-0 py-6 lg:py-0">
+          <div className="flex-[3] order-2 lg:order-1 relative h-full p-4 lg:p-0 flex items-center">
             <HeroVideo />
           </div>
 

@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Users, ShoppingCart, BookOpen, DollarSign } from "lucide-react";
+import Link from "next/link";
 
 const AdminPage = () => {
   return (
@@ -66,7 +67,9 @@ const AdminPage = () => {
             <p className="text-muted-foreground">
               عرض وإدارة جميع المستخدمين المسجلين.
             </p>
-            <Button variant="outline">دخول</Button>
+            <Button variant="outline" asChild>
+              <Link href={"/admin/users"}>دخول</Link>
+            </Button>
           </CardContent>
         </Card>
 
@@ -76,7 +79,9 @@ const AdminPage = () => {
           </CardHeader>
           <CardContent className="flex justify-between items-center">
             <p className="text-muted-foreground">تتبع وإدارة طلبات العملاء.</p>
-            <Button variant="outline">دخول</Button>
+            <Button variant="outline" asChild>
+              <Link href={"/admin/orders"}>دخول</Link>
+            </Button>
           </CardContent>
         </Card>
 
@@ -88,7 +93,9 @@ const AdminPage = () => {
             <p className="text-muted-foreground">
               تعديل أسعار الإنشاء والتوصيل.
             </p>
-            <Button variant="outline">دخول</Button>
+            <Button variant="outline" asChild>
+              <Link href={"/admin/settings"}>دخول</Link>
+            </Button>
           </CardContent>
         </Card>
 
@@ -100,7 +107,9 @@ const AdminPage = () => {
             <p className="text-muted-foreground">
               الموافقة أو التعديل أو حذف القصص.
             </p>
-            <Button variant="outline">دخول</Button>
+            <Button variant="outline" asChild>
+              <Link href={"/admin/stories"}>دخول</Link>
+            </Button>
           </CardContent>
         </Card>
       </div>

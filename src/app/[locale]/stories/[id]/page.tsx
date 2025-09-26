@@ -38,20 +38,22 @@ const StoryPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   };
 
   return (
-    <section className="min-h-[calc(100dvh-5rem)] py-12 md:py-16">
+    <section className="min-h-[calc(100dvh-5rem)] py-8 md:py-12">
       <div className="container flex flex-col gap-8">
         <h1 className="text-2xl lg:text-3xl font-bold text-primary-foreground">
           {localizedStory.title}
         </h1>
         <div className="flex flex-col md:flex-row gap-4 md:gap-8">
-          <div className="md:flex-1 md:order-2 mx-auto max-w-[300px] md:max-w-full border-b border-b-foreground md:border-0 pb-4 md:pb-0">
-            <Image
-              width={595}
-              height={842}
-              src={localizedStory.cover || "https://placehold.co/595x842.png"}
-              alt={localizedStory.title || "Story Cover"}
-              className="rounded-lg shadow-lg"
-            />
+          <div className="md:flex-1 md:order-2 border-b border-b-foreground md:border-0 pb-4 md:pb-0">
+            <div className="max-w-[360px] md:max-w-full mx-auto">
+              <Image
+                width={595}
+                height={842}
+                src={localizedStory.cover || "https://placehold.co/595x842.png"}
+                alt={localizedStory.title || "Story Cover"}
+                className="rounded-lg shadow-lg "
+              />
+            </div>
           </div>
 
           <div className="md:flex-[2] md:order-1 flex flex-col gap-4">
@@ -59,8 +61,9 @@ const StoryPage = async ({ params }: { params: Promise<{ id: string }> }) => {
               <div
                 className={cn("grid gap-4", {
                   "grid-cols-1": localizedStory.images.length === 1,
-                  "md:grid-cols-2": localizedStory.images.length === 2,
-                  "md:grid-cols-3": localizedStory.images.length >= 3,
+                  "grid-cols-2": localizedStory.images.length === 2,
+                  "grid-cols-2 md:grid-cols-3":
+                    localizedStory.images.length >= 3,
                 })}
               >
                 {localizedStory.images.map((image, index) => (

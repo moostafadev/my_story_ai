@@ -23,8 +23,15 @@ import { CustomSelect } from "@/components/custom/select";
 import { CloudinaryInput } from "@/components/custom/cloudinary-input";
 import { CustomInput } from "@/components/custom/input";
 import { Lang } from "@/components/custom/cloudinary-input/types";
+import { CreateOrderInput } from "@/services/types";
 
-const OrderFormStepOne = ({ userId }: { userId: string }) => {
+const OrderFormStepOne = ({
+  userId,
+  prices: { pdfPrice, softPrice, hardPrice },
+}: {
+  userId: string;
+  prices: { pdfPrice: number; softPrice: number; hardPrice: number };
+}) => {
   const t = useTranslations("CreateStory");
   const locale = useLocale();
   const [loading, setLoading] = useState(false);
@@ -48,6 +55,7 @@ const OrderFormStepOne = ({ userId }: { userId: string }) => {
       accessory_description: "",
       personality_traits: "",
       moral_value: "",
+      storyType: "PDF",
     },
   });
 
@@ -62,10 +70,19 @@ const OrderFormStepOne = ({ userId }: { userId: string }) => {
 
     setLoading(true);
 
-    const payload = {
+    const payload: CreateOrderInput = {
       ...values,
       child_image: childImage,
       userId,
+      state: values.storyType === "PDF" ? "STEP2" : "STEP1",
+      type: values.storyType === "PDF" ? "VISA" : "COD",
+      storiesPrice:
+        values.storyType === "PDF"
+          ? pdfPrice
+          : values.storyType === "SOFT"
+          ? softPrice
+          : hardPrice,
+      fPrice: values.storyType === "PDF" ? pdfPrice : 0,
     };
 
     const res = await createOrderAction(payload);
@@ -74,6 +91,11 @@ const OrderFormStepOne = ({ userId }: { userId: string }) => {
 
     if (res.success) {
       toast.success("✅ تم إنشاء الطلب بنجاح");
+      if (res.order?.storyType === "PDF") {
+        redirect(
+          `/profile/orders/${res?.order?.id}/checkout/continue?type=visa`
+        );
+      }
       redirect(`/profile/orders/${res?.order?.id}/checkout`);
     } else {
       toast.error("❌ فشل إنشاء الطلب: " + res.message);
@@ -173,6 +195,29 @@ const OrderFormStepOne = ({ userId }: { userId: string }) => {
             )}
           />
         </div>
+
+        <FormField
+          control={form.control}
+          name="storyType"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("form.labels.story_type")}</FormLabel>
+              <FormControl>
+                <CustomSelect
+                  value={field.value}
+                  onChange={field.onChange}
+                  className="w-full"
+                  options={[
+                    { label: t("form.story_type.pdf"), value: "PDF" },
+                    { label: t("form.story_type.pdf_soft"), value: "SOFT" },
+                    { label: t("form.story_type.pdf_hard"), value: "HARD" },
+                  ]}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <FormItem>
           <FormLabel>{t("form.labels.child_image")}</FormLabel>

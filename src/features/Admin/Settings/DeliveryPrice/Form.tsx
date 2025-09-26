@@ -128,29 +128,6 @@ const PricingDeliveryForm = ({
               </FormItem>
             )}
           />
-
-          <FormField
-            control={form.control}
-            name="currency"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text">العملة</FormLabel>
-                <FormControl>
-                  <CustomSelect
-                    onChange={field.onChange}
-                    value={field.value}
-                    options={[
-                      { label: "جنيه مصري", value: "EGP" },
-                      { label: "دولار أمريكي", value: "USD" },
-                    ]}
-                    placeholder="اختر العملة"
-                    className="text-foreground"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
         </div>
 
         <Button

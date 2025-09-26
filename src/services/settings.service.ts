@@ -7,8 +7,9 @@ export class SettingsService {
 
   static async updateSettings(
     data: Partial<{
-      storyCreationPrice: number;
-      storyCreationCurrency: string;
+      storyCreationPricePDF: number;
+      storyCreationPriceSoft: number;
+      storyCreationPriceHard: number;
       supportEmail: string;
       supportPhone: string;
     }>

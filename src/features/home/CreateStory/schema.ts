@@ -17,6 +17,7 @@ export const orderSchema = (t: ClientTranslationFunction) => {
     gender: z.nativeEnum(GENDER, {
       message: t("errors.gender_required"),
     }),
+    storyType: z.enum(["PDF", "SOFT", "HARD"]),
     hair_color: z.string().optional(),
     hair_style: z.string().optional(),
     eye_color: z.string().optional(),

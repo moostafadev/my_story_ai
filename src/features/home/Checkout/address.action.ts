@@ -15,3 +15,16 @@ export async function updateOrderAddressAction(
     return { success: false, message: "حدث خطأ أثناء تحديث العنوان" };
   }
 }
+
+export async function updateOrderStateAction(
+  orderId: string,
+  data: UpdateOrderInput
+) {
+  try {
+    const order = await OrderService.updateOrder(orderId, data);
+    return { success: true, order };
+  } catch (error) {
+    console.error("❌ Error updating order:", error);
+    return { success: false, message: "حدث خطأ أثناء تحديث الطلب" };
+  }
+}

@@ -13,6 +13,7 @@ export interface TableAction<T> {
   onClick?: (item: T) => void;
   href?: string | ((item: T) => string);
   loading?: boolean | ((item: T) => boolean);
+  target?: "_blank" | "_self";
 }
 
 export interface GenericTableProps<T> {

@@ -27,6 +27,12 @@ enum OrderState {
   CANCELLED
 }
 
+enum STORYTYPE {
+  PDF
+  SOFT
+  HARD
+}
+
 enum ORDERTYPE {
   COD
   VISA
@@ -127,11 +133,6 @@ model Order {
   houseNumber   String?
   details       String?
 
-  // Location
-  latitude      Float?
-  longitude     Float?
-  mapsLink      String?
-
   // Child info
   name          String
   age           Int
@@ -149,7 +150,10 @@ model Order {
   moral_value              String?
   child_image   String
 
+  storyPdfEnUrl String?
+  storyPdfArUrl String?
   type          ORDERTYPE  @default(COD)
+  storyType     STORYTYPE  @default(PDF)
   order_id      String?
 
   createdAt     DateTime   @default(now())
@@ -160,8 +164,9 @@ model Settings {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   uuid        String   @unique @default(uuid())
 
-  storyCreationPrice    Float    @default(0)
-  storyCreationCurrency String   @default("USD")
+  storyCreationPricePDF    Float    @default(0)
+  storyCreationPriceSoft   Float    @default(0)
+  storyCreationPriceHard   Float    @default(0)
 
   deliveryPrices        Json
 

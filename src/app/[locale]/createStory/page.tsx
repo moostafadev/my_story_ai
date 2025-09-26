@@ -1,5 +1,6 @@
 import OrderFormStepOne from "@/features/home/CreateStory/Form";
 import { getUserFromCookies } from "@/lib/cookies";
+import { SettingsService } from "@/services/settings.service";
 import { UserService } from "@/services/user.service";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
@@ -16,6 +17,12 @@ const CreateStoryPage = async () => {
     redirect("/login");
   }
 
+  const settings = await SettingsService.getSettings();
+
+  if (!settings) {
+    redirect("/");
+  }
+
   const t = await getTranslations("CreateStory");
 
   return (
@@ -28,7 +35,14 @@ const CreateStoryPage = async () => {
             {t("desc")}
           </p>
         </div>
-        <OrderFormStepOne userId={userId.userId} />
+        <OrderFormStepOne
+          userId={userId.userId}
+          prices={{
+            pdfPrice: settings.storyCreationPricePDF,
+            softPrice: settings.storyCreationPriceSoft,
+            hardPrice: settings.storyCreationPriceHard,
+          }}
+        />
       </div>
 
       {/* Image Section */}

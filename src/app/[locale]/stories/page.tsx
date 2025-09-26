@@ -50,7 +50,7 @@ const StoriesPage = async () => {
 
   return (
     <>
-      <section className="min-h-[calc(100dvh-5rem)] py-12 md:py-16">
+      <section className="min-h-[calc(100dvh-5rem)] py-8 md:py-12">
         <div className="container flex flex-col gap-10">
           <h2 className="text-4xl xl:text-6xl leading-normal font-bold bg-gradient-to-r from-foreground to-primary-foreground bg-clip-text text-transparent w-fit mx-auto">
             {t("Stories.title")}

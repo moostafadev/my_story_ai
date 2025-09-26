@@ -99,6 +99,12 @@ const ProfilePage = async () => {
           </Button>
         )}
 
+        {user.orders.length > 0 && (
+          <Button variant={"secondary"} asChild>
+            <Link href={"/profile/orders"}>{t("MyOrders")}</Link>
+          </Button>
+        )}
+
         <LogoutBtn title={tHeader("logout")} />
       </section>
     </>
