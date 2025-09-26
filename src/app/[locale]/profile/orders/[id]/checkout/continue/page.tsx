@@ -18,8 +18,6 @@ const ContinuePage = async ({
     redirect("/");
   }
 
-  console.log(order);
-
   return (
     <section className="min-h-[calc(100vh-5rem)] py-8 lg:p-12">
       <div className="container flex flex-col items-center gap-6">

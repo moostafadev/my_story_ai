@@ -297,7 +297,8 @@
     "errorTitle": "خطأ",
     "errorMessage": "فشل إنشاء الطلب. حاول مرة أخرى.",
     "payButton": "ادفع الآن",
-    "processing": "جاري المعالجة..."
+    "processing": "جاري المعالجة...",
+    "submit": "تأكيد"
   },
   "PaymentCallback": {
     "processing_payment": "جارٍ معالجة نتيجة الدفع..."

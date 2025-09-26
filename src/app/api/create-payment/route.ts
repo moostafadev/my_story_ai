@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { amount, currency } = await req.json();
+    const { amount, currency, orderId } = await req.json();
 
     // 1. Auth request
     const authRes = await fetch("https://accept.paymob.com/api/auth/tokens", {
@@ -26,11 +26,12 @@ export async function POST(req: Request) {
           auth_token: token,
           amount_cents: amount * 100,
           currency: currency,
+          merchant_order_id: orderId, // ربط معرف الطلب الداخلي
           items: [
             {
-              name: "Test Product",
+              name: "Story Order",
               amount_cents: amount * 100,
-              description: "A test product",
+              description: "Custom story order",
               quantity: 1,
             },
           ],
@@ -39,7 +40,7 @@ export async function POST(req: Request) {
     );
 
     const orderData = await orderRes.json();
-    const orderId = orderData.id;
+    const paymobOrderId = orderData.id;
 
     // 3. Generate Payment Key
     const redirectBase =
@@ -54,11 +55,11 @@ export async function POST(req: Request) {
           auth_token: token,
           amount_cents: amount * 100,
           expiration: 3600,
-          order_id: orderId,
+          order_id: paymobOrderId,
           billing_data: {
-            first_name: "Test",
+            first_name: "Customer",
             last_name: "User",
-            email: "test@example.com",
+            email: "customer@example.com",
             phone_number: "01000000000",
             apartment: "NA",
             floor: "NA",
@@ -71,7 +72,8 @@ export async function POST(req: Request) {
           },
           currency: currency,
           integration_id: process.env.PAYMOB_INTEGRATION_ID,
-          redirect_url: `${redirectBase}/payment-callback`,
+          // إضافة معرف الطلب إلى رابط الإرجاع
+          redirect_url: `${redirectBase}/payment-callback?order_id=${orderId}`,
         }),
       }
     );
@@ -84,7 +86,8 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       checkout_url: checkoutURL,
-      order_id: orderId,
+      order_id: paymobOrderId,
+      merchant_order_id: orderId,
     });
   } catch (err) {
     console.error("Payment error:", err);

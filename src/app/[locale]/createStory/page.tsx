@@ -39,6 +39,8 @@ const CreateStoryPage = async () => {
           userId={userId.userId}
           prices={{
             pdfPrice: settings.storyCreationPricePDF,
+            softPrice: settings.storyCreationPriceSoft,
+            hardPrice: settings.storyCreationPriceHard,
           }}
         />
       </div>

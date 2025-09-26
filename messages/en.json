@@ -295,7 +295,8 @@
     "errorTitle": "Error",
     "errorMessage": "Failed to create order. Please try again.",
     "payButton": "Pay Now",
-    "processing": "Processing..."
+    "processing": "Processing...",
+    "submit": "Submit"
   },
   "PaymentCallback": {
     "processing_payment": "Processing your payment result..."

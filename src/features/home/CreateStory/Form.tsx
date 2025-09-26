@@ -27,10 +27,10 @@ import { CreateOrderInput } from "@/services/types";
 
 const OrderFormStepOne = ({
   userId,
-  prices: { pdfPrice },
+  prices: { pdfPrice, softPrice, hardPrice },
 }: {
   userId: string;
-  prices: { pdfPrice: number };
+  prices: { pdfPrice: number; softPrice: number; hardPrice: number };
 }) => {
   const t = useTranslations("CreateStory");
   const locale = useLocale();
@@ -76,7 +76,12 @@ const OrderFormStepOne = ({
       userId,
       state: values.storyType === "PDF" ? "STEP2" : "STEP1",
       type: values.storyType === "PDF" ? "VISA" : "COD",
-      storiesPrice: values.storyType === "PDF" ? pdfPrice : 0,
+      storiesPrice:
+        values.storyType === "PDF"
+          ? pdfPrice
+          : values.storyType === "SOFT"
+          ? softPrice
+          : hardPrice,
       fPrice: values.storyType === "PDF" ? pdfPrice : 0,
     };
 

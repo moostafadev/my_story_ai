@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
 export default async function PaymentFailedPage() {
-  const t = await getTranslations("PaymentFailed"); // Assuming you have a PaymentFailed translation file
+  const t = await getTranslations("PaymentFailed");
 
   return (
     <section className="flex flex-col items-center justify-center h-screen gap-6">

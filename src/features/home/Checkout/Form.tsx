@@ -19,12 +19,19 @@ import { redirect } from "next/navigation";
 import CitySelection from "@/components/CitySelection";
 import { useState } from "react";
 import { CustomInput } from "@/components/custom/input";
+import { STORYTYPE } from "@prisma/client";
 
 type Props = {
   orderId: string;
+  prices: { softPrice: number; hardPrice: number };
+  storyType: STORYTYPE;
 };
 
-export default function AddressForm({ orderId }: Props) {
+export default function AddressForm({
+  orderId,
+  prices: { hardPrice, softPrice },
+  storyType,
+}: Props) {
   const t = useTranslations("AddressForm");
   const [loading, setLoading] = useState(false);
 
@@ -44,6 +51,8 @@ export default function AddressForm({ orderId }: Props) {
       houseNumber: values.houseNumber,
       type: values.type,
       state: "STEP2",
+      deliveryPrice: +values.city,
+      fPrice: +values.city + (storyType === "SOFT" ? softPrice : hardPrice),
     });
 
     if (res.success) {
