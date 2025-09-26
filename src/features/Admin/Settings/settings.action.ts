@@ -4,8 +4,9 @@ import { SettingsService } from "@/services/settings.service";
 import { revalidatePath } from "next/cache";
 
 export async function updateSettingsAction(data: {
-  storyCreationPrice?: number;
-  storyCreationCurrency?: string;
+  storyCreationPriceHard?: number;
+  storyCreationPriceSoft?: number;
+  storyCreationPricePDF?: number;
   supportEmail?: string;
   supportPhone?: string;
 }) {

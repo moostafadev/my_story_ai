@@ -1,18 +1,21 @@
-"use client";
-
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
-export default function PaymentFailedPage() {
+export default async function PaymentFailedPage() {
+  const t = await getTranslations("PaymentFailed"); // Assuming you have a PaymentFailed translation file
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen gap-6">
-      <h1 className="text-3xl font-bold text-red-600">❌ Payment Failed!</h1>
-      <p className="text-lg">Your payment could not be processed.</p>
+    <section className="flex flex-col items-center justify-center h-screen gap-6">
+      <h1 className="text-3xl font-bold text-red-600">
+        ❌ {t("payment_failed")}
+      </h1>
+      <p className="text-lg">{t("payment_error_message")}</p>
       <Link
         href="/"
         className="px-6 py-3 bg-blue-600 text-white rounded-xl shadow-lg hover:bg-blue-700"
       >
-        Go to Homepage
+        {t("go_to_homepage")}
       </Link>
-    </div>
+    </section>
   );
 }

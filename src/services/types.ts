@@ -4,6 +4,7 @@ import {
   OrderState,
   ORDERTYPE,
   GENDER,
+  STORYTYPE,
 } from "@prisma/client";
 import { UserService } from "./user.service";
 import { StoryService } from "./story.service";
@@ -92,7 +93,8 @@ export interface CreateOrderInput {
   moral_value?: string;
 
   child_image: string;
-  type?: ORDERTYPE; // COD / VISA
+  type?: ORDERTYPE;
+  storyType?: STORYTYPE;
 }
 
 export type UpdateOrderInput = Partial<CreateOrderInput>;

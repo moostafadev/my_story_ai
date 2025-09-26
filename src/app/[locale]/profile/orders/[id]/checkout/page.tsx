@@ -16,7 +16,14 @@ const CheckoutPage = async ({
     redirect("/");
   }
   const user = await UserService.getUserById(order?.userId);
-  console.log(user);
+
+  if (!user?.id) {
+    redirect("/login");
+  }
+
+  if (order.storyType === "PDF") {
+    redirect("/profile/orders/" + id + "/checkout/continue?type=visa");
+  }
 
   return (
     <section className="min-h-[calc(100vh-5rem)] flex">

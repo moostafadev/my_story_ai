@@ -171,6 +171,11 @@
     "title": "إنشاء قصة لطفلك",
     "desc": "قم بإدخال معلومات طفلك لتوليد قصة مخصصة تعكس شخصيته وهواياته.",
     "form": {
+      "story_type": {
+        "pdf": "PDF",
+        "pdf_soft": "PDF + Soft",
+        "pdf_hard": "PDF + Hard"
+      },
       "labels": {
         "name": "اسم الطفل",
         "age": "عمر الطفل",
@@ -186,7 +191,8 @@
         "accessory_description": "وصف إكسسوارات الطفل",
         "personality_traits": "صفات الطفل الشخصية",
         "moral_value": "القيم الأخلاقية للطفل",
-        "child_image": "صورة الطفل"
+        "child_image": "صورة الطفل",
+        "story_type": "نوع القصة"
       },
       "placeholders": {
         "name": "أدخل اسم طفلك",
@@ -203,7 +209,8 @@
         "accessory_description": "صف إكسسوارات طفلك",
         "personality_traits": "أدخل صفات طفلك الشخصية",
         "moral_value": "أدخل القيم الأخلاقية لطفلك",
-        "child_image": "قم برفع صورة طفلك"
+        "child_image": "قم برفع صورة طفلك",
+        "story_type": "اختر نوع القصة"
       },
       "buttons": {
         "submit": "التالي",
@@ -233,7 +240,8 @@
       "accessory_description_required": "وصف إكسسوارات الطفل مطلوبة",
       "personality_traits_required": "صفات الطفل الشخصية مطلوبة",
       "moral_value_required": "القيم الأخلاقية للطفل مطلوبة",
-      "child_image_required": "صورة الطفل مطلوبة"
+      "child_image_required": "صورة الطفل مطلوبة",
+      "story_type_required": "نوع القصة مطلوب"
     }
   },
   "AddressForm": {
@@ -270,8 +278,38 @@
       "payment_required": "يجب اختيار طريقة الدفع",
       "geo_not_supported": "المتصفح لا يدعم تحديد الموقع",
       "geo_failed": "تعذر الحصول على الموقع",
-      "failed": "فشل تحديث العنوان"
+      "failed": "فشل تحديث العنوان",
+      "required": "هذا الحقل مطلوب"
     },
     "success": "✅ تم تحديث العنوان بنجاح"
+  },
+  "CheackoutPage": {
+    "title": "الدفع",
+    "priceCreateStory": "سعر إنشاء القصة",
+    "priceShipping": "تكلفة الشحن",
+    "totalPrice": "السعر الإجمالي",
+    "note": "اضف ملاحظة (اختياري)",
+    "notePlaceholder": "اكتب ملاحظتك هنا...",
+    "pound": "ُEGP",
+    "dolar": "ُUSD",
+    "successTitle": "نجاح",
+    "successMessage": "تم إنشاء طلبك بنجاح. سيتم توصيل القصة إلى عنوانك قريبًا.",
+    "errorTitle": "خطأ",
+    "errorMessage": "فشل إنشاء الطلب. حاول مرة أخرى.",
+    "payButton": "ادفع الآن",
+    "processing": "جاري المعالجة..."
+  },
+  "PaymentCallback": {
+    "processing_payment": "جارٍ معالجة نتيجة الدفع..."
+  },
+  "PaymentFailed": {
+    "payment_failed": "فشل الدفع!",
+    "payment_error_message": "تعذر معالجة الدفع الخاص بك.",
+    "go_to_homepage": "الذهاب إلى الصفحة الرئيسية"
+  },
+  "PaymentSuccess": {
+    "payment_successful": "تم الدفع بنجاح!",
+    "payment_confirmation": "تم تأكيد الدفع الخاص بك.",
+    "go_to_homepage": "الذهاب إلى الصفحة الرئيسية"
   }
 }

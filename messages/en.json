@@ -167,8 +167,13 @@
   },
   "CreateStory": {
     "title": "Create a Story for Your Child",
-    "desc": "Enter your child’s details to generate a personalized story that reflects their personality and hobbies.",
+    "desc": "Enter your child's information to generate a personalized story reflecting their personality and hobbies.",
     "form": {
+      "story_type": {
+        "pdf": "PDF",
+        "pdf_soft": "PDF + Soft",
+        "pdf_hard": "PDF + Hard"
+      },
       "labels": {
         "name": "Child's Name",
         "age": "Child's Age",
@@ -181,16 +186,17 @@
         "eye_color": "Child's Eye Color",
         "skin_tone": "Child's Skin Tone",
         "clothing_description": "Child's Clothing Description",
-        "accessory_description": "Child's Accessories Description",
+        "accessory_description": "Child's Accessory Description",
         "personality_traits": "Child's Personality Traits",
         "moral_value": "Child's Moral Values",
-        "child_image": "Child's Image"
+        "child_image": "Child's Image",
+        "story_type": "Story Type"
       },
       "placeholders": {
         "name": "Enter your child's name",
         "age": "Enter your child's age",
         "hobbies": "Enter your child's hobbies",
-        "language": "Select your child's language",
+        "language": "Choose your child's language",
         "description": "Write a description for your child",
         "gender": "Choose your child's gender",
         "hair_color": "Enter your child's hair color",
@@ -201,7 +207,8 @@
         "accessory_description": "Describe your child's accessories",
         "personality_traits": "Enter your child's personality traits",
         "moral_value": "Enter your child's moral values",
-        "child_image": "Upload your child's image"
+        "child_image": "Upload your child's image",
+        "story_type": "Choose story type"
       },
       "buttons": {
         "submit": "Next",
@@ -213,7 +220,7 @@
         "female": "Female"
       },
       "additional_info": "Additional Information",
-      "additional_info_note": "You can fill these fields if you want to personalize the story more"
+      "additional_info_note": "You can provide this data if you want to further personalize the story."
     },
     "errors": {
       "name_required": "Child's name is required",
@@ -228,10 +235,11 @@
       "eye_color_required": "Child's eye color is required",
       "skin_tone_required": "Child's skin tone is required",
       "clothing_description_required": "Child's clothing description is required",
-      "accessory_description_required": "Child's accessories description is required",
+      "accessory_description_required": "Child's accessory description is required",
       "personality_traits_required": "Child's personality traits are required",
       "moral_value_required": "Child's moral values are required",
-      "child_image_required": "Child's image is required"
+      "child_image_required": "Child's image is required",
+      "story_type_required": "Story type is required"
     }
   },
   "AddressForm": {
@@ -268,8 +276,38 @@
       "payment_required": "Payment method is required",
       "geo_not_supported": "Your browser does not support geolocation",
       "geo_failed": "Unable to get your location",
-      "failed": "Failed to update address"
+      "failed": "Failed to update address",
+      "required": "This field is required"
     },
     "success": "✅ Address updated successfully"
+  },
+  "CheackoutPage": {
+    "title": "Payment",
+    "priceCreateStory": "Story Creation Price",
+    "priceShipping": "Shipping Cost",
+    "totalPrice": "Total Price",
+    "note": "Add Note (Optional)",
+    "notePlaceholder": "Write your note here...",
+    "pound": "EGP",
+    "dolar": "USD",
+    "successTitle": "Success",
+    "successMessage": "Your order has been created successfully. The story will be delivered to your address soon.",
+    "errorTitle": "Error",
+    "errorMessage": "Failed to create order. Please try again.",
+    "payButton": "Pay Now",
+    "processing": "Processing..."
+  },
+  "PaymentCallback": {
+    "processing_payment": "Processing your payment result..."
+  },
+  "PaymentFailed": {
+    "payment_failed": "Payment Failed!",
+    "payment_error_message": "Your payment could not be processed.",
+    "go_to_homepage": "Go to Homepage"
+  },
+  "PaymentSuccess": {
+    "payment_successful": "Payment Successful!",
+    "payment_confirmation": "Your payment has been confirmed.",
+    "go_to_homepage": "Go to Homepage"
   }
 }
