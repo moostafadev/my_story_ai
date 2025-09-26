@@ -96,7 +96,7 @@ const Header = ({ user }: { user: User }) => {
         <Link
           href={"/"}
           className="flex items-center justify-center"
-          title="My Story AI"
+          title="My Stories AI"
         >
           <Image
             src="/logo.png"
