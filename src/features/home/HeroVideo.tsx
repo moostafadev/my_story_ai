@@ -71,7 +71,7 @@ const HeroVideo = () => {
             disablePictureInPicture
             controlsList="nodownload nofullscreen noremoteplayback"
             preload="auto"
-            className={`max-w-[500px] lg:max-w-full w-full h-auto lg:!min-h-[calc(100dvh-5rem)] rounded-lg lg:rounded-none object-cover shadow-lg 
+            className={`max-w-[500px] lg:max-w-full w-full h-auto lg:w-auto lg:!min-h-full rounded-lg lg:rounded-none object-cover shadow-lg 
                        transition-all duration-500 ease-out
                        [&::-webkit-media-controls]:hidden [&::-webkit-media-controls-panel]:hidden 
                        [&::-webkit-media-controls-play-button]:hidden [&::-webkit-media-controls-start-playback-button]:hidden
